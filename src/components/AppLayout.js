@@ -1,9 +1,29 @@
 import React from "react";
 import "./AppLayout.css";
-
+import { useAppContext } from "../store";
 
 function AppLayout({ children }) {
-    
+    const { store : {isAuthenticated, name} } = useAppContext();
+
+    function ShowUsername() {
+        if (isAuthenticated === true){
+            return (
+                <ul>{name}</ul>
+            )
+        }
+        else {
+            return (
+            <ul>
+                <li>
+                    <a href="/membership/membershipLogin.html" class="membershipHeaderLogin">로그인</a>
+                </li>
+                <li>
+                    <a href="/membership/membership.html">회원가입</a>
+                </li>
+            </ul>
+            )
+        }
+    }
     return (
         <>
             <header class="membershipHeader">
@@ -25,14 +45,15 @@ function AppLayout({ children }) {
                     </ul>
                 </nav>
                 <nav class="headerLogin">
-                    <ul>
+                    {/* <ul>
                         <li>
                             <a href="/membership/membershipLogin.html" class="membershipHeaderLogin">로그인</a>
                         </li>
                         <li>
                             <a href="/membership/membership.html">회원가입</a>
                         </li>
-                    </ul>
+                    </ul> */}
+                    <ShowUsername />
                 </nav>   
             </header>
             <div class="headerMargin">

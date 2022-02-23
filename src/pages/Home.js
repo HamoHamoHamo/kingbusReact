@@ -1,13 +1,18 @@
 import React from "react";
 import { Link } from 'react-router-dom';
+import "./Home.css";
+import { useAppContext } from "../store";
 
 function Home() {
+    const { store : {isAuthenticated, name} } = useAppContext();
+    console.log("CONTEXT", isAuthenticated, name);
+
+    
+
     return (
-        <div>
-            <div>
-                <Link to="/accounts/register/user">회원가입</Link>>
-            </div>
-        </div>
+        <>
+            <div>Home</div>
+        </>
     )
 }
 

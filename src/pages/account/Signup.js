@@ -1,12 +1,12 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
 
-function UserRegister() {
+export default function SignupUser() {
     return (
         <div>
+            <Outlet />
             <input placeholder="id" />
             <input placeholder="pw" />
         </div>
     )
 }
-
-export default UserRegister;
