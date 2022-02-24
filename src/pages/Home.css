@@ -1,831 +1,994 @@
-
-.mainImg{
-    width: 100%;
-    height: 100vh;
-    z-index: -1;
-    position: inherit;
-    
+.routeDataCell {
+  height: 5.5rem;
+  width: 24rem;
+  border-bottom: 0.1rem solid black;
+  font-size: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-.mainEsDiv{
-    width: 144rem;
-    margin-left: 24rem;
+.routeDataTextTitle {
+  padding: 0.5rem;
+  font-weight: 500;
+}
+.routeDataTextDetail {
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  font-weight: 500;
+  color: #7F7F7F;
+}
+
+.mainContentsContainer{
     display: flex;
-    border-radius: 1.4rem;
-    background-color: white;
-    -webkit-box-shadow: 0 0.5rem 0.4rem -0.4rem black;
-	-moz-box-shadow: 0 0.5rem 0.4rem -0.4rem black;
-	box-shadow: 0 0.5rem 0.4rem -0.4rem black;
-    margin-top: -30rem;
-    height: 17rem;
-    z-index: 1;
-    position: relative;
-    border: 0.1rem solid #cfcfcfa8;
     flex-direction: column;
-    align-items: flex-start;
-    
-}
-.mainEsDivChoose{
-    display: flex;
-    margin-top: -1rem;
-    margin-bottom: 1rem;
-}
-.mainEsDivChooseReturn{
-    width: 8.7rem;
-    height: 4rem;
-    background-color: #b80000;
-    margin-left: 3rem;
-    margin-top: 2.5rem;
-    text-align: center;
-    color: white;
-    border-radius: 1rem 0 0 1rem;
-    line-height: 4rem;
-    font-size: 2rem;
-    border: 0.1rem solid #b80000;
-}
-.mainEsDivChooseOneWay{
-    width: 8.7rem;
-    height: 4rem;
-    border: 0.1rem solid black;
-    margin-top: 2.5rem;
-    text-align: center;
-    line-height: 4rem;
-    font-size: 2rem;
-}
-.mainEsDivChooseShuttle{
-    width: 8.7rem;
-    height: 4rem;
-    border: 0.1rem solid black;
-    margin-top: 2.5rem;
-    text-align: center;
-    line-height: 4rem;
-    font-size: 2rem;
-    border-radius: 0 1rem 1rem 0;
-}
-.mainEsDivOption{
-    display: flex;
-    z-index: 0;
-}
-.mainEsDivOptionDe{
-    display: flex;
-    border: none;
-    border-bottom: 0.2rem solid black;
-    width: 21rem;
-    margin-left: 3rem;
-    margin-top: 2rem;
-}
-.mainEsDivOptionDeText{
-    width: 15rem;
-    height: 4rem;
-    display: inline-block;
-    border: none;
-}
-.mainEsDivOptionDeImg{
-    display: inline-block;
-    width: 3rem;
-    height: 3rem;
-    margin-top: 0.5rem;
-    margin-left: 0.5rem;
-}
-input::placeholder{
-    font-size: 1.8rem;
-    color: #7F7F7F;    
-}
-input{
-    padding-left: 1.5rem;    
-}
-.mainEsDivOptionArText{
-    width: 15rem;
-    height: 4rem;
-    display: inline-block;
-    border: none;
-}
-.mainEsDivOptionArImg{
-    display: inline-block;
-    width: 3rem;
-    height: 3rem;
-    margin-top: 0.5rem;
-    margin-left: 0.5rem;
-}
-.mainEsDivOptionDeDateText{
-    width: 20rem;
-    height: 4rem;
-    display: inline-block;
-    border: none;
-}
-.mainEsDivOptionDeDateImg{
-    display: inline-block;
-    width: 3rem;
-    height: 3rem;
-    margin-top: 0.5rem;
-    margin-left: 0.5rem;
-}
-.mainEsDivOptionArDateText{
-    width: 20rem;
-    height: 4rem;
-    display: inline-block;
-    border: none;
-}
-.mainEsDivOptionArDateImg{
-    display: inline-block;
-    width: 3rem;
-    height: 3rem;
-    margin-top: 0.5rem;
-    margin-left: 0.5rem;
-}
-.mainEsDivOptionProfileText{
-    width: 15rem;
-    height: 4rem;
-    display: inline-block;
-    border: none;
-}
-.mainEsDivOptionProfileImg{
-    display: inline-block;
-    width: 3rem;
-    height: 3rem;
-    margin-top: 0.5rem;
-    margin-left: 0.5rem;
-}
-.mainEsDivEsButton{
-    width: 10rem;
-    height: 4.6rem;
-    background-color: #b80000;
-    color: white;
-    line-height: 4.6rem;
-    font-size: 2rem;
-    display: inline-block;
-    border-radius: 0.7rem;
-    text-align: center;
-    margin-top: 2rem;
-    margin-left: 6rem;
-}
-.mainAdvantage{
-    position: relative;
-}
-.mainAdvantageTitle{
-    font-size: 3rem;
-    margin-left: 24rem;
-    font-weight: bold;
-    margin-top: 22rem;
-}
-.mainAdvantageImgSlide1Img{
-    width: 144rem;
-    height: 72rem;
-    margin-left: 24rem;
-    margin-top: 5rem;
-}
-.mainAdvantageImgSlide1SubTitle{
-    color: #fff;
-    font-size: 3rem;
-    position: absolute;
-    left: 18%;
-    top: 30%;
-}
-.mainAdvantageImgSlide1SubTitleEx{
-    color: #fff;
-    font-size: 2rem;
-    position: absolute;
-    left: 18%;
-    top: 40%;
-    line-height: 3rem;
-}
-.mainAdvantageImgSlide2Img{
-    width: 144rem;
-    height: 72rem;
-    margin-left: 24rem;
-    margin-top: 5rem;
-}
-.mainAdvantageImgSlide2SubTitle{
-    color: #fff;
-    font-size: 3rem;
-    position: absolute;
-    left: 18%;
-    top: 30%;
-}
-.mainAdvantageImgSlide2SubTitleEx{
-    color: #fff;
-    font-size: 2rem;
-    position: absolute;
-    left: 18%;
-    top: 40%;
-    line-height: 3rem;
-}
-
-.mainAdvantageImgSlide3Img{
-    width: 144rem;
-    height: 72rem;
-    margin-left: 24rem;
-    margin-top: 5rem;
-}
-.mainAdvantageImgSlide3SubTitle{
-    color: #fff;
-    font-size: 3rem;
-    position: absolute;
-    left: 18%;
-    top: 30%;
-}
-.mainAdvantageImgSlide3SubTitleEx{
-    color: #fff;
-    font-size: 2rem;
-    position: absolute;
-    left: 18%;
-    top: 40%;
-    line-height: 3rem;
-}
-
-.mainAdvantageImgSlide4Img{
-    width: 144rem;
-    height: 72rem;
-    margin-left: 24rem;
-    margin-top: 5rem;
-}
-.mainAdvantageImgSlide4SubTitle{
-    color: #fff;
-    font-size: 3rem;
-    position: absolute;
-    left: 18%;
-    top: 30%;
-}
-.mainAdvantageImgSlide4SubTitleEx{
-    color: #fff;
-    font-size: 2rem;
-    position: absolute;
-    left: 18%;
-    top: 40%;
-    line-height: 3rem;
-}
-
-.mainAdvantageImgSlide5Img{
-    width: 144rem;
-    height: 72rem;
-    margin-left: 24rem;
-    margin-top: 5rem;
-}
-.mainAdvantageImgSlide5SubTitle{
-    color: #fff;
-    font-size: 3rem;
-    position: absolute;
-    left: 18%;
-    top: 30%;
-}
-.mainAdvantageImgSlide5SubTitleEx{
-    color: #fff;
-    font-size: 2rem;
-    position: absolute;
-    left: 18%;
-    top: 40%;
-    line-height: 3rem;
-}
-.mainAdvantageImgSlide6Img{
-    width: 144rem;
-    height: 72rem;
-    margin-left: 24rem;
-    margin-top: 5rem;
-}
-.mainAdvantageImgSlide6SubTitle{
-    color: #fff;
-    font-size: 3rem;
-    position: absolute;
-    left: 18%;
-    top: 30%;
-}
-.mainAdvantageImgSlide6SubTitleEx{
-    color: #fff;
-    font-size: 2rem;
-    position: absolute;
-    left: 18%;
-    top: 40%;
-    line-height: 3rem;
-}
-.mainAdvantageMenu{
-    width: 132rem;
-    padding: 0 6rem;
-    height: 9rem;
-    display: flex;
-    margin-top: 68rem;
-    margin-left: 27rem;
-    position: absolute;
-}
-.mainAdvantageMenuKind{
-    width: 21rem;
-    height: 9rem;
-    line-height: 9rem;
-    background-color: #fff;
-    background-color: rgba( 255, 255, 255, 0.5 );
-    color: black;
-    font-size: 2rem;
-    margin-top: 0;
-    display: inline-block;
-    text-align: center;
-    cursor: pointer;
-}
-
-.mainYoutubeTitle{
-    font-size: 4rem;
-    margin-left: 22%;
-    margin-top: 7rem;   
-    display: block;
-}
-.kingkingBase{
-    display: block;
-    width: 6.5rem;
-    height: 6rem;
-    margin-left: 145rem;
-    margin-bottom: -8rem;
-    margin-top: 7rem;
-    position: relative;
-    z-index: -1;
-}
-.mainHashTag{
-    background-color: #F0F0F0;
-    text-align: center;
-    font-size: 2rem;
-    border: none;
-    width: 15rem;
-    height: 4rem;
-    border-radius: 3rem;
-    line-height: 4rem;
-    display: inline-block;
-    margin-left: 3rem;
-    position: relative;
-    z-index: -2;
-}
-.mainReview{
-    width:100%;
-    height: 90rem;
-    background-color: #E6E6E6;
-    border: none;
-    margin-top: 10rem;
-
-}
-.mainReviewTitle{
-    text-align: center;
-    font-size: 3rem;
-    padding-top: 5rem;
-    font-weight: bold;
-}
-.mainReviewDiv{
-    width: 144rem;
-    height: 68rem;
-    margin-top: 5rem;
-    margin-left: 24rem;
-    font-size: 2rem; 
-}
-.mainReviewDivMain{
-    background-color: #565656;
-    width: 70rem;
-    height: 35rem;
-    position: relative;
-    margin-top: 20rem;
-    margin-left: 35rem;
-    z-index: 1;
-}
-.mainReviewDivMainLeft{
-    background-color: #828282;
-    width: 60rem;
-    height: 30rem;
-    margin-top: 2.5rem;
-    position: absolute;
-}
-.mainReviewDivMainLeftImg{
-    margin-top: 13.5rem;
-    margin-left: 2rem;
-}
-.mainReviewDivMainRight{
-    background-color: #828282;
-    width: 60rem;
-    height: 30rem;
-    margin-top: -32.5rem;
-    position: absolute;
-    margin-left: 83rem;
-}
-.mainReviewDivMainRightImg{
-    margin-left: 54rem;
-    margin-top: 13.5rem;
-}
-.mainReviewStarImg{
-    width: 12rem;
-    height: 8rem;
-    display: inline-block;
-    margin-left: 3rem;
-    margin-top: -2rem;
-    margin-bottom: 3rem;
-}
-.mainEsBgColor{
-    content: '';
-    position: fixed;
-    display:none;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: rgba(0,0,0,0.5);
-    z-index: 2;
-}
-.mainEsDetailDiv{
-    width: 48%;
-    height: 54rem;
-    margin-left: 26.5%;
-    background-color: #fff;
-    border-radius: 1rem;
-    border: 0.1rem solid black;
-    z-index: 3;
-    position: fixed;
-    text-align: center;
-    font-size: 2.2rem;
-    margin-top: -70rem;
-    padding-top: 3rem;
-    display: none;
-    font-weight: bold;
-    z-index: 3;
-}
-.mainEsDetailDivImg{
-    width: 5rem;
-    float: right;
-    margin-top: -3rem;
-    margin-right: 10%;
-
-}
-.mainEsDetailDivDriverWith{
-    width: 80%;
-    height: 5rem;
-    margin-left: 10%;
-    border: 0.1rem solid black;
-    margin-top: 3rem;
-}
-.mainEsDetailDivDriverWithNo{
-    width: 50%;
-    background-color: #b80000;
-    color: #fff;
-    height: 5rem;
-    display: inline-block;
-    line-height: 5rem;
-    margin-left: -0.02rem;
-}
-.mainEsDetailDivDriverWithYes{
-    width: 50%;
-    background-color: #fff;
-    border-left: 0.1rem solid black;
-    height: 5rem;
-    line-height: 5rem;
-    display: inline-block;
-    margin-left: -1rem;
-}
-.mainEsDetailDivPurpose{
-    width: 80%;
-    height: 5rem;
-    line-height: 5rem;
-    margin-left: 10%;  
-    border: 0.1rem solid black; 
-    margin-top: 2rem;
-}
-.mainEsDetailDivSchedule{
-    width: 79%;
-    height: 13rem;
-    border: 0.1rem solid black;
-    margin-top: 2rem;
-    resize: none;
-    font-size: 2rem;
-    display: none;
-}
-::placeholder{
-    font-weight: bold;
-    font-size: 2rem;
-    color: black;
-}
-.mainEsDetailDivVerificationCode{
-    width: 78%;
-    height: 4rem;
-    font-size: 2rem;
-    margin-top: 1rem;
-    margin-left: 10%;
-    display: none;
-}
-.mainEsDetailDivVerificationCodeButton{
-    display: inline-block;
-    width: 20rem;
-    background-color: #b80000;
-    color: white;
-    font-size: 1.6rem;
-    line-height: 5rem;
-    height: 5rem;
-}
-.mainEsDetailDivPhoneNum{
-    width: 55%;
-    height: 4.5rem;
-    font-size: 2rem;
-    margin-top: 1rem;
-}
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-.mainEsDetailDivNext{
-    display: inline-block;
-    width: 10rem;
-    background-color: #b80000;
-    color: white;
-    font-size: 2rem;
-    line-height: 4rem;
-    height: 4rem;
-    margin-left: 70%;
-    margin-top: 24.7rem;
-    border-radius: 3rem;
-}
-.mainEsDetailDivPurposePage{
-    width: 38rem;
-    height: 50rem;
-    left: 40%;
-    top: 24%;
-    position: fixed;
-    border-radius: 0.5rem;
-    background-color: white;
-    border: 0.1rem solid #F2F2F2;
-    display: none;
-    z-index: 6;
-    box-shadow: 0 0.3rem 0.6rem rgba(0,0,0,0.16), 0 0.3rem 0.6rem rgba(0,0,0,0.23);
-}
-.mainEsDetailDivPurposePageKind{
-    width: 16rem;
-    height: 5rem;
-    border: 0.1rem solid #F2F2F2;
-    font-size: 2rem;
-    text-align: center;
-    display: inline-block;
-    margin-left: 2rem;
-    margin-top: 2rem;
-    line-height: 5rem;
-    cursor: pointer;
-    background-color:  white;
-    border-radius: 0.6rem;
-    box-shadow: 0 0.3rem 0.6rem rgba(0,0,0,0.16), 0 0.3rem 0.6rem rgba(0,0,0,0.23);
-}
-.mainEsDetailDivPurposePageConfirm{
-    width: 100%;
-    border-top: 0.1rem solid #808080;
-    height: 4rem;
-    line-height: 4rem;
-    text-align: center;
-    margin-top: 2rem;
-    font-size: 2rem;
-    cursor: pointer;
-    background-color: white;
-}
-.mainEsDetailDivSec{
-    width: 48%;
-    height: 54rem;
-    margin-left: 26.5%;
-    background-color: #fff;
-    border-radius: 1rem;
-    border: 0.1rem solid black;
-    z-index: 3;
-    position: fixed;
-    text-align: center;
-    font-size: 2.2rem;
-    margin-top: -70rem;
-    padding-top: 3rem;
-    display: none;
-    font-weight: bold;
-    z-index: 3;
-}
-.mainEsDetailDivSecComforts{
-    width: 80%;
-    height: 5rem;
-    line-height: 5rem;
-    margin-left: 10%;  
-    border: 0.1rem solid black; 
-    margin-top: 2rem;
-}
-.mainEsDetailDivSecStopover{
-    width: 79%;
-    height: 10rem;
-    border: 0.1rem solid black;
-    margin-top: 2rem;
-    resize: none;
-    font-size: 2rem;
-}
-.mainEsDetailDivSecExtra{
-    width: 79%;
-    height: 10rem;
-    border: 0.1rem solid black;
-    margin-top: 2rem;
-    resize: none;
-    font-size: 2rem;
-}
-.mainEsDetailDivSecComplete{
-    display: inline-block;
-    width: 10rem;
-    background-color: #b80000;
-    color: white;
-    font-size: 2rem;
-    line-height: 4rem;
-    height: 4rem;
-    margin-left: 70%;
-    margin-top: 13.6rem;
-    border-radius: 3rem;
-}
-.mainEsDetailDivSecComfortsDiv{
-    width: 38rem;
-    height: 37rem;
-    left: 40%;
-    top: 27%;
-    position: fixed;
-    border-radius: 0.5rem;
-    background-color: white;
-    border: 0.1rem solid #F2F2F2;
-    display: none;
-    z-index: 6;
-    box-shadow: 0 0.3rem 0.6rem rgba(0,0,0,0.16), 0 0.3rem 0.6rem rgba(0,0,0,0.23);
-}
-.mainEsDetailDivComfortsKind{
-    width: 16rem;
-    height: 5rem;
-    border: 0.1rem solid #F2F2F2;
-    font-size: 1.6rem;
-    text-align: center;
-    display: inline-block;
-    margin-left: 2rem;
-    margin-top: 2.5rem;
-    line-height: 5rem;
-    cursor: pointer;
-    background-color:  white;
-    border-radius: 0.6rem;
-    box-shadow: 0 0.3rem 0.6rem rgba(0,0,0,0.16), 0 0.3rem 0.6rem rgba(0,0,0,0.23);
-}
-.mainEsDetailDivComfortsConfirm{
-    width: 100%;
-    border-top: 0.1rem solid #808080;
-    height: 4rem;
-    line-height: 4rem;
-    text-align: center;
-    margin-top: 2rem;
-    font-size: 2rem;
-    cursor: pointer;
-    background-color: white;
-}
-.mainMaps{
-    width: 100%;
-    height: 85rem;
-    display: flex;
-
-}
-.mainMapsEx{
-    display: inline-block;
-    width: 45%;
-    margin: 0;
-    border: none;
-    height: 85rem;
-}
-.mainMapsApi{
-    display: inline-block;
-    width: 55%;
-    margin: 0;
-    border: none;
-    height: 85rem;
-    z-index: 1;
-}
-.mainMapsExTitle{
-    text-align: center;
-    width: 100%;
-    margin-top: 10rem;
-    font-size: 3.5rem;
-}
-.mainMapsExLocation{
-    width: 100%;
-    margin-top: 15rem;
-    font-size: 2.4rem;
-    text-align: center;
-}
-.mainMapsExTel{
-    margin-top: 4rem;
-    font-size: 2.6rem;
-    margin-left: 22rem;
-}
-.mainMapsExLine{
-    background-color: black;
-    width: 40rem;
-    height: 0.2rem;
-    margin-left: 22rem;
-    margin-top: 30rem;
-}
-.mainMapsExSns{
-    text-align: center;
-    margin-top: 5rem;
-}
-.mainMapsExSnsTwitter{
-    margin-left: 3rem;
-    margin-right: 3rem;
-}
-
-.mainApp{
-    display: flex;
-    width: 192rem;
-    height: 13rem;
-}
-.mainAppLink{
-    width: calc(192rem/3);
-    text-align: center;
-    font-size: 1.8rem;
-    line-height: 13rem;
-    background-color: #160A61;
-    color: #fff;
-    position: relative;
-}
-.mainAppLink span{
-    width: 23rem;
-}
-.mainAppKingbus{
-    width: calc(192rem/3);
-    background-color: #E4E4E4;
-    text-align: center;
-    font-size: 1.8rem;
-    line-height: 4rem;
     align-items: center;
-    padding-top: 2rem;
-    position: relative;
-}
-.mainAppKingbus span{
-    width: 30rem;
-}
-.mainAppTrp{
-    width: calc(192rem/3);
-    text-align: center;
-    font-size: 1.8rem;
-    line-height: 13rem;
-    background-color: #247030;
-}
-.mainApp div img{
-    display: inline-block;
-    position: absolute;
-
-}
-.LinkLogo{
-    width: 7.   6rem;
-    height: 5.5rem;
-    margin-left: 5rem;
-    margin-top: 3rem;
-}
-.KingbusApp{
-    width: 9.2rem;
-    height: 9.2rem;
-    margin-left: 5rem;
-    margin-top: -5rem;
-}
-.TRPLogo{
-    width: 11.8rem;
-    height: 4.7rem;
-    margin-left: 14rem;
-    margin-top: 3rem;
-}
-.goSite{
-    margin-left: 4rem;
-    margin-top: 10rem;
-}
-.SiteLink{
-    width: 15rem;
-    height: 6rem;
-    margin-top: 3rem;
-    margin-left: 20rem;
-}
-.goSite{
-    width: 9rem;
-    height: 3rem;
-}
-.TRPgoSite{
-    width: 9rem;
-    height: 3rem;
-    margin-left: 16rem;
-    margin-top: 10rem;
-}
-.AppDownload{
-    width: 9rem;
-    height: 2.5rem;
-    margin-left: 5rem;
-    margin-top: 3rem
-}
-.mainFooter{
-    width: 100%;
-    height: 20rem;
-    background-color: #242434;
-    color:  white;
-}
-.mainFooterKingbusLogo{
-    width: 18rem;
-    height: 6rem;
-    margin-top:7rem;
-    margin-left: 10%;   
-}
-.mainFooterEx{
-    margin-left: 50rem;
-    margin-top: -5.5rem;
-    font-size: 1.8rem;
-    line-height: 2.5rem;
-}
-
-
-  @media screen and (max-width : 768px) { 
-    header .headerMenu{
+    width: 129.6rem;
+    margin: 0 auto;
+  }
   
-        width: 48rem;
-    }
-  } 
+  /*login*/
+  .loginHidden{
+    position: absolute;
+    top: 8rem;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    width: 34rem;
+    height: 10rem;
+  }
+  .loginCell{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 9.6rem;
+    height: 7.6rem;
+    border: 0.2rem solid #B00020;
+    border-radius: 0.6rem;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    line-height: 2.6rem;
+    cursor: pointer ;
+  }
+  .loginCell:hover{
+    font-size: 2.1rem;
+    line-height: 2.7  rem;
+  }
+  .passenger{
+    background-color: #B00020;
+    color: white;
+  }
+  .loginCellOther{
+    background-color: white;
+    color: #B00020;
+  }
+  
+  
+  /*first MoreWaypoint*/
+  .firstContainerImgSizing{
+    position: absolute;
+    z-index: -1;
+    width: calc(100vw - 1.7rem);
+    height: 130vh;
+    overflow: hidden;
+  }
+  .firstContainerImg{
+    position: absolute;
+    top: -30vh;
+    left: 50%;
+    z-index: -1;
+    width: calc(100vw - 1.7rem);
+    height: 130vh;
+    transform: translate(-50%);
+  }
+  .firstContainerImgCover{
+    position: absolute;
+    top: -30vh;
+    z-index: -1;
+    width: 100%;
+    height: 130vh;
+    background-color: rgba(0, 0, 0 , 0.4);
+  }
+  .firstContainerImgSizingJs{
+  }
+  .firstContainerImgJs{
+  }
+  .firstContainerImgCoverJs{
+  }
+  .firstContainerJs{
+  }
+  .firstContainer{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: calc( 100vh - 6rem);
+  }
+  .way{
+    display: flex;
+    margin-bottom: 2.4rem;
+  }
+  .onWay{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 8rem;
+    height: 4rem;
+    font-size: 1.8rem;
+    cursor: pointer;
+  }
+  .oneWay{
+    border-radius: 0.4rem 0 0 0.4rem;
+    background-color: #B00020;
+    color: white;
+  }
+  .twoWay{
+    border-radius: 0 0.4rem 0.4rem 0;
+    background-color: white;
+    color: #B00020;
+  }
+  .choiceBox{
+    display: flex;
+    justify-content: space-between;
+    width: 70rem;
+  }
+  .choiceBoxJs{
+    width: 110rem;
+  }
+  .peopleAndBtn{
+    align-items: center;
+  }
+  .choiceCell{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30rem;
+    height: 26rem;
+    margin-bottom: 3rem;
+    border-radius: 0.5rem;
+    background-color: white;
+    box-shadow: 0.3rem 0.3rem 0.6rem rgba(0, 0, 0, 0.4);
+  }
+  .choiceCellTitle{
+    margin-top: 2.4rem;
+    margin-bottom: 3.4rem;
+    font-size: 2.6rem;
+  }
+  .WaypointTitle{
+    margin-bottom: 0;
+  }
+  .WaypointScrollBox{
+    width: 24rem;
+    height: 16rem;
+    overflow-y: scroll;
+  }
+  /* 스크롤바 설정*/
+  .WaypointScrollBox::-webkit-scrollbar{
+    width: 6px;
+  }
+  
+  /* 스크롤바 막대 설정*/
+  .WaypointScrollBox::-webkit-scrollbar-thumb{
+    height: 17%;
+    background-color: #B00020;
+    border-radius: 10px;  
+  }
+  
+  /* 스크롤바 뒷 배경 설정*/
+  .WaypointScrollBox::-webkit-scrollbar-track{
+    background-color: rgba(176,0,32,0.1);
+  }
+  .choiceCellPeople{
+    display: flex;
+    justify-content: center;
+    width: 30rem;
+    height: 6rem;
+    border-radius: 0.5rem;
+    background-color: white;
+    box-shadow: 0.3rem 0.3rem 0.6rem rgba(0, 0, 0, 0.4);
+  }
+  .orderInputCell{
+    display: flex;
+    width: 24rem;
+    height: 3rem;
+    margin-top: 1.8rem;
+    border-bottom: 0.2rem solid black;
+  }
+  .orderInputCellText{
+    width: 22.2rem;
+    height: calc(100% - 0.2rem);
+    margin-right: 0.4rem;
+    border: none;
+    outline: none;
+    font-size: 1.8rem;
+    color: #7F7F7F;
+    font-weight: bold;
+  }
+  .orderInputCellTextWaypoint{
+    width: 16rem;
+    height: calc(100% - 0.2rem);
+    margin-right: 0.4rem;
+    border: none;
+    outline: none;
+    font-size: 1.8rem;
+    color: #7F7F7F;
+  }
+  .orderInputCell img{
+    height: 2.6rem;
+  }
+  .addWaypoint{
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 4.2rem;
+    margin-top: 3.4rem;
+    border-radius: 0 0 0.5rem 0.5rem;
+    background-color: #B00020;
+    font-size: 1.6rem;
+    color: white;
+    cursor: pointer;
+  }
+  .addWaypoint img{
+    margin-left: 0.6rem;
+  }
+  .moreGapTopIcon{
+    margin-top: 3.6rem;
+  }
+  .orderInputCellPeople{
+    margin-top: 1.4rem;
+  }
+  .orderInputCellTextPeople{  
+    width: 18.4rem;
+  }
+  /*second Container*/
+  .secondContainer{
+    position: relative;
+    width: 100%;
+  }
+  .secondContainer img{
+    width: 100%;
+  }
+  .secondContainerTitle{
+    position: absolute;
+    top: 38%;
+    left: 10%;
+    font-size: 4rem;
+    color: white;
+  }
+  .secondContainerContents{
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    font-size: 2.8rem;
+    color: white;
+  }
+  .secondContainerNavBox{
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: flex-end;
+    width: 100%;
+    height: 100%;
+  }
+  .secondContainerNav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(100%/6);
+    cursor: pointer;
+  }
+  .secondContainerNav:hover{
+    background-color: #B00020;
+    color: white;
+  }
+  .secondContainerNavNotThis{
+    height: 9.2%;
+    background-color: #DEE0E0;
+    font-size: 2rem;
+  }
+  .secondContainerNavThis{
+    height: 13%;
+    background-color: #B00020;
+    color: white;
+    font-size: 2.6rem;
+    font-weight: bold;
+  }
+  
+  /*third Container*/
+  .thirdContainer{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 90rem;
+  }
+  .thirdContainerHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5rem;
+  }
+  .moreInfor{
+    display: flex;
+    align-items: flex-end;
+  }
+  .moreInfor img{
+    width: 12rem;
+    height: 12rem;
+    margin-right: 1.6rem;
+  }
+  .moreInfor{
+    font-size: 4rem;
+    font-weight: bold;
+    line-height: 6rem;
+  }
+  .moreInfor div span{
+    font-size: 4.8rem;
+    color: #B00020
+  }
+  .thirdContainer video{
+    width: 100%;
+  }
+  .moreInforTag{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 10.6rem;
+  }
+  .moreInforTagBlock{
+    display: flex;
+    justify-content: space-between;
+  }
+  .moreInforTagCell{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 4.2rem;
+    padding: 0 3.5rem;
+    border-radius: 2.1rem;
+    background-color: #f3f3f3;
+    font-size: 2.2rem;
+    font-weight: 500;
+    box-shadow: 0.3rem 0.3rem 0.6rem rgba(0, 0, 0 , 0.4);
+  }
+  .moreInforTagBlockWidth1{
+    width: 50rem;
+    float: right;
+  }
+  .moreInforTagBlockWidth2{
+    width: 46rem;
+  }
+  
+  /*fourth Container*/
+  .fourthContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .fourthContainerTitle{
+    font-size: 6.8rem;
+    color: #B00020;
+  }
+  .reviweContainer{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(100vw - 1.7rem);
+    height: 64rem;
+    margin-top: 6rem;
+    background-color: #fff0f0;
+  }
+  .reviweContainerCenter{
+    display: flex;
+    align-items: center;
+    width: 129.6rem;
+    height: 100%;
+    overflow: hidden;
+  }
+  .reviweContainerBtnTool{
+    position: absolute;
+    z-index: 100;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    justify-content: space-between;
+    width: 129.6rem;
+    height: 8rem;
+    transform: translate(-50%, -50%);
+  }
+  .reviweContainerBtn{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    width: 5.2rem;
+    height: 8rem;
+    border-radius: 0.5rem;
+    background-color: rgba(0, 0, 0 , 0.06);
+    font-size: 3.4rem;
+    font-weight: bold;
+    color: black;
+    cursor: pointer;
+  }
+  .reviweContainerBtnRotate{
+    transform: rotate(180deg);
+  }
+  .reviweContainerBtn span{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 3.8rem;
+    transform: translate(-50%, -50%);
+  }
+  .reviweContainerBtn:hover{
+    background-color: rgba(0, 0, 0 , 0.2);
+  }
+  .reviweBox{
+    position: relative;
+    display: flex;
+    width: 129.6rem;
+    height: 48rem;
+  }
+  .reviweCell{
+    position: absolute;
+    flex-direction: column;
+    align-items: center;
+    width: 56rem;
+    height: 42rem;
+    border-radius: 0.1rem;
+    box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0 , 0.2);  
+    display: none;
+  }
+  .reviweCell0{
+    z-index: 1;
+    display: flex;
+    background-color: rgba(255, 255, 255);
+    top: -50%;
+    left: 50%;
+    transform: translate(-182%);
+    opacity: 0;
+  }
+  .reviweCell1{
+    z-index: 2;
+    display: flex;
+    background-color: rgba(255, 255, 255);
+    top: 0;
+    left: 50%;
+    transform: translate(-116%);  
+    opacity: 1;
+  }
+  .reviweCell2{
+    top: 5rem;
+    left: 50%;
+    z-index: 10;
+    display: flex;
+    background-color: white;
+    transform: translate(-50%);  
+    opacity: 1;
+  }
+  .reviweCell3{
+    z-index: 2;
+    display: flex;
+    background-color: rgba(255, 255, 255);
+    top: 0;
+    left: 50%; 
+    transform: translate(16%);  
+    opacity: 1;
+  }
+  .reviweCell4{
+    z-index: 1;
+    display: flex;
+    background-color: rgba(255, 255, 255);
+    top: -50%;
+    left: 50%;
+    transform: translate(82%);
+    opacity: 0;
+  }
+  .reviweCellHeader{
+    display: flex;
+    justify-content: space-between;
+    width: 50rem;
+    margin-top: 5.2rem;
+  }
+  .reviweCellName{
+    font-size: 2.2rem;
+    font-weight: bold;
+  }
+  .reviweCellContents{
+    width: 50rem;
+    height: 26rem;
+    margin-top: 1.8rem;
+    font-size: 2rem;  
+  }
+  .reviweCellDate{
+    display: flex;
+    justify-content: flex-end;
+    width: 50rem;
+    font-size: 1.8rem;  
+  }
+  
+  /*fifth Container*/
+  .fifthContainer{
+    display: flex;
+    align-items: center;
+    width: 129.6rem;
+    height: 42rem;
+  }
+  .contactUs{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 64.6rem;
+    height: 100%;
+  }
+  .contactUsTitle{
+    font-size: 5.2rem;
+    font-weight: bold;
+    color: #B00020;
+    margin-bottom: 6.6rem; 
+  }
+  .contactUsLocation{
+    font-size: 2rem;
+    margin-bottom: 2.2rem; 
+  }
+  .contactUsLocation img{
+    width: 1.4rem;
+  }
+  .contactUsTel{
+    font-size: 2rem;
+  }
+  .map{
+    width: 64rem;
+    height: 42rem;
+  }
+  
+  /*sixth Container*/
+  .sixthContainer{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 13rem;
+  }
+  .companyBox{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 40rem;
+    height: 12rem;
+    border-radius: 0.8rem;
+  }
+  .companyBoxLink{
+    background-color: #160A61;
+  }
+  .companyBoxKingbus{
+    background-color: #B80000;
+  }
+  .companyBoxTrp{
+    width: 39.4rem;
+    height: 11.4rem;
+    border: 0.3rem solid #141320;
+  }
+  .textInfor{
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: white;
+    margin-right: 1.2rem;
+    line-height: 3rem;
+  }
+  .logoLink{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 1rem;
+  }
+  .logoLinkImgLink{
+    height: 5.6rem;
+    width: 7rem;
+    margin-left: 1rem;
+    margin-bottom: 0.8rem;
+  }
+  .logoLinkImgKingbusApp{
+    margin-bottom: 0.8rem;
+  }
+  .logoLinkImgTRP{
+    width: 8rem;
+    height: 4.8rem;
+  }
+  .companyBoxLogoBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.6rem 1.2rem;
+    border-radius: 1.3rem;
+    background-color: white;
+    font-size: 1.3rem;
+    color: black;
+  }
+  .companyBoxLogoBtnShadow{
+    box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0 , 0.16);
+  }
+  .companyBoxTrp div:nth-child(2){
+    color: #141320;
+  }
+  .boxLeftFill{
+    position: absolute;
+    left: -0.1rem;
+    top: 0;
+    width: 2.8rem;
+    height: 100%;
+    border-radius: 0.5rem 0 0 0.5rem;
+    background-color: #141320;
+  }
+  
+  
+  /*first MoreWaypoint waypoint*/
+  .MoreWaypoint{
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 4.2rem;
+    margin-top: 3.4rem;
+    border-radius: 0 0 0.5rem 0.5rem;
+    background-color: #B00020;
+    font-size: 1.6rem;
+    color: white;
+    cursor: pointer;
+  }
+  .MoreWaypoint img{
+    margin-left: 0.3rem;
+  }
+  .waypointBtnTool{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 22rem;
+    height: 3rem;
+    margin-top: 1.6rem;
+  }
+  .removeWaypoint{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:  3rem;
+    height: 3rem;
+    border-radius: 0.5rem;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: white;
+    background-color: #B00020;
+    cursor: pointer;
+    margin-left: 0.8rem;
+  }
+  
+  .firstContainerJsTop{
+  }
+  /*second OrderPage*/
+  .secondOrderPage{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 35rem;
+    padding-top: 7rem;
+  }
+  .secondOrderPageCheckBox{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 70rem;
+    height: 26rem;
+  }
+  .secondOrderPageCheckCell{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 26rem;
+    height: 26rem;
+    border-radius: 0.5rem;
+    background-color: white;
+    line-height: 3.6rem;
+    font-size: 2.6rem;
+    color: black;
+    cursor: pointer;
+    box-shadow: 0.3rem 0.3rem 0.6rem rgba(0, 0, 0 , 0.7) ;
+  }
+  .secondOrderPageCheckCellcheck{
+    background-color: #B00020;
+    color: white;
+  }
+  .secondOrderPageCheckCell img{
+    position: absolute;
+    top: 6%;
+    left: 6%;
+  }
+  .mainOrderBtn{  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30rem;
+    height: 6rem;
+    border-radius: 0.5rem;
+    background-color: #B00020;
+    box-shadow: 0.3rem 0.3rem 0.6rem rgb(0 0 0 / 40%);
+    font-size: 2.6rem;
+    color: white;
+    cursor: pointer;
+  }
+  /*third OrderPage*/
+  .thirdOrderPage{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 42rem;
+  }
+  .thirdOrderPageCheckingContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 86rem;
+    min-height: 12rem;
+  }
+  .thirdOrderPageCheckingBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40rem;
+    min-height: 12rem;
+  }
+  .itIsReal{
+    position: absolute;
+    z-index: 101;
+    left: 0;
+    top: 50%;
+    transform: translate(0, -50%);
+  }
+  .itIsReal2{
+    position: absolute;
+    z-index: 101;
+    right: 0;
+    top: 50%;
+    transform: translate(0, -50%);
+  }
+  .thirdOrderPageCheckingBoxTitle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40rem;
+    height: 6rem;
+    border-radius: 0.8rem 0.8rem 0 0;
+    background-color: #B00020;
+    color: white;
+    font-size: 2.2rem;
+    font-weight: bold;
+  }
+  .thirdOrderPageCheckingCell{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 48rem;
+    background-color: white;
+    font-size: 2rem;
+    overflow: hidden;
+  }
+  .thirdOrderPageCheckingCellFacilities{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 34rem;
+    background-color: white;
+    font-size: 2rem;
+    overflow: hidden;
+  }
+  .thirdOrderPageOptionCell{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 40rem;
+    height: 6rem;
+  }
+  .thirdOrderPageOptionBlock{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 17.8rem;
+    height: 5.8rem;
+    border-radius: 0.5rem;
+    border: 0.1rem solid black;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  }
+  .thirdOrderPageOptionBlock:hover{
+    box-shadow: 0.2rem 0.2rem 1rem rgba(0,0,0,0.4);
+  }
+  .thirdOrderPageOptionBlockFacilities{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 11.8rem;
+    height: 9.3rem;
+    border-radius: 0.5rem;
+    border: 0.1rem solid black;
+    font-size: 1.6rem;
+    color: grey;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);  
+  }
+  .thirdOrderPageOptionBlockFacilities svg{
+    margin-bottom: 1.2rem;
+  }.thirdOrderPageOptionBlockFacilities svg g{
+    margin-bottom: 1.2rem;
+    fill: gray;
+  }
+  
+  .thirdOrderPageOptionBlockFacilities:hover{
+    box-shadow: 0.2rem 0.2rem 1rem rgba(0,0,0,0.4);
+  }
+  .thirdOrderPageCheckingBoxBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 39.6rem;
+    height: 5.6rem;
+    border: 0.2rem solid #B00020;
+    border-radius: 0 0 0.8rem 0.8rem;
+    background-color: white;
+    color: black;
+    font-size: 2.2rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .additionalRequests{
+    width: 84rem;
+    height: 10rem;
+    border: 0.2rem solid #B00020;
+    border-radius: 0.3rem;
+    padding: 1rem;
+    color: black;
+    font-size: 1.6rem;
+    font-weight: normal;
+    font-family: 'Noto Sans CJK KR';
+    resize: none;
+    outline: none;
+  }
+  .thirdOrderPageOptonCover{
+    position: absolute;
+    z-index: 100;
+    top: 55.5%;
+    left: 50%;
+    width: calc(100vw - 1.7rem);
+    height: 101vh;
+    background-color: rgba(0, 0, 0 , 0.5);
+    transform: translate(-50%, -50%);
+  }
+  .thirdOrderPageSubmit{
+    border: none;
+  }
+  /*fourthOrderPage*/
+  .fourthOrderPage{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 70rem;
+    height: 29rem;
+  }
+  .specificSchedule{
+    width: 67.4rem;
+    height: 14.4rem;
+    padding: 1rem;
+    border: 0.3rem solid #B00020;
+    border-radius: 0.3rem;
+    color: black;
+    font-size: 1.6rem;
+    font-weight: normal;
+    font-family: 'Noto Sans CJK KR';
+    resize: none;
+    outline: none;
+  }
+  .fourthOrderPageBox{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  .fourthOrderPageInfor{
+    font-size: 1.4rem;
+    color: white;
+    margin-top: 0.8rem;
+  }
+  .fourthOrderPageInfor span{
+    font-size: 2rem;
+    font-weight: bold;
+    color: #EF2146;
+  }
+  
+  
+  
+  
+  /*리뷰 슬라이드 */
+  #revNextAniCenter {  
+    transition: all ease-in-out 1.6s, z-index 0.8s ease-in-out 0.2s;  
+  }
+  #revNextAni {
+    transition: all ease-in-out 1.6s, z-index 0.8s ease-in-out 0.2s;
+  }
+  #revNextAnitoCenter {
+    transition: all ease-in-out 1.6s, z-index 0.8s ease-in-out 0.2s;
+    z-index: 10;
+  }
+  
+  
+  .chatting{
+    position: fixed;
+    z-index: 1000;
+    right: 10%;
+    bottom: 10rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 8rem;
+    height: 11rem;
+    border-radius: 1rem;
+    background-color: #CB0000;
+  }
+  .chatting img{
+    margin: 1.3rem 0 1.3rem 0
+  }
+  .chatting div:nth-child(2){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 3.6rem;
+    border-top: 0.1rem solid white;
+    border-radius: 0 0 1rem 1rem;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: white;
+  }
+  
+  
+  
+  
+  /*spareClass*/
+  .displayFlex{
+    display: flex;
+  }
+  .displayblock{
+    display: block;
+  }
+  .displayNone{
+    display: none;
+  }
+  .containerGap{
+    margin-top: 22rem;
+  }
+
+
+  
