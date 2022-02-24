@@ -90,7 +90,7 @@ export function Login() {
     }
     
     return (
-        <div>
+        <div style={{height: '50rem', display: "flex", alignItems: "center"}}>
             <Outlet />
             <form onSubmit={onSubmit}>
                 <input onChange={onChange} type="text" name="username" placeholder="id" />

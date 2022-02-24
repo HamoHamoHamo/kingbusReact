@@ -1,0 +1,326 @@
+header{
+    position: fixed;
+    z-index: 10000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 129.6rem;
+    height: 6rem;
+    padding: 0 calc( (100vw - 129.6rem - 1.7rem) / 2 );
+    background-color: #B00020;
+  }
+  
+  /*logo*/
+  header a{
+    width: 14rem;
+    height: 4rem;
+  }
+  header a img{
+    width: 100%;
+    height: 100%;
+  }
+  
+  /*nav*/
+  header ul{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 48rem;
+    height: 100%;
+  }
+  header ul li a{
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: white;
+  }
+  
+  /*button*/
+  .headerBtnTool{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 18.8rem;
+    height: 3.2rem;
+  }
+  .headerBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3.2rem;
+    border-radius: 1.6rem;
+    font-size: 1.7rem;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+  }
+  .login{
+    width: 8rem;
+  }
+  .signUp{
+    width: 9.8rem;
+  }
+  .headerBtn:hover{
+    border: 0.2rem solid white;
+  }
+  /*hembuger*/
+  .hembugerButton{
+    position: absolute;
+    right: 3rem;
+    display: none;
+  }
+  .hembugerBg{
+    position: fixed;
+    z-index: 10000;
+    top: 6rem;
+    left: 0;
+    display: none;
+    justify-content: flex-end;
+    width: 100vw;
+    height: 100vh;
+  }
+  .hembugerCover{
+    width: calc(100% - 24rem);
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+  .hembugerMenu{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 24rem;
+    height: 100%;
+    background-color: white;
+  }
+  .hembugerBtnTool{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    height: 6.8rem;
+    border-bottom: 0.2rem solid #B00020;
+  }
+  .hembugerLogin{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 7.2rem;
+    height: 3rem;
+    border: 0.1rem solid #B00020;
+    border-radius: 0.5rem;
+    color: #B00020;
+    font-size: 1.6rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .hembugerSignup{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 9.2rem;
+    height: 3rem;
+    border: 0.1rem solid #B00020;
+    border-radius: 0.5rem;
+    color: #B00020;
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    cursor: pointer;
+  }
+  .hembugerNav{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .hembugerNav li{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 1rem;
+    width: 22rem;
+    height: 5.8rem;
+    border-bottom: 0.1rem solid #CECECE;
+    font-size: 2rem;
+    color: #4B4B4B;
+  }
+  .hembugerNav li a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #4B4B4B;
+  }
+  /*hembugerLoginBox*/
+  .hembugerLoginBox{
+    position: relative;
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 19rem;
+    border-bottom: 0.2rem solid #B00020;
+  }
+  /*hembugerSignupBox*/
+  .hembugerSignupBox{
+    position: relative;
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 19rem;
+    border-bottom: 0.2rem solid #B00020;
+  }
+  .hembugeroptionBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 22rem;
+    height: 4.2rem;
+    border: 0.1rem solid #B00020;
+    border-radius: 0.5rem;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #B00020;
+  }
+  .ontherColor{
+    background-color: #B00020;
+    color: white;  
+  }
+  .turnBackHemburger{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 20rem;
+    right: 2rem;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #B00020;
+    cursor: pointer;
+  }
+  .turnBackHemburger img{
+    margin-right: 0.4rem;
+  }
+  
+  
+  
+  
+  @media screen and (max-width: 1295px) and (min-width: 1024px) {
+    html {
+      font-size: 50%;
+    }
+      /*header*/
+      header{
+        width: calc(102.4rem/5*6.25);
+        padding: 0 calc( (100vw - 128rem - 1.7rem) / 2 );
+      }
+      .mainContentsContainer{
+        width: 76.8rem;
+      }
+      /*first Container*/
+      .firstContainerImg{
+        width: 100vw;
+      }
+    }
+  @media screen and (max-width: 1023px) and (min-width: 768px) {
+    html {
+      font-size: 62.5%;
+    }
+  
+    /*header*/
+    header{
+      justify-content: center;
+      width: 76.8rem;
+      padding: 0 calc( (100vw - 76.8rem) / 2 );
+    }
+    .mainContentsContainer{
+      width: 76.8rem;
+    }
+    /*first Container*/
+    .firstContainerImg{
+      width: 100vw;
+    }
+    header ul{
+      display: none;
+    }
+    .headerBtnTool{
+      display: none;    
+    }
+    /*hembuger*/
+    .hembugerButton{
+      display: block;
+  }
+  }
+  @media screen and (max-width: 767px) and (min-width: 360px) {
+    html {
+      font-size: 50%;
+    }
+        /*header*/
+        header{
+          justify-content: center;
+          width: 36rem;
+          padding: 0 calc( (100vw - 36rem) / 2 );
+        }
+        .mainContentsContainer{
+          width: 76.8rem;
+        }
+        /*first Container*/
+        .firstContainerImg{
+          width: 100vw;
+        }
+        header ul{
+          display: none;
+        }
+        .headerBtnTool{
+          display: none;    
+        }
+        /*hembuger*/
+        .hembugerButton{
+          display: block;
+      }
+  }
+
+/*login*/
+
+.loginHidden{
+    position: absolute;
+    top: 8rem;
+    right: calc( (100vw - 129.6rem - 1.7rem) / 2 );
+    display: flex;
+    justify-content: space-between;
+    width: 34rem;
+    height: 10rem;
+  }
+  .loginCell{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 9.6rem;
+    height: 7.6rem;
+    border: 0.2rem solid #B00020;
+    border-radius: 0.6rem;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    line-height: 2.6rem;
+    cursor: pointer ;
+  }
+  .loginCell:hover{
+    font-size: 2.1rem;
+    line-height: 2.7  rem;
+  }
+  .passenger{
+    background-color: #B00020;
+    color: white;
+  }
+  .loginCellOther{
+    background-color: white;
+    color: #B00020;
+  }
+
+
+.displayNone{
+    display: none;
+}
