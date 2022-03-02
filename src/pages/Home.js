@@ -7,78 +7,176 @@ import { RenderAfterNavermapsLoaded, NaverMap, Marker } from "react-naver-maps";
 import axios from "axios";
 
 
-function NaverMapDiv(){   
+function NaverMapDiv() {
     return (
         <RenderAfterNavermapsLoaded
             ncpClientId='etu1t8yjz0'
             error={<p>Maps Load Error</p>}
         >
-            <NaverMap 
+            <NaverMap
                 mapDivId={'maps-getting-started-uncontrolled'} // default: react-naver-map
                 style={{
-                width: '64rem',
-                height: '42rem'
+                    width: '64rem',
+                    height: '42rem'
                 }}
                 defaultCenter={{ lat: 37.24548819705312, lng: 126.9925381461988 }}
                 defaultZoom={17}
-                
-                
             >
                 <Marker
-                position={{ lat: 37.24548819705312, lng: 126.9925381461988 }}
+                    position={{ lat: 37.24548819705312, lng: 126.9925381461988 }}
                 />
             </NaverMap>
-            
-
         </RenderAfterNavermapsLoaded>
-        
     )
 }
 
-function Home() {
+export default function Home() {
     const { store: { isAuthenticated, name } } = useAppContext();
     const [inputs, setInputs] = useState({});
+    const [datas, setDatas] = useState({});
+
+    const [depDatas, setDepDatas] = useState([])
+    const [arrDatas, setArrDatas] = useState([])
+
+    const onBlur = (e) => {
+
+        // console.log("EEEEEEEEEEEE", e.target.parentElement.children[2]);
+        e.target.parentElement.children[2].style.display = 'none';
+    }
+    const onFocus = (e) => {
+        console.log("EEEEEEEEEEEE", e.target.parentElement.children[2]);
+        e.target.parentElement.children[2].style.display = 'block';
+        const box = Box('departure');
+        console.log("BOX", box);
+
+    }
+    // function SearchBoxDep(){
+    //     // return SearchBox('departure');
+    //     return (
+    //         <div class='routeDataCon'>
+    //             <Box type='departure' />
+    //         </div>
+    //     )
+    // }
+    // function SearchBoxArr(){
+    //     // return SearchBox('arrival');
+    //     return (
+    //         <div class='routeDataCon'>
+    //             <Box type='arrival'/>
+    //         </div>
+    //     )
+    // }
+    function Box({ type }) {
+        let dataList = ''
+
+        switch (type) {
+            case 'departure':
+                dataList = datas['departure'];
+                break;
+            case 'arrival':
+                dataList = datas['arrival'];
+                break;
+            default:
+                dataList = '';
+
+        }
+
+        if (dataList) {
+            return (
+                dataList.map((data) => {
+                    let { place_name: title, address_name: detail } = data;
+
+                    if (!title) {
+                        // console.log("KEYWORD");
+                        title = detail
+                    }
+
+                    // console.log("DATA", data)
+                    return (
+                        <div class="routeDataCell">
+                            <p class="routeDataTextTitle">{title}</p>
+                            <p class="routeDataTextDetail">{detail}</p>
+                        </div>
+                    )
+                })
+            )
+        }
+        else {
+            return (
+                <div></div>
+            )
+        }
+
+    }
+
+    function addWayPoint() {
+        return (
+            <div class="orderInputCell itIsWaypoit">
+                <input class="orderInputCellTextWaypoint" placeholder="경유지" name="wayPointList" />
+                <img src="/assets/location.png" alt="위치아이콘" /><div class="removeWaypoint" />
+                <img src="/assets/trashbin.png" alt="쓰레기통 아이콘" style="height: auto;" />
+            </div>
+        )
+    }
+
+    // useEffect(() => {SearchBox(inputs)}, [inputs])
 
     const onChange = async (e) => {
         let { name, value } = e.target;
         setInputs(prev => ({
             ...prev,
             [name]: value
-        }));
-        console.log("inputs", inputs);
-        
+        }, e));
+        // console.log("inputs", inputs);
+
         const headers = {
             Authorization: 'KakaoAK 89c319742a7efca01255c48b9579a68a'
-            };
+        };
         let addressResult = '';
-        try{
-            addressResult = await axios.get(`https://dapi.kakao.com/v2/local/search/address.json?query=${value}&page=1&size=5`,{ headers })
-            
+        try {
+            addressResult = await axios.get(`https://dapi.kakao.com/v2/local/search/address.json?query=${value}&page=1&size=5`, { headers })
+
         }
-        catch(err) {
+        catch (err) {
             console.log("Kakao API ERROR", err);
         }
         const { data: { documents: addressData } } = addressResult;
         //console.log("RESULT", addressData);
 
         let keywordResult = '';
-        try{
-            keywordResult = await axios.get(`https://dapi.kakao.com/v2/local/search/keyword.json?query=${value}&page=1&size=5`,{ headers })
-            
+        try {
+            keywordResult = await axios.get(`https://dapi.kakao.com/v2/local/search/keyword.json?query=${value}&page=1&size=5`, { headers })
+
         }
-        catch(err) {
+        catch (err) {
             console.log("Kakao API ERROR", err);
         }
         const { data: { documents: keywordData } } = keywordResult;
-        //console.log("RESULT", keywordData);
+        // console.log("RESULT", keywordData);
 
         let dataList = []
         dataList.push(...addressData);
         dataList.push(...keywordData);
-        dataList = dataList.slice(0,5);
-        console.log("PUSSS", dataList);
+        dataList = dataList.slice(0, 5);
+        // console.log("DATALIST", dataList)
+
+        setDatas(prev => ({
+            ...prev,
+            [name]: dataList
+        }));
+        // console.log("DATALIST", datas);
+
+
+        if (name === "departure") {
+            setDepDatas(dataList);
+
+        } else if (name === "arrival") {
+            setArrDatas(dataList);
+
+        }
+
     };
-    
+
 
     return (
         <>
@@ -132,17 +230,22 @@ function Home() {
                                     <div class="choiceCellTitle">노선선택</div>
 
                                     <div class="orderInputCell">
-                                        <input onChange={onChange} name='departure' type="text" class="orderInputCellText" placeholder="출발지" />
+                                        <input autoComplete="off" onChange={onChange} onFocus={onFocus} onBlur={onBlur} name='departure' type="text" class="orderInputCellText" placeholder="출발지" />
                                         <img src="/assets/location.png" alt="위치아이콘" />
-                                    </div>
-                                    <div class="routeDataCell">
-                                        <p class="routeDataTextTitle">북한산둘레길 구름정원길8구간</p>
-                                        <p class="routeDataTextDetail">경기 성남시 분당구 판교역로 235</p>
+                                        <div class='routeDataCon'>
+                                            <Box type='departure' />
+                                        </div>
                                     </div>
 
+
                                     <div class="orderInputCell">
-                                        <input onChange={onChange} name='arrival' type="text" class="orderInputCellText" placeholder="도착지" />
+                                        <input autoComplete="off" onChange={onChange} onFocus={onFocus} onBlur={onBlur} name='arrival' type="text" class="orderInputCellText" placeholder="도착지" />
                                         <img src="/assets/location.png" alt="위치아이콘" />
+
+                                        <div class='routeDataCon'>
+                                            <Box type='arrival' />
+                                        </div>
+
                                     </div>
 
                                     <div class="addWaypoint">
@@ -164,12 +267,12 @@ function Home() {
                                         </div>
                                     </div>
 
-                                    <div class="MoreWaypoint">
+                                    <div class="MoreWaypoint" onClick={addWayPoint}>
                                         <span>경유지 추가</span>
                                         <img src="/assets/add.png" alt="추가아이콘" />
                                     </div>
                                 </div>
-                                
+
 
                                 <div class="choiceCell">
 
@@ -614,37 +717,37 @@ function Home() {
                         <div class="textInfor">LINK와 함께 "인생을 초연결"</div>
                         <div class="logoLink">
                             <img src="/assets/linkLogo.png" alt="링크 로고" class="logoLinkImgLink" />
-                                <a href="http://www.kingbus.kr/">
-                                    <span class="companyBoxLogoBtn">사이트 바로가기</span>
-                                </a>
+                            <a href="http://www.kingbus.kr/">
+                                <span class="companyBoxLogoBtn">사이트 바로가기</span>
+                            </a>
                         </div>
                     </div>
                     <div class="companyBox companyBoxKingbus">
                         <div class="textInfor">
-                            킹버스 앱을통해 더욱간편하게<br/>
-                                One Touch로 이용해보세요!!
+                            킹버스 앱을통해 더욱간편하게<br />
+                            One Touch로 이용해보세요!!
                         </div>
                         <div class="logoLink">
                             <img src="/assets/kingbusAppLogo.png" alt="링크 로고" class="logoLinkImgKingbusApp" />
-                                <a href="https://play.google.com/store/search?q=%ED%82%B9%EB%B2%84%EC%8A%A4&c=apps">
-                                    <span class="companyBoxLogoBtn">
-                                        <img src="/assets/playStore.png" alt="플레이스토어 아이콘" />
-                                            앱 다운받기
-                                    </span>
-                                </a>
+                            <a href="https://play.google.com/store/search?q=%ED%82%B9%EB%B2%84%EC%8A%A4&c=apps">
+                                <span class="companyBoxLogoBtn">
+                                    <img src="/assets/playStore.png" alt="플레이스토어 아이콘" />
+                                    앱 다운받기
+                                </span>
+                            </a>
                         </div>
                     </div>
                     <div class="companyBox companyBoxTrp">
                         <div class="boxLeftFill"></div>
                         <div class="textInfor">
-                            교통의 혁신을 원한다면<br/>
-                                킹버스 TRP !!
+                            교통의 혁신을 원한다면<br />
+                            킹버스 TRP !!
                         </div>
                         <div class="logoLink">
                             <img src="/assets/TRPLogoNew.png" alt="링크 로고" class="logoLinkImgTRP" />
-                                <a href="http://kingbuserp.link/">
-                                    <span class="companyBoxLogoBtn companyBoxLogoBtnShadow">사이트 바로가기</span>
-                                </a>
+                            <a href="http://kingbuserp.link/">
+                                <span class="companyBoxLogoBtn companyBoxLogoBtnShadow">사이트 바로가기</span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -657,5 +760,3 @@ function Home() {
         </>
     )
 }
-
-export default Home;

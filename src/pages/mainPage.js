@@ -9,8 +9,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const loginCell = document.querySelectorAll(".loginCell");
     let clickLoginCount = 0;
 
-    login.addEventListener("click", changeToBlockLogin);
-    signUp.addEventListener("click", changeToBlockSingup);
+    if(login){
+        login.addEventListener("click", changeToBlockLogin);
+        login.addEventListener("blur", closeToLogin);
+    }
+    if(signUp){
+        signUp.addEventListener("click", changeToBlockSingup);
+        signUp.addEventListener("blur", closeToSignUp);
+    }
     function changeToBlockLogin() {
 
         loginOption.classList.remove("displayNone");
@@ -29,8 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    login.addEventListener("blur", closeToLogin);
-    signUp.addEventListener("blur", closeToSignUp);
+    
     function closeToLogin() {
         if (clickLoginCount == 0) {
             loginOption.classList.remove("displayFlex");
@@ -342,12 +347,16 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    
     //경유지 추가
     const WaypointScrollBox = document.querySelector(".WaypointScrollBox")
     const MoreWaypointBtn = document.querySelector(".MoreWaypoint")
 
-    MoreWaypointBtn.addEventListener("click", addMoreWaypoint)
+    //MoreWaypointBtn.addEventListener("click", addMoreWaypoint)
+    
+
     function addMoreWaypoint() {
+        console.log("MoreWaypointBtn")
         const MoreWaypointDiv = document.createElement("div");
         MoreWaypointDiv.classList.add("orderInputCell")
         MoreWaypointDiv.classList.add("itIsWaypoit")
@@ -356,12 +365,12 @@ document.addEventListener("DOMContentLoaded", function () {
         MoreWaypointInput.placeholder = "경유지"
         MoreWaypointInput.name = "wayPointList"
         const MoreWaypointImg = document.createElement("img");
-        MoreWaypointImg.src = "images/location.png"
+        MoreWaypointImg.src = "/assets/location.png"
         MoreWaypointImg.alt = "위치아이콘"
         const removeWaypoint = document.createElement("div");
         removeWaypoint.classList.add("removeWaypoint")
         const removeWaypointImg = document.createElement("img");
-        removeWaypointImg.src = "images/trashbin.png"
+        removeWaypointImg.src = "/assets/trashbin.png"
         removeWaypointImg.alt = "쓰레기통 아이콘"
         removeWaypointImg.style.height = "auto"
         removeWaypoint.append(removeWaypointImg)
