@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState, useRef } from "react";
 import "./Home.css";
 import "./mainPage.js";
 import { useAppContext } from "../Store";
 import { RenderAfterNavermapsLoaded, NaverMap, Marker } from "react-naver-maps";
-import { WayPoint } from "./home/WayPoint";
 import axios from "axios";
+import { SearchAddress } from './home/Order'
 
 
 function NaverMapDiv() {
@@ -34,95 +33,39 @@ function NaverMapDiv() {
 export default function Home() {
     const { store: { isAuthenticated, name } } = useAppContext();
     const [inputs, setInputs] = useState({});
-    const [datas, setDatas] = useState({});
+    const [searchDatas, setSearchDatas] = useState();
+    const [types, setTypes] = useState({
+        name: '',
+        title: '',
+        text: '',
+        display: 'hidden'
+    });
+    const searchRef = useRef();
 
-    // const [id, setId] = useState({cnt: 0, id: []});
-    const [id, setId] = useState([]);
-    const [cnt, setCnt] = useState(0);
-    
-    const onBlur = (e) => {
+    function onClickRoute(e) {
+        console.log("ONCLICK", e.target.name);
 
-        // console.log("EEEEEEEEEEEE", e.target.parentElement.children[2]);
-        e.target.parentElement.children[2].style.display = 'none';
-    }
-    const onFocus = (e) => {
-        console.log("EEEEEEEEEEEE", e.target.parentElement.children[2]);
-        e.target.parentElement.children[2].style.display = 'block';
-        const box = Box('departure');
-        console.log("BOX", box);
-
-    }
-    // function SearchBoxDep(){
-    //     // return SearchBox('departure');
-    //     return (
-    //         <div class='routeDataCon'>
-    //             <Box type='departure' />
-    //         </div>
-    //     )
-    // }
-    // function SearchBoxArr(){
-    //     // return SearchBox('arrival');
-    //     return (
-    //         <div class='routeDataCon'>
-    //             <Box type='arrival'/>
-    //         </div>
-    //     )
-    // }
-    function addWayPoint() {
-        setCnt(cnt+1);
-        setId(id.concat(cnt));
-    }
-    const onRemove = (i) => {
-        setId(id.filter(y => y !== i));
+        setTypes(() => ({
+            
+            name: e.target.name,
+            title: e.target.value,
+            text: e.target.value.slice(0,2),
+            display: 'visible',
+            //ref: 
+        }))
+        console.log("ONCLLLL", types);
     }
 
-    function Box({ type }) {
-        let dataList = ''
 
-        switch (type) {
-            case 'departure':
-                dataList = datas['departure'];
-                break;
-            case 'arrival':
-                dataList = datas['arrival'];
-                break;
-            default:
-                dataList = '';
-        }
-        const searchResult = (e, title) => {
-            console.log("MOUSE DOWN", e.target.parentElement.parentElement.parentElement.children[0], title);
-            const parentInput = e.target.parentElement.parentElement.parentElement.children[0];
-            parentInput.value = title;
-        }
-
-        if (dataList) {
-            return (
-                dataList.map((data) => {
-                    let { place_name: title, address_name: detail } = data;
-
-                    if (!title) {
-                        // console.log("KEYWORD");
-                        title = detail
-                    }
-
-                    // console.log("DATA", data)
-                    return (
-                        <div class="routeDataCell" onMouseDown={(e) => {searchResult(e, title)}}>
-                            <p class="routeDataTextTitle">{title}</p>
-                            <p class="routeDataTextDetail">{detail}</p>
-                        </div>
-                    )
-                })
-            )
-        }
-        else {
-            return (
-                <div></div>
-            )
-        }
-
+    const onClose = () => {
+        setTypes((prev) => ({
+            
+            display: 'hidden'
+        }))
     }
-    // useEffect(() => {SearchBox(inputs)}, [inputs])
+    const onClickButton = (title) => {
+        
+    }
     const onChange = async (e) => {
         let { name, value } = e.target;
         setInputs(prev => ({
@@ -141,34 +84,38 @@ export default function Home() {
         catch (err) {
             console.log("Kakao API ERROR", err);
         }
-        const { data: { documents: addressData } } = addressResult;
-        //console.log("RESULT", addressData);
+        if (addressResult) {
+            const { data: { documents: addressData } } = addressResult;
+            //console.log("RESULT", addressData);
 
-        let keywordResult = '';
-        try {
-            keywordResult = await axios.get(`https://dapi.kakao.com/v2/local/search/keyword.json?query=${value}&page=1&size=5`, { headers })
+            let keywordResult = '';
+            try {
+                keywordResult = await axios.get(`https://dapi.kakao.com/v2/local/search/keyword.json?query=${value}&page=1&size=5`, { headers })
 
+            }
+            catch (err) {
+                console.log("Kakao API ERROR", err);
+            }
+            const { data: { documents: keywordData } } = keywordResult;
+            // console.log("RESULT", keywordData);
+
+            let dataList = []
+            dataList.push(...addressData);
+            dataList.push(...keywordData);
+            dataList = dataList.slice(0, 5);
+            //console.log("DATALIST", dataList)
+
+            setSearchDatas(dataList);
+            console.log("DATALIST", searchDatas);
         }
-        catch (err) {
-            console.log("Kakao API ERROR", err);
+        else {
+            setSearchDatas([]);
         }
-        const { data: { documents: keywordData } } = keywordResult;
-        // console.log("RESULT", keywordData);
-
-        let dataList = []
-        dataList.push(...addressData);
-        dataList.push(...keywordData);
-        dataList = dataList.slice(0, 5);
-        //console.log("DATALIST", dataList)
-
-        setDatas(prev => ({
-            ...prev,
-            [name]: dataList
-        }));
-        console.log("DATALIST", datas);
+        
     };
     return (
         <>
+            <SearchAddress onChange={onChange} type={types} datas={searchDatas} onClose={onClose} onClickButton={onClickButton}/>
             <div class="chatting">
                 <img src="/assets/speechBubble.png" alt="말풍선" />
                 <div>채팅</div>
@@ -219,22 +166,14 @@ export default function Home() {
                                     <div class="choiceCellTitle">노선선택</div>
 
                                     <div class="orderInputCell">
-                                        <input autoComplete="off" onChange={onChange} onFocus={onFocus} onBlur={onBlur} name='departure' type="text" class="orderInputCellText" placeholder="출발지" />
+                                        <input onClick={onClickRoute} name='departure' type="text" class="orderInputCellText" value='출발지' />
                                         <img src="/assets/location.png" alt="위치아이콘" />
-                                        <div class='routeDataCon'>
-                                            <Box type='departure' />
-                                        </div>
                                     </div>
 
 
                                     <div class="orderInputCell">
-                                        <input autoComplete="off" onChange={onChange} onFocus={onFocus} onBlur={onBlur} name='arrival' type="text" class="orderInputCellText" placeholder="도착지" />
+                                        <input onClick={onClickRoute} name='arrival' type="text" class="orderInputCellText" value='도착지' />
                                         <img src="/assets/location.png" alt="위치아이콘" />
-
-                                        <div class='routeDataCon'>
-                                            <Box type='arrival' />
-                                        </div>
-
                                     </div>
 
                                     <div class="addWaypoint">
@@ -254,10 +193,9 @@ export default function Home() {
                                             <input type="text" class="orderInputCellText" placeholder="경유지" />
                                             <img src="/assets/location.png" alt="위치아이콘" />
                                         </div>
-                                        <WayPoint id={id} onRemove={onRemove} onChange={onChange} onFocus={onFocus} onBlur={onBlur} Box={Box} />
                                     </div>
 
-                                    <div class="MoreWaypoint" onClick={addWayPoint}>
+                                    <div class="MoreWaypoint">
                                         <span>경유지 추가</span>
                                         <img src="/assets/add.png" alt="추가아이콘" />
                                     </div>
