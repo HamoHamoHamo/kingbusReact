@@ -1,3 +1,9 @@
+// 경유지 삭제
+export function removeWaypointDiv() {
+    let deletWayPoint = this.parentElement;
+    deletWayPoint.remove();
+}
+
 //로그인&회원가입
 document.addEventListener("DOMContentLoaded", function () {
     //로그인&회원가입
@@ -377,12 +383,12 @@ document.addEventListener("DOMContentLoaded", function () {
         MoreWaypointDiv.append(MoreWaypointInput, MoreWaypointImg, removeWaypoint)
         WaypointScrollBox.appendChild(MoreWaypointDiv)
         const removeWaypointBtn = document.querySelector(".removeWaypoint")
-        removeWaypointBtn.addEventListener("click", removeWaypointDiv)
-        const removeWaypointBtnAll = document.querySelectorAll(".removeWaypoint")
-        let wayPoinNum = removeWaypointBtnAll.length
-        for (let i = 0; i < wayPoinNum; i++) {
-            removeWaypointBtnAll[i].addEventListener("click", removeWaypointDivAll)
-        }
+        // removeWaypointBtn.addEventListener("click", removeWaypointDiv)
+        // const removeWaypointBtnAll = document.querySelectorAll(".removeWaypoint")
+        // let wayPoinNum = removeWaypointBtnAll.length
+        // for (let i = 0; i < wayPoinNum; i++) {
+        //     removeWaypointBtnAll[i].addEventListener("click", removeWaypointDivAll)
+        // }
     }
 
     //경유지 삭제

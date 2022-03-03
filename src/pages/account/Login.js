@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { Api } from "../../utils/Api";
 import axios from "axios";
-import { useAppContext, setToken } from "../../store";
+import { useAppContext, setToken } from "../../Store";
 
 export function LoginUser() {
     return (

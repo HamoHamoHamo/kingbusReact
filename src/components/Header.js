@@ -1,5 +1,5 @@
 import React from "react";
-import { useAppContext } from "../store";
+import { useAppContext } from "../Store";
 
 export default function Header() {
     const { store : {isAuthenticated, name} } = useAppContext();

@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import "./Home.css";
 import "./mainPage.js";
-import { useAppContext } from "../store";
+import { useAppContext } from "../Store";
 import { RenderAfterNavermapsLoaded, NaverMap, Marker } from "react-naver-maps";
+import { WayPoint } from "./home/WayPoint";
 import axios from "axios";
 
 
@@ -35,9 +36,10 @@ export default function Home() {
     const [inputs, setInputs] = useState({});
     const [datas, setDatas] = useState({});
 
-    const [depDatas, setDepDatas] = useState([])
-    const [arrDatas, setArrDatas] = useState([])
-
+    // const [id, setId] = useState({cnt: 0, id: []});
+    const [id, setId] = useState([]);
+    const [cnt, setCnt] = useState(0);
+    
     const onBlur = (e) => {
 
         // console.log("EEEEEEEEEEEE", e.target.parentElement.children[2]);
@@ -66,6 +68,14 @@ export default function Home() {
     //         </div>
     //     )
     // }
+    function addWayPoint() {
+        setCnt(cnt+1);
+        setId(id.concat(cnt));
+    }
+    const onRemove = (i) => {
+        setId(id.filter(y => y !== i));
+    }
+
     function Box({ type }) {
         let dataList = ''
 
@@ -78,7 +88,11 @@ export default function Home() {
                 break;
             default:
                 dataList = '';
-
+        }
+        const searchResult = (e, title) => {
+            console.log("MOUSE DOWN", e.target.parentElement.parentElement.parentElement.children[0], title);
+            const parentInput = e.target.parentElement.parentElement.parentElement.children[0];
+            parentInput.value = title;
         }
 
         if (dataList) {
@@ -93,7 +107,7 @@ export default function Home() {
 
                     // console.log("DATA", data)
                     return (
-                        <div class="routeDataCell">
+                        <div class="routeDataCell" onMouseDown={(e) => {searchResult(e, title)}}>
                             <p class="routeDataTextTitle">{title}</p>
                             <p class="routeDataTextDetail">{detail}</p>
                         </div>
@@ -108,19 +122,7 @@ export default function Home() {
         }
 
     }
-
-    function addWayPoint() {
-        return (
-            <div class="orderInputCell itIsWaypoit">
-                <input class="orderInputCellTextWaypoint" placeholder="경유지" name="wayPointList" />
-                <img src="/assets/location.png" alt="위치아이콘" /><div class="removeWaypoint" />
-                <img src="/assets/trashbin.png" alt="쓰레기통 아이콘" style="height: auto;" />
-            </div>
-        )
-    }
-
     // useEffect(() => {SearchBox(inputs)}, [inputs])
-
     const onChange = async (e) => {
         let { name, value } = e.target;
         setInputs(prev => ({
@@ -135,7 +137,6 @@ export default function Home() {
         let addressResult = '';
         try {
             addressResult = await axios.get(`https://dapi.kakao.com/v2/local/search/address.json?query=${value}&page=1&size=5`, { headers })
-
         }
         catch (err) {
             console.log("Kakao API ERROR", err);
@@ -158,26 +159,14 @@ export default function Home() {
         dataList.push(...addressData);
         dataList.push(...keywordData);
         dataList = dataList.slice(0, 5);
-        // console.log("DATALIST", dataList)
+        //console.log("DATALIST", dataList)
 
         setDatas(prev => ({
             ...prev,
             [name]: dataList
         }));
-        // console.log("DATALIST", datas);
-
-
-        if (name === "departure") {
-            setDepDatas(dataList);
-
-        } else if (name === "arrival") {
-            setArrDatas(dataList);
-
-        }
-
+        console.log("DATALIST", datas);
     };
-
-
     return (
         <>
             <div class="chatting">
@@ -265,6 +254,7 @@ export default function Home() {
                                             <input type="text" class="orderInputCellText" placeholder="경유지" />
                                             <img src="/assets/location.png" alt="위치아이콘" />
                                         </div>
+                                        <WayPoint id={id} onRemove={onRemove} onChange={onChange} onFocus={onFocus} onBlur={onBlur} Box={Box} />
                                     </div>
 
                                     <div class="MoreWaypoint" onClick={addWayPoint}>
@@ -729,7 +719,7 @@ export default function Home() {
                         </div>
                         <div class="logoLink">
                             <img src="/assets/kingbusAppLogo.png" alt="링크 로고" class="logoLinkImgKingbusApp" />
-                            <a href="https://play.google.com/store/search?q=%ED%82%B9%EB%B2%84%EC%8A%A4&c=apps">
+                            <a href="https://play.google.com/Store/search?q=%ED%82%B9%EB%B2%84%EC%8A%A4&c=apps">
                                 <span class="companyBoxLogoBtn">
                                     <img src="/assets/playStore.png" alt="플레이스토어 아이콘" />
                                     앱 다운받기

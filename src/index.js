@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Root from "./pages";
 import { BrowserRouter } from "react-router-dom";
-import { AppProvider } from "./store";
+import { AppProvider } from "./Store";
 
 ReactDOM.render(
   <BrowserRouter>
