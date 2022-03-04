@@ -1,5 +1,5 @@
 // 경유지 삭제
-export function removeWaypointDiv() {
+export function removeWayPointDiv() {
     let deletWayPoint = this.parentElement;
     deletWayPoint.remove();
 }
@@ -319,34 +319,32 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //경유지
     const firstContainer = document.querySelector(".firstContainer");
-    const addWaypoint = document.querySelector(".addWaypoint");
-    const addWaypointText = document.querySelector(".addWaypoint span");
-    const addWaypointImg = document.querySelectorAll(".addWaypoint img");
+    const addWayPoint = document.querySelector(".addWayPoint");
+    const addWayPointText = document.querySelector(".addWayPoint span");
+    const addWayPointImg = document.querySelectorAll(".addWayPoint img");
     const choiceCell = document.querySelectorAll(".choiceCell");
     const choiceBox = document.querySelectorAll(".choiceBox");
     const firstContainerImgSizing = document.querySelector(".firstContainerImgSizing");
     const firstContainerImg = document.querySelector(".firstContainerImg");
     const firstContainerImgCover = document.querySelector(".firstContainerImgCover");
 
-    addWaypoint.addEventListener("click", addWaypointBox);
-    function addWaypointBox() {
-        if (addWaypointText.innerText == "경유지 추가") {
+    addWayPoint.addEventListener("click", addWayPointBox);
+    function addWayPointBox() {
+        if (addWayPointText.innerText == "경유지 추가") {
             choiceCell[1].classList.remove("displayNone");
-            addWaypointText.innerText = "경유지 삭제"
+            addWayPointText.innerText = "경유지 삭제"
             choiceBox[0].classList.add("choiceBoxJs")
-            addWaypointImg[0].classList.add("displayNone")
-            addWaypointImg[1].classList.remove("displayNone")
-            firstContainer.classList.add("firstContainerJs")
+            addWayPointImg[0].classList.add("displayNone")
+            addWayPointImg[1].classList.remove("displayNone")
             firstContainerImgSizing.classList.add("firstContainerImgSizingJs")
             firstContainerImg.classList.add("firstContainerImgJs")
             firstContainerImgCover.classList.add("firstContainerImgCoverJs")
         } else {
             choiceCell[1].classList.add("displayNone");
-            addWaypointText.innerText = "경유지 추가"
+            addWayPointText.innerText = "경유지 추가"
             choiceBox[0].classList.remove("choiceBoxJs")
-            addWaypointImg[0].classList.remove("displayNone")
-            addWaypointImg[1].classList.add("displayNone")
-            firstContainer.classList.remove("firstContainerJs")
+            addWayPointImg[0].classList.remove("displayNone")
+            addWayPointImg[1].classList.add("displayNone")
             firstContainerImgSizing.classList.remove("firstContainerImgSizingJs")
             firstContainerImg.classList.remove("firstContainerImgJs")
             firstContainerImgCover.classList.remove("firstContainerImgCoverJs")
@@ -355,48 +353,48 @@ document.addEventListener("DOMContentLoaded", function () {
 
     
     //경유지 추가
-    const WaypointScrollBox = document.querySelector(".WaypointScrollBox")
-    const MoreWaypointBtn = document.querySelector(".MoreWaypoint")
+    const WayPointScrollBox = document.querySelector(".WayPointScrollBox")
+    const MoreWayPointBtn = document.querySelector(".MoreWayPoint")
 
-    //MoreWaypointBtn.addEventListener("click", addMoreWaypoint)
+    //MoreWayPointBtn.addEventListener("click", addMoreWayPoint)
     
 
-    function addMoreWaypoint() {
-        console.log("MoreWaypointBtn")
-        const MoreWaypointDiv = document.createElement("div");
-        MoreWaypointDiv.classList.add("orderInputCell")
-        MoreWaypointDiv.classList.add("itIsWaypoit")
-        const MoreWaypointInput = document.createElement("input");
-        MoreWaypointInput.classList.add("orderInputCellTextWaypoint")
-        MoreWaypointInput.placeholder = "경유지"
-        MoreWaypointInput.name = "wayPointList"
-        const MoreWaypointImg = document.createElement("img");
-        MoreWaypointImg.src = "/assets/location.png"
-        MoreWaypointImg.alt = "위치아이콘"
-        const removeWaypoint = document.createElement("div");
-        removeWaypoint.classList.add("removeWaypoint")
-        const removeWaypointImg = document.createElement("img");
-        removeWaypointImg.src = "/assets/trashbin.png"
-        removeWaypointImg.alt = "쓰레기통 아이콘"
-        removeWaypointImg.style.height = "auto"
-        removeWaypoint.append(removeWaypointImg)
-        MoreWaypointDiv.append(MoreWaypointInput, MoreWaypointImg, removeWaypoint)
-        WaypointScrollBox.appendChild(MoreWaypointDiv)
-        const removeWaypointBtn = document.querySelector(".removeWaypoint")
-        // removeWaypointBtn.addEventListener("click", removeWaypointDiv)
-        // const removeWaypointBtnAll = document.querySelectorAll(".removeWaypoint")
-        // let wayPoinNum = removeWaypointBtnAll.length
+    function addMoreWayPoint() {
+        console.log("MoreWayPointBtn")
+        const MoreWayPointDiv = document.createElement("div");
+        MoreWayPointDiv.classList.add("orderInputCell")
+        MoreWayPointDiv.classList.add("itIsWaypoit")
+        const MoreWayPointInput = document.createElement("input");
+        MoreWayPointInput.classList.add("orderInputCellTextWayPoint")
+        MoreWayPointInput.placeholder = "경유지"
+        MoreWayPointInput.name = "WayPointList"
+        const MoreWayPointImg = document.createElement("img");
+        MoreWayPointImg.src = "/assets/location.png"
+        MoreWayPointImg.alt = "위치아이콘"
+        const removeWayPoint = document.createElement("div");
+        removeWayPoint.classList.add("removeWayPoint")
+        const removeWayPointImg = document.createElement("img");
+        removeWayPointImg.src = "/assets/trashbin.png"
+        removeWayPointImg.alt = "쓰레기통 아이콘"
+        removeWayPointImg.style.height = "auto"
+        removeWayPoint.append(removeWayPointImg)
+        MoreWayPointDiv.append(MoreWayPointInput, MoreWayPointImg, removeWayPoint)
+        WayPointScrollBox.appendChild(MoreWayPointDiv)
+        const removeWayPointBtn = document.querySelector(".removeWayPoint")
+        // removeWayPointBtn.addEventListener("click", removeWayPointDiv)
+        // const removeWayPointBtnAll = document.querySelectorAll(".removeWayPoint")
+        // let wayPoinNum = removeWayPointBtnAll.length
         // for (let i = 0; i < wayPoinNum; i++) {
-        //     removeWaypointBtnAll[i].addEventListener("click", removeWaypointDivAll)
+        //     removeWayPointBtnAll[i].addEventListener("click", removeWayPointDivAll)
         // }
     }
 
     //경유지 삭제
-    function removeWaypointDiv() {
+    function removeWayPointDiv() {
         let deletWayPoint = this.parentElement;
         deletWayPoint.remove();
     }
-    function removeWaypointDivAll() {
+    function removeWayPointDivAll() {
         let deletWayPoint = this.parentElement;
         deletWayPoint.remove();
     }

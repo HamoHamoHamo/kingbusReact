@@ -1,32 +1,26 @@
+/* global kakao */
 import React, { useEffect, useState, useRef } from "react";
 import "./Home.css";
 import "./mainPage.js";
 import { useAppContext } from "../Store";
-import { RenderAfterNavermapsLoaded, NaverMap, Marker } from "react-naver-maps";
 import axios from "axios";
-import { SearchAddress } from './home/Order'
+import { SearchAddress } from './home/Search';
+import { Map, MapMarker } from "react-kakao-maps-sdk";
+import Stopover from "./home/Waypoint";
 
+const { kakao } = window;
 
-function NaverMapDiv() {
+function KakaoMapDiv() {
     return (
-        <RenderAfterNavermapsLoaded
-            ncpClientId='etu1t8yjz0'
-            error={<p>Maps Load Error</p>}
+        <Map
+            style={{ width: '64rem', height: '42rem' }}
+            center={{ lat: 37.24548819705312, lng: 126.9925381461988 }}
+            level={2}
         >
-            <NaverMap
-                mapDivId={'maps-getting-started-uncontrolled'} // default: react-naver-map
-                style={{
-                    width: '64rem',
-                    height: '42rem'
-                }}
-                defaultCenter={{ lat: 37.24548819705312, lng: 126.9925381461988 }}
-                defaultZoom={17}
-            >
-                <Marker
-                    position={{ lat: 37.24548819705312, lng: 126.9925381461988 }}
-                />
-            </NaverMap>
-        </RenderAfterNavermapsLoaded>
+            <MapMarker position={{ lat: 37.24548819705312, lng: 126.9925381461988 }}>
+
+            </MapMarker>
+        </Map>
     )
 }
 
@@ -34,37 +28,108 @@ export default function Home() {
     const { store: { isAuthenticated, name } } = useAppContext();
     const [inputs, setInputs] = useState({});
     const [searchDatas, setSearchDatas] = useState();
+    const [useStopover, setUseStopover] = useState(false);
     const [types, setTypes] = useState({
         name: '',
         title: '',
         text: '',
         display: 'hidden'
     });
-    const searchRef = useRef();
+    const [index, setIndex] = useState([]);
+    const [cnt, setCnt] = useState(0);
+    const [idxArr, setIdxArr] = useState([]);
+
+    const departureRef = useRef();
+    const arrivalRef = useRef();
+    const waypointAddText = useRef();
+    const waypointAddImg = useRef();
+    const waypointAddImg2 = useRef();
+    const waypointInput = useRef();
+
+    const addWayPoint = () => {
+        setCnt(cnt+1);
+        setIndex(index.concat(cnt));
+        
+        
+    }
+    const onRemove = (i) => {
+        setIndex(index.filter(y => y !== i));
+    }
 
     function onClickRoute(e) {
-        console.log("ONCLICK", e.target.name);
-
+        console.log("ONCLICK", e.target);
+        setSearchDatas('');
         setTypes(() => ({
-            
-            name: e.target.name,
-            title: e.target.value,
-            text: e.target.value.slice(0,2),
+            id: e.target.id,
+            title: e.target.placeholder,
+            text: e.target.placeholder.slice(0, 2),
             display: 'visible',
+            value: e.target.value
             //ref: 
         }))
         console.log("ONCLLLL", types);
     }
 
-
     const onClose = () => {
         setTypes((prev) => ({
-            
             display: 'hidden'
         }))
     }
-    const onClickButton = (title) => {
+    const onClickButton = (e, title, id) => {
+        onClose();
+        //document.querySelector(`#${}`)
+        console.log("BUBBBBBBBBBBBBB", title, 'id', id);
+        let ref = '';
+        if (id === 'departure') {
+            ref = departureRef.current;
+        }
+        else if (id === 'arrival') {
+            ref = arrivalRef.current;
+        }
+        else {
+            ref = '';
+        }
+        console.log(ref);
+        ref.value = title;
+    }
+    const onClickWaypoint = () => {
+        setSearchDatas('');
+        addWayPoint();
+        const e = waypointInput.current
+        console.log("WAYPOINT", e);
+        setTypes(() => ({
+            id: e.id,
+            title: e.placeholder,
+            text: e.placeholder.slice(0, 2),
+            display: 'visible',
+            value: e.value
+        }))
         
+        
+
+        console.log("ONCLLLL", types);
+    }
+
+    const onClickWaypointF = () => {
+        addWayPoint();
+        setUseStopover(useStopover === false ? true : false)
+        console.log(useStopover);
+
+        if (useStopover === false){
+            setSearchDatas('');
+            const e = waypointInput.current
+            console.log("WAYPOINT", e);
+            setTypes(() => ({
+                //id: e.id,
+                title: e.placeholder,
+                text: e.placeholder.slice(0, 2),
+                display: 'visible',
+                value: e.value
+            }))
+        }
+        
+
+        console.log("ONCLLLL", types);
     }
     const onChange = async (e) => {
         let { name, value } = e.target;
@@ -111,11 +176,11 @@ export default function Home() {
         else {
             setSearchDatas([]);
         }
-        
+
     };
     return (
         <>
-            <SearchAddress onChange={onChange} type={types} datas={searchDatas} onClose={onClose} onClickButton={onClickButton}/>
+            <SearchAddress onChange={onChange} type={types} datas={searchDatas} onClose={onClose} onClickButton={onClickButton} />
             <div class="chatting">
                 <img src="/assets/speechBubble.png" alt="말풍선" />
                 <div>채팅</div>
@@ -166,36 +231,35 @@ export default function Home() {
                                     <div class="choiceCellTitle">노선선택</div>
 
                                     <div class="orderInputCell">
-                                        <input onClick={onClickRoute} name='departure' type="text" class="orderInputCellText" value='출발지' />
+                                        <input autoComplete="off" ref={departureRef} id="departure" onClick={onClickRoute} name='departure' type="text" class="orderInputCellText" placeholder='출발지' />
                                         <img src="/assets/location.png" alt="위치아이콘" />
                                     </div>
 
 
                                     <div class="orderInputCell">
-                                        <input onClick={onClickRoute} name='arrival' type="text" class="orderInputCellText" value='도착지' />
+                                        <input autoComplete="off" ref={arrivalRef} id="arrival" onClick={onClickRoute} name='arrival' type="text" class="orderInputCellText" placeholder='도착지' />
                                         <img src="/assets/location.png" alt="위치아이콘" />
                                     </div>
 
-                                    <div class="addWaypoint">
-                                        <span>경유지 추가</span>
-                                        <img src="/assets/add.png" alt="추가아이콘" />
-                                        <img src="/assets/remove.png" class="displayNone" alt="삭제아이콘" />
+                                    <div class="addWayPoint" onClick={onClickWaypointF}>
+                                        <span ref={waypointAddText}>경유지 추가</span>
+                                        <img ref={waypointAddImg} src="/assets/add.png" alt="추가아이콘" />
+                                        <img ref={waypointAddImg2} src="/assets/remove.png" class="displayNone" alt="삭제아이콘" />
                                     </div>
 
                                 </div>
 
                                 <div class="choiceCell displayNone">
-
-                                    <div class="choiceCellTitle WaypointTitle">경유지</div>
-
-                                    <div class="WaypointScrollBox">
-                                        <div class="orderInputCell itIsWaypoit">
-                                            <input type="text" class="orderInputCellText" placeholder="경유지" />
+                                    <div class="choiceCellTitle WayPointTitle">경유지</div>
+                                    <div class="WayPointScrollBox">                                        
+                                        {/* <div class="orderInputCell itIsWaypoit">
+                                            <input ref={waypointInput} autoComplete="off" name='stopover' id='stopover' type="text" class="orderInputCellText" placeholder="경유지" />
                                             <img src="/assets/location.png" alt="위치아이콘" />
-                                        </div>
+                                        </div> */}
+                                        <Stopover index={index} />
                                     </div>
 
-                                    <div class="MoreWaypoint">
+                                    <div class="MoreWayPoint" onClick={onClickWaypoint}>
                                         <span>경유지 추가</span>
                                         <img src="/assets/add.png" alt="추가아이콘" />
                                     </div>
@@ -638,7 +702,7 @@ export default function Home() {
                         </div>
                         <div class="contactUsTel">1544-9145</div>
                     </div>
-                    <NaverMapDiv />
+                    <KakaoMapDiv />
                 </div>
                 <div class="sixthContainer containerGap">
                     <div class="companyBox companyBoxLink">

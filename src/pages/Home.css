@@ -9,47 +9,6 @@
 .orderInputCellText{
   padding-left: 0.5rem;
 }
-.routeDataCell {
-  height: 5.9rem;
-  width: 100%;
-  border-top: 0.1rem solid #7F7F7F;
-  font-size: 1.6rem;
-  display: flex;
-  justify-content: space-between;
-  background-color: white;
-  
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-}
-.routeDataTextTitle {
-  padding: 0.5rem;
-  font-weight: 500;
-}
-.routeDataTextDetail {
-  font-size: 1.2rem;
-  padding: 0.5rem;
-  font-weight: 500;
-  color: #7F7F7F;
-}
-
-.routeDataCellRow {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 1rem;
-}
-
-.routeDataCellRow:nth-child(2) {
-  margin-right: 0.5rem;
-}
-
-.routeDataCellRow button {
-  padding: 0.5rem 1rem;
-  border: none;
-  background-color: #B00020;
-  color: white;
-  font-size: 1.6rem;
-  border-radius: 0.3rem;
-}
 
 .mainContentsContainer{
     display: flex;
@@ -96,8 +55,7 @@
     color: #B00020;
   }
   
-  
-  /*first MoreWaypoint*/
+  /*first MoreWayPoint*/
   .firstContainerImgSizing{
     position: absolute;
     z-index: -1;
@@ -122,14 +80,7 @@
     height: 130vh;
     background-color: rgba(0, 0, 0 , 0.4);
   }
-  .firstContainerImgSizingJs{
-  }
-  .firstContainerImgJs{
-  }
-  .firstContainerImgCoverJs{
-  }
-  .firstContainerJs{
-  }
+
   .firstContainer{
     position: relative;
     display: flex;
@@ -189,28 +140,28 @@
     margin-bottom: 3.4rem;
     font-size: 2.6rem;
   }
-  .WaypointTitle{
+  .WayPointTitle{
     margin-bottom: 0;
   }
-  .WaypointScrollBox{
+  .WayPointScrollBox{
     width: 24rem;
     height: 16rem;
     overflow-y: scroll;
   }
   /* 스크롤바 설정*/
-  .WaypointScrollBox::-webkit-scrollbar{
+  .WayPointScrollBox::-webkit-scrollbar{
     width: 6px;
   }
   
   /* 스크롤바 막대 설정*/
-  .WaypointScrollBox::-webkit-scrollbar-thumb{
+  .WayPointScrollBox::-webkit-scrollbar-thumb{
     height: 17%;
     background-color: #B00020;
     border-radius: 10px;  
   }
   
   /* 스크롤바 뒷 배경 설정*/
-  .WaypointScrollBox::-webkit-scrollbar-track{
+  .WayPointScrollBox::-webkit-scrollbar-track{
     background-color: rgba(176,0,32,0.1);
   }
   .choiceCellPeople{
@@ -239,7 +190,7 @@
     color: #7F7F7F;
     font-weight: bold;
   }
-  .orderInputCellTextWaypoint{
+  .orderInputCellTextWayPoint{
     width: 16rem;
     height: calc(100% - 0.2rem);
     margin-right: 0.4rem;
@@ -251,7 +202,7 @@
   .orderInputCell img{
     height: 2.6rem;
   }
-  .addWaypoint{
+  .addWayPoint{
     position: absolute;
     bottom: 0;
     display: flex;
@@ -266,7 +217,7 @@
     color: white;
     cursor: pointer;
   }
-  .addWaypoint img{
+  .addWayPoint img{
     margin-left: 0.6rem;
   }
   .moreGapTopIcon{
@@ -664,8 +615,8 @@
   }
   
   
-  /*first MoreWaypoint waypoint*/
-  .MoreWaypoint{
+  /*first MoreWayPoint WayPoint*/
+  .MoreWayPoint{
     position: absolute;
     bottom: 0;
     display: flex;
@@ -680,10 +631,10 @@
     color: white;
     cursor: pointer;
   }
-  .MoreWaypoint img{
+  .MoreWayPoint img{
     margin-left: 0.3rem;
   }
-  .waypointBtnTool{
+  .WayPointBtnTool{
     position: relative;
     display: flex;
     justify-content: center;
@@ -692,7 +643,7 @@
     height: 3rem;
     margin-top: 1.6rem;
   }
-  .removeWaypoint{
+  .removeWayPoint{
     display: flex;
     justify-content: center;
     align-items: center;
