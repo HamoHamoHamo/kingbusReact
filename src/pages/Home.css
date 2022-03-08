@@ -175,7 +175,7 @@
   }
   .orderInputCell{
     display: flex;
-    width: 22rem;
+    width: 23rem;
     height: 3rem;
     margin-top: 1.8rem;
     border-bottom: 0.2rem solid black;
@@ -199,7 +199,8 @@
     font-size: 1.8rem;
     color: #7F7F7F;
   }
-  .orderInputCell img{
+  .orderInputCellImg{
+    margin-left: 0.7rem;
     height: 2.6rem;
   }
   .addWayPoint{

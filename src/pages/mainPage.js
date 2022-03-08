@@ -7,7 +7,7 @@ export function removeWayPointDiv() {
 //로그인&회원가입
 document.addEventListener("DOMContentLoaded", function () {
     //로그인&회원가입
-    
+
     const login = document.querySelector(".login");
     const signUp = document.querySelector(".signUp");
     const loginOption = document.querySelector(".loginOption");
@@ -15,11 +15,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const loginCell = document.querySelectorAll(".loginCell");
     let clickLoginCount = 0;
 
-    if(login){
+    if (login) {
         login.addEventListener("click", changeToBlockLogin);
         login.addEventListener("blur", closeToLogin);
     }
-    if(signUp){
+    if (signUp) {
         signUp.addEventListener("click", changeToBlockSingup);
         signUp.addEventListener("blur", closeToSignUp);
     }
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    
+
     function closeToLogin() {
         if (clickLoginCount == 0) {
             loginOption.classList.remove("displayFlex");
@@ -267,7 +267,7 @@ document.addEventListener("DOMContentLoaded", function () {
         hembugerSignupBox.style.display = "none";
         hembugerBtnTool.style.display = "flex";
         hembugerNav.style.display = "flex";
-        
+
     }
 
 
@@ -303,7 +303,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const applicationBtn = document.querySelector(".applicationBtn")
     const firstOrderPage = document.querySelector(".firstOrderPage")
     const secondOrderPage = document.querySelector(".secondOrderPage")
-    console.log("AAAAAAAAAAAAAAAAAAAAAAAAWWWWWWWWWWWWWWWWWWWWWWWWW", applicationBtn );
+    console.log("AAAAAAAAAAAAAAAAAAAAAAAAWWWWWWWWWWWWWWWWWWWWWWWWW", applicationBtn);
     applicationBtn.addEventListener("click", startOrder);
 
     function startOrder() {
@@ -351,13 +351,13 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    
+
     //경유지 추가
     const WayPointScrollBox = document.querySelector(".WayPointScrollBox")
     const MoreWayPointBtn = document.querySelector(".MoreWayPoint")
 
     //MoreWayPointBtn.addEventListener("click", addMoreWayPoint)
-    
+
 
     function addMoreWayPoint() {
         console.log("MoreWayPointBtn")
@@ -390,14 +390,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     //경유지 삭제
-    function removeWayPointDiv() {
-        let deletWayPoint = this.parentElement;
-        deletWayPoint.remove();
-    }
-    function removeWayPointDivAll() {
-        let deletWayPoint = this.parentElement;
-        deletWayPoint.remove();
-    }
+    // function removeWayPointDiv() {
+    //     let deletWayPoint = this.parentElement;
+    //     deletWayPoint.remove();
+    // }
+    // function removeWayPointDivAll() {
+    //     let deletWayPoint = this.parentElement;
+    //     deletWayPoint.remove();
+    // }
 
     //기사님 동행여부 선택
     const secondOrderPageCheckCell = document.querySelectorAll(".secondOrderPageCheckCell")
@@ -468,7 +468,7 @@ document.addEventListener("DOMContentLoaded", function () {
         thirdOrderPageCheckingBoxBtn[0].innerText = "다시선택하기"
     }
     for (let i = 0; i < 12; i++) {
-        tripOptionRadio[i].addEventListener("change", tripOptionchange);
+        tripOptionRadio[i].addEventListener("click", tripOptionchange);
     }
     function tripOptionchange() {
         for (let i = 0; i < 12; i++) {
@@ -484,6 +484,8 @@ document.addEventListener("DOMContentLoaded", function () {
     //편의시설 추가하는 체크박스
     const itIsReal2 = document.querySelector(".itIsReal2")
     const Facilities = document.querySelectorAll(".Facilities")
+    const thirdOrderPageOptionBlockFacilities = document.querySelectorAll(".thirdOrderPageOptionBlockFacilities")
+    const thirdOrderPageOptionBlockFacilitiesSvg = document.querySelectorAll(".thirdOrderPageOptionBlockFacilities svg g")
 
     thirdOrderPageCheckingBoxBtn[1].addEventListener("click", openFacilities)
     function openFacilities() {

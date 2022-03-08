@@ -53,7 +53,7 @@ export function SearchAddress({ onChange, type, datas, onClose, onClickButton })
     
     
 
-    function SearchRes({ id, datas, text }) {
+    function SearchRes({ name, datas, text, id }) {
 
         const onClickRes = (title, x, y) => {
             setCenter(() => ({
@@ -81,7 +81,7 @@ export function SearchAddress({ onChange, type, datas, onClose, onClickButton })
                                 <p class={styles.routeDataTextDetail}>{detail}</p>
                             </div>
                             <div class={styles.routeDataCellRow}>
-                                <button className={styles.routeDataCellRowButton} onClick={(e) => {onClickButton(e, title, id)}}>{text}</button>
+                                <button className={styles.routeDataCellRowButton} onClick={(e) => {onClickButton(e, title, name, id)}}>{text}</button>
                             </div>
                         </div>
                     )
@@ -95,20 +95,25 @@ export function SearchAddress({ onChange, type, datas, onClose, onClickButton })
         }
     }
 
-    let title = ''
-    let display = ''
-    let id = ''
-    let text = ''
-    let value = ''
-    if (type) {
-        title = type.title;
-        display = type.display;
-        id = type.id;
-        text = type.text;
-        value = type.value;
-    } else {
-        title = ''
-    }
+
+    const { title, display, name, text, value, id } = type ? type : '';
+    // let title = ''
+    // let display = ''
+    // let name = ''
+    // let text = ''
+    // let value = ''
+    // let id = ''
+    // if (type) {
+    //     title = type.title;
+    //     display = type.display;
+    //     name = type.name;
+    //     text = type.text;
+    //     value = type.value;
+    //     id = type.id;
+    // } else {
+    //     title = ''
+    // }
+    console.log("TITLE", title, display, name, text, value, id)
 
     useEffect(() => {
         searchInput.current.value = value
@@ -128,7 +133,7 @@ export function SearchAddress({ onChange, type, datas, onClose, onClickButton })
                         </svg>
                     </div>
                     <div>
-                        <input ref={searchInput} autoComplete="off" id={id} onChange={onChange} className={`${styles.headerTitle} ${styles.headerSearchInput}`} />
+                        <input ref={searchInput} autoComplete="off" id={name} onChange={onChange} className={`${styles.headerTitle} ${styles.headerSearchInput}`} />
                         <svg className={styles.searchImg} xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 30 30">
                             <path id="Icon_map-search" data-name="Icon map-search" d="M23.392,19.4A11.864,11.864,0,1,0,19.4,23.391l8.05,8.049,3.992-3.994ZM13.277,20.6A7.319,7.319,0,1,1,20.6,13.286,7.331,7.331,0,0,1,13.277,20.6Z" transform="translate(-1.44 -1.44)" fill="#7f7f7f" />
                         </svg>
@@ -145,13 +150,13 @@ export function SearchAddress({ onChange, type, datas, onClose, onClickButton })
                         </svg>
                     </div>
                     <div className={`${styles.routeDataCellRow} ${styles.addressResButton}`}>
-                        <button className={`${styles.routeDataCellRowButton}`} onClick={(e) => {onClickButton(e, address, id)}}>{text}</button>
+                        <button className={`${styles.routeDataCellRowButton}`} onClick={(e) => {onClickButton(e, address, name, id)}}>{text}</button>
                     </div>
                     
                 </div>}
                 
                 <div className={styles.searchRes}>
-                    <SearchRes id={id} datas={datas} text={text} />
+                    <SearchRes name={name} datas={datas} text={text} id={id} />
                 </div>
             </div>
         </div>

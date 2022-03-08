@@ -6,7 +6,7 @@ import { useAppContext } from "../Store";
 import axios from "axios";
 import { SearchAddress } from './home/Search';
 import { Map, MapMarker } from "react-kakao-maps-sdk";
-import Stopover from "./home/Waypoint";
+import Stopover from "./home/Stopover";
 
 const { kakao } = window;
 
@@ -26,7 +26,10 @@ function KakaoMapDiv() {
 
 export default function Home() {
     const { store: { isAuthenticated, name } } = useAppContext();
-    const [inputs, setInputs] = useState({});
+    const [inputs, setInputs] = useState({
+        way: 'lt',
+        is_driver: false
+    });
     const [searchDatas, setSearchDatas] = useState();
     const [useStopover, setUseStopover] = useState(false);
     const [types, setTypes] = useState({
@@ -37,142 +40,193 @@ export default function Home() {
     });
     const [index, setIndex] = useState([]);
     const [cnt, setCnt] = useState(0);
-    const [idxArr, setIdxArr] = useState([]);
 
     const departureRef = useRef();
     const arrivalRef = useRef();
-    const waypointAddText = useRef();
-    const waypointAddImg = useRef();
-    const waypointAddImg2 = useRef();
-    const waypointInput = useRef();
 
     const addWayPoint = () => {
         setCnt(cnt+1);
         setIndex(index.concat(cnt));
-        
-        
     }
     const onRemove = (i) => {
+        //console.log("CNT=",cnt, "INDEX=", index);
         setIndex(index.filter(y => y !== i));
     }
-
+    const setInputsStopover = () => {
+        if (useStopover === true){
+            const arr = window.document.getElementsByName('stopover');
+            console.log("ARRRRR", arr);
+            let stopover = [];
+            Array.from(arr).map(val => {
+                stopover = stopover.concat(val.value);
+            });
+            setInputs(prev => {
+                return ({
+                    ...prev,
+                    stopover
+                });
+            });
+        }        
+    }
     function onClickRoute(e) {
-        console.log("ONCLICK", e.target);
+        //console.log("ONCLICK", e.target);
         setSearchDatas('');
         setTypes(() => ({
-            id: e.target.id,
+            name: e.target.name,
             title: e.target.placeholder,
             text: e.target.placeholder.slice(0, 2),
             display: 'visible',
-            value: e.target.value
-            //ref: 
+            value: e.target.value,
+            id: e.target.id
         }))
         console.log("ONCLLLL", types);
     }
 
     const onClose = () => {
-        setTypes((prev) => ({
+        setTypes(() => ({
             display: 'hidden'
         }))
     }
-    const onClickButton = (e, title, id) => {
+    const onClickButton = (e, title, name, id) => {
         onClose();
         //document.querySelector(`#${}`)
-        console.log("BUBBBBBBBBBBBBB", title, 'id', id);
+        console.log("BUBBBBBBBBBBBBB", title, 'name', name);
         let ref = '';
-        if (id === 'departure') {
+        if (name === 'departure') {
             ref = departureRef.current;
         }
-        else if (id === 'arrival') {
+        else if (name === 'arrival') {
             ref = arrivalRef.current;
         }
-        else {
-            ref = '';
+        else if (name === 'stopover') {
+            ref = window.document.getElementById(id)
         }
         console.log(ref);
         ref.value = title;
+        
+
+        if(name !== 'stopover'){
+            setInputs(prev => {
+                return ({
+                    ...prev,
+                    [name]: title
+                })
+            });
+        }
     }
     const onClickWaypoint = () => {
         setSearchDatas('');
         addWayPoint();
-        const e = waypointInput.current
-        console.log("WAYPOINT", e);
         setTypes(() => ({
-            id: e.id,
-            title: e.placeholder,
-            text: e.placeholder.slice(0, 2),
+            name: 'stopover',
+            title: '경유지',
+            text: '경유',
             display: 'visible',
-            value: e.value
+            value: '',
+            id: `stopover${cnt}`
         }))
-        
-        
-
         console.log("ONCLLLL", types);
+        console.log("INPUUUUU", inputs)
     }
 
     const onClickWaypointF = () => {
-        addWayPoint();
+        
         setUseStopover(useStopover === false ? true : false)
         console.log(useStopover);
 
         if (useStopover === false){
+            addWayPoint();
             setSearchDatas('');
-            const e = waypointInput.current
-            console.log("WAYPOINT", e);
             setTypes(() => ({
-                //id: e.id,
-                title: e.placeholder,
-                text: e.placeholder.slice(0, 2),
+                name: 'stopover',
+                title: '경유지',
+                text: '경유',
                 display: 'visible',
-                value: e.value
+                value: '',
+                id: 'stopover0'
             }))
         }
         
 
         console.log("ONCLLLL", types);
     }
-    const onChange = async (e) => {
-        let { name, value } = e.target;
+    const onClickConvenience = (e) => {
+        const arr = window.document.getElementsByName('convenience');
+        let convenience = [];
+        Array.from(arr).map(val => {
+            if(val.checked){
+                convenience = convenience.concat(val.value);
+            }
+            setInputs((prev) => ({
+                ...prev,
+                convenience
+            }))
+        });
+    }
+
+    const onChangeDate = (e) => {
+        const { name, value } = e.target;
+        const date = value.slice(0,10);
+        const time = value.slice(11,);
+        const timeName = `${name.slice(0,-4)}time`
+
+        setInputs(prev => ({
+            ...prev,
+            [name]: date,
+            [timeName]: time
+        }));
+    }
+    const onChangeInputs = (e) => {
+        const { name, value } = e.target;
         setInputs(prev => ({
             ...prev,
             [name]: value
-        }, e));
+        }));
+    }
+    const onChange = async (e) => {
+        let { name, value } = e.target;
+        
         // console.log("inputs", inputs);
-
-        const headers = {
-            Authorization: 'KakaoAK 89c319742a7efca01255c48b9579a68a'
-        };
-        let addressResult = '';
-        try {
-            addressResult = await axios.get(`https://dapi.kakao.com/v2/local/search/address.json?query=${value}&page=1&size=5`, { headers })
-        }
-        catch (err) {
-            console.log("Kakao API ERROR", err);
-        }
-        if (addressResult) {
-            const { data: { documents: addressData } } = addressResult;
-            //console.log("RESULT", addressData);
-
-            let keywordResult = '';
+        if (value.length > 1){
+            const headers = {
+                Authorization: 'KakaoAK 89c319742a7efca01255c48b9579a68a'
+            };
+            let addressResult = '';
             try {
-                keywordResult = await axios.get(`https://dapi.kakao.com/v2/local/search/keyword.json?query=${value}&page=1&size=5`, { headers })
-
+                addressResult = await axios.get(`https://dapi.kakao.com/v2/local/search/address.json?query=${value}&page=1&size=5`, { headers })
             }
             catch (err) {
                 console.log("Kakao API ERROR", err);
             }
-            const { data: { documents: keywordData } } = keywordResult;
-            // console.log("RESULT", keywordData);
-
-            let dataList = []
-            dataList.push(...addressData);
-            dataList.push(...keywordData);
-            dataList = dataList.slice(0, 5);
-            //console.log("DATALIST", dataList)
-
-            setSearchDatas(dataList);
-            console.log("DATALIST", searchDatas);
+            if (addressResult) {
+                const { data: { documents: addressData } } = addressResult;
+                //console.log("RESULT", addressData);
+    
+                let keywordResult = '';
+                try {
+                    keywordResult = await axios.get(`https://dapi.kakao.com/v2/local/search/keyword.json?query=${value}&page=1&size=5`, { headers })
+    
+                }
+                catch (err) {
+                    console.log("Kakao API ERROR", err);
+                }
+                const { data: { documents: keywordData } } = keywordResult;
+                // console.log("RESULT", keywordData);
+    
+                let dataList = []
+                dataList.push(...addressData);
+                dataList.push(...keywordData);
+                dataList = dataList.slice(0, 5);
+                //console.log("DATALIST", dataList)
+    
+                setSearchDatas(dataList);
+                console.log("DATALIST", searchDatas);
+            }
+            else {
+                setSearchDatas([]);
+            }
         }
+        
         else {
             setSearchDatas([]);
         }
@@ -215,13 +269,13 @@ export default function Home() {
                         </a>
                     </div>
 
-                    <form action="">
+                    <form method='post' action="">
                         <div class="firstOrderPage">
 
                             <div class="way">
-                                <input type="radio" name="onWay" id="oneWay" checked={true} class="displayNone" />
+                                <input onChange={onChangeInputs} value={'lt'} type="radio" name="way" id="oneWay" checked={true} class="displayNone" />
                                 <label for="oneWay" class="oneWay onWay">왕복</label>
-                                <input type="radio" name="onWay" id="twoWay" class="displayNone" />
+                                <input onChange={onChangeInputs} value={'st'} type="radio" name="way" id="twoWay" class="displayNone" />
                                 <label for="twoWay" class="twoWay onWay">편도</label>
                             </div>
 
@@ -231,32 +285,28 @@ export default function Home() {
                                     <div class="choiceCellTitle">노선선택</div>
 
                                     <div class="orderInputCell">
-                                        <input autoComplete="off" ref={departureRef} id="departure" onClick={onClickRoute} name='departure' type="text" class="orderInputCellText" placeholder='출발지' />
-                                        <img src="/assets/location.png" alt="위치아이콘" />
+                                        <input readOnly autoComplete="off" ref={departureRef} id="departure" onClick={onClickRoute} name='departure' type="text" class="orderInputCellText" placeholder='출발지' />
+                                        <img class="orderInputCellImg" src="/assets/location.png" alt="위치아이콘" />
                                     </div>
 
 
                                     <div class="orderInputCell">
-                                        <input autoComplete="off" ref={arrivalRef} id="arrival" onClick={onClickRoute} name='arrival' type="text" class="orderInputCellText" placeholder='도착지' />
-                                        <img src="/assets/location.png" alt="위치아이콘" />
+                                        <input readOnly autoComplete="off" ref={arrivalRef} id="arrival" onClick={onClickRoute} name='arrival' type="text" class="orderInputCellText" placeholder='도착지' />
+                                        <img class="orderInputCellImg" src="/assets/location.png" alt="위치아이콘" />
                                     </div>
 
                                     <div class="addWayPoint" onClick={onClickWaypointF}>
-                                        <span ref={waypointAddText}>경유지 추가</span>
-                                        <img ref={waypointAddImg} src="/assets/add.png" alt="추가아이콘" />
-                                        <img ref={waypointAddImg2} src="/assets/remove.png" class="displayNone" alt="삭제아이콘" />
+                                        <span>경유지 추가</span>
+                                        <img src="/assets/add.png" alt="추가아이콘" />
+                                        <img src="/assets/remove.png" class="displayNone" alt="삭제아이콘" />
                                     </div>
 
                                 </div>
 
                                 <div class="choiceCell displayNone">
                                     <div class="choiceCellTitle WayPointTitle">경유지</div>
-                                    <div class="WayPointScrollBox">                                        
-                                        {/* <div class="orderInputCell itIsWaypoit">
-                                            <input ref={waypointInput} autoComplete="off" name='stopover' id='stopover' type="text" class="orderInputCellText" placeholder="경유지" />
-                                            <img src="/assets/location.png" alt="위치아이콘" />
-                                        </div> */}
-                                        <Stopover index={index} />
+                                    <div class="WayPointScrollBox">
+                                        <Stopover onRemove={onRemove} onClickRoute={onClickRoute} index={index} />
                                     </div>
 
                                     <div class="MoreWayPoint" onClick={onClickWaypoint}>
@@ -271,13 +321,13 @@ export default function Home() {
                                     <div class="choiceCellTitle">날짜선택</div>
 
                                     <div class="orderInputCell">
-                                        <input type="text" class="orderInputCellText" placeholder="출발일" />
-                                        <img src="/assets/calenderGrey.png" alt="위치아이콘" />
+                                        <input onChange={onChangeDate} name="departure_date" type="datetime-local" class="orderInputCellText" placeholder="출발일" />
+                                        <img class="orderInputCellImg" src="/assets/calenderGrey.png" alt="위치아이콘" />
                                     </div>
 
                                     <div class="orderInputCell moreGapTopIcon blinkcell">
-                                        <input type="text" class="orderInputCellText" placeholder="도착일" />
-                                        <img src="/assets/calenderGrey.png" alt="위치아이콘" />
+                                        <input onChange={onChangeDate} name="arrival_date" type="datetime-local" class="orderInputCellText" placeholder="도착일" />
+                                        <img class="orderInputCellImg" src="/assets/calenderGrey.png" alt="위치아이콘" />
                                     </div>
 
                                 </div>
@@ -287,25 +337,25 @@ export default function Home() {
                             <div class="displayFlex choiceBox peopleAndBtn">
                                 <div class="choiceCellPeople">
                                     <div class="orderInputCell orderInputCellPeople">
-                                        <input type="text" class="orderInputCellText orderInputCellTextPeople" placeholder="인원수" />
-                                        <img src="/assets/people.png" alt="위치아이콘" />
+                                        <input onChange={onChangeInputs} type="number" name="total_number" class="orderInputCellText orderInputCellTextPeople" placeholder="인원수" />
+                                        <img class="orderInputCellImg" src="/assets/people.png" alt="위치아이콘" />
                                     </div>
                                 </div>
-                                <div class="applicationBtn mainOrderBtn">주문신청</div>
+                                <div onClick={setInputsStopover} class="applicationBtn mainOrderBtn">주문신청</div>
                             </div>
                         </div>
 
                         <div class="secondOrderPage displayNone">
                             <div class="secondOrderPageCheckBox">
 
-                                <input type="radio" name="withDriver" id="withDriver" checked={true} class="displayNone" />
+                                <input onChange={onChangeInputs} value={false} type="radio" name="is_driver" id="withDriver" checked={true} class="displayNone" />
                                 <label for="withDriver" class="secondOrderPageCheckCell secondOrderPageCheckCellcheck">
                                     <img src="/assets/checkRadio.png" alt="체크완료 아이콘" class="checking" />
                                     <img src="/assets/beforeCheckRadio.png" alt="체크 아이콘" class="beforechecking displayNone" />
                                     출발지 , 도착지만<br />
                                     기사님 동행
                                 </label>
-                                <input type="radio" name="withDriver" id="withDriverAll" class="displayNone" />
+                                <input onChange={onChangeInputs} value={true} type="radio" name="is_driver" id="withDriverAll" class="displayNone" />
                                 <label for="withDriverAll" class="secondOrderPageCheckCell">
                                     <img src="/assets/checkRadio.png" alt="체크완료 아이콘" class="checking displayNone" />
                                     <img src="/assets/beforeCheckRadio.png" alt="체크 아이콘" class="beforechecking" />
@@ -329,53 +379,53 @@ export default function Home() {
                                 </div>
 
                             </div>
-                            <textarea name="additionalRequests" class="additionalRequests" placeholder="추가요청사항을 입력해주세요.(선택)
+                            <textarea onChange={onChangeInputs} name="reference" class="additionalRequests" placeholder="추가요청사항을 입력해주세요.(선택)
                             ex)45인승 부탁드려요. 쾌적하게 가고 싶어요~~"></textarea>
                             <div class="thirdOrderPageNextBtn mainOrderBtn displayNone">다음</div>
-                            <input type="submit" class="thirdOrderPageNextBtn mainOrderBtn displayNone thirdOrderPageSubmit" value="완료" />
+                            <input onClick={() => { console.log("INPUTS", inputs)}} type="text" class="thirdOrderPageNextBtn mainOrderBtn displayNone thirdOrderPageSubmit" value="완료" />
 
                             <div class="thirdOrderPageCheckingBox itIsReal displayNone">
                                 <div class="thirdOrderPageCheckingBoxTitle">버스를 구하시는 목적을 선택해주세요.</div>
                                 <div class="thirdOrderPageCheckingCell">
                                     <div class="thirdOrderPageOptionCell">
-                                        <input type="radio" name="tripOption" id="tripOption0" class="tripOptionRadio displayNone" />
+                                        <input onChange={onChangeInputs} type="radio" name="purpose" id="tripOption0" class="tripOptionRadio displayNone" value='결혼식' />
                                         <label for="tripOption0" class="thirdOrderPageOptionBlock tripOption0" style={{ color: "black" }}>결혼식</label>
-                                        <input type="radio" name="tripOption" id="tripOption1" class="tripOptionRadio displayNone" />
+                                        <input onChange={onChangeInputs} type="radio" name="purpose" id="tripOption1" class="tripOptionRadio displayNone" value='워크샵' />
                                         <label for="tripOption1" class="thirdOrderPageOptionBlock tripOption1" style={{ color: "black" }}>워크샵</label>
                                     </div>
                                     <div class="thirdOrderPageOptionCell">
-                                        <input type="radio" name="tripOption" id="tripOption2" class="tripOptionRadio displayNone" />
+                                        <input onChange={onChangeInputs} type="radio" name="purpose" id="tripOption2" class="tripOptionRadio displayNone" value='MT' />
                                         <label for="tripOption2" class="thirdOrderPageOptionBlock tripOption2" style={{ color: "black" }}>MT</label>
-                                        <input type="radio" name="tripOption" id="tripOption3" class="tripOptionRadio displayNone" />
+                                        <input onChange={onChangeInputs} type="radio" name="purpose" id="tripOption3" class="tripOptionRadio displayNone" value='동호회' />
                                         <label for="tripOption3" class="thirdOrderPageOptionBlock tripOption3" style={{ color: "black" }}>동호회</label>
                                     </div>
                                     <div class="thirdOrderPageOptionCell">
-                                        <input type="radio" name="tripOption" id="tripOption4" class="tripOptionRadio displayNone" />
+                                        <input onChange={onChangeInputs} type="radio" name="purpose" id="tripOption4" class="tripOptionRadio displayNone" value='산악회' />
                                         <label for="tripOption4" class="thirdOrderPageOptionBlock tripOption4" style={{ color: "black" }}>산악회</label>
-                                        <input type="radio" name="tripOption" id="tripOption5" class="tripOptionRadio displayNone" />
+                                        <input onChange={onChangeInputs} type="radio" name="purpose" id="tripOption5" class="tripOptionRadio displayNone" value='골프모임' />
                                         <label for="tripOption5" class="thirdOrderPageOptionBlock tripOption5"
                                             style={{ color: "black" }}>골프모임</label>
                                     </div>
                                     <div class="thirdOrderPageOptionCell">
-                                        <input type="radio" name="tripOption" id="tripOption6" class="tripOptionRadio displayNone" />
+                                        <input onChange={onChangeInputs} type="radio" name="purpose" id="tripOption6" class="tripOptionRadio displayNone" value='낚시' />
                                         <label for="tripOption6" class="thirdOrderPageOptionBlock tripOption6" style={{ color: "black" }}>낚시</label>
-                                        <input type="radio" name="tripOption" id="tripOption7" class="tripOptionRadio displayNone" />
+                                        <input onChange={onChangeInputs} type="radio" name="purpose" id="tripOption7" class="tripOptionRadio displayNone" value='종교행사' />
                                         <label for="tripOption7" class="thirdOrderPageOptionBlock tripOption7"
                                             style={{ color: "black" }}>종교행사</label>
                                     </div>
                                     <div class="thirdOrderPageOptionCell">
-                                        <input type="radio" name="tripOption" id="tripOption8" class="tripOptionRadio displayNone" />
+                                        <input onChange={onChangeInputs} type="radio" name="purpose" id="tripOption8" class="tripOptionRadio displayNone" value='현장학습' />
                                         <label for="tripOption8" class="thirdOrderPageOptionBlock tripOption8"
                                             style={{ color: "black" }}>현장학습</label>
-                                        <input type="radio" name="tripOption" id="tripOption9" class="tripOptionRadio displayNone" />
+                                        <input onChange={onChangeInputs} type="radio" name="purpose" id="tripOption9" class="tripOptionRadio displayNone" value='단체관광' />
                                         <label for="tripOption9" class="thirdOrderPageOptionBlock tripOption9"
                                             style={{ color: "black" }}>단체관광</label>
                                     </div>
                                     <div class="thirdOrderPageOptionCell">
-                                        <input type="radio" name="tripOption" id="tripOption10" class="tripOptionRadio displayNone" />
+                                        <input onChange={onChangeInputs} type="radio" name="purpose" id="tripOption10" class="tripOptionRadio displayNone" value='콘서트' />
                                         <label for="tripOption10" class="thirdOrderPageOptionBlock tripOption10"
                                             style={{ color: "black" }}>콘서트</label>
-                                        <input type="radio" name="tripOption" id="tripOption11" checked={true} class="tripOptionRadio displayNone" />
+                                        <input onChange={onChangeInputs} type="radio" name="purpose" id="tripOption11" checked={true} class="tripOptionRadio displayNone" value='기타' />
                                         <label for="tripOption11" class="thirdOrderPageOptionBlock tripOption11" style={{ color: "white", backgroundColor: "#b00020" }}>기타</label>
                                     </div>
                                 </div>
@@ -385,7 +435,7 @@ export default function Home() {
                             <div class="thirdOrderPageCheckingBox itIsReal2 displayNone">
                                 <div class="thirdOrderPageCheckingBoxTitle">원하시는 편의시설을 추가해 주세요.</div>
                                 <div class="thirdOrderPageCheckingCellFacilities">
-                                    <input type="checkbox" name="" id="Facilities0" class="Facilities displayNone" />
+                                    <input value='손 소독제 비치' onChange={onChangeInputs} type="checkbox" name="convenience" id="Facilities0" class="Facilities displayNone" />
                                     <label for="Facilities0" class="thirdOrderPageOptionBlockFacilities Facilities0" style={{ color: "grey" }}>
                                         <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="26.000000pt" height="9.000000pt" viewBox="0 0 26.000000 9.000000" preserveAspectRatio="xMidYMid meet">
                                             <g transform="translate(0.000000,9.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
@@ -396,7 +446,7 @@ export default function Home() {
                                         </svg>
                                         손 소독제 비치
                                     </label>
-                                    <input type="checkbox" name="" id="Facilities1" class="Facilities displayNone" />
+                                    <input value='와이파이' onChange={onChangeInputs} type="checkbox" name="convenience" id="Facilities1" class="Facilities displayNone" />
                                     <label for="Facilities1" class="thirdOrderPageOptionBlockFacilities Facilities1" style={{ color: "grey" }}>
                                         <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="21.000000pt" height="15.000000pt" viewBox="0 0 21.000000 15.000000" preserveAspectRatio="xMidYMid meet">
                                             <g transform="translate(0.000000,15.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
@@ -405,9 +455,9 @@ export default function Home() {
                                                 <path d="M84 39 c-10 -17 13 -36 27 -22 12 12 4 33 -11 33 -5 0 -12 -5 -16 -11z" />
                                             </g>
                                         </svg>
-                                        와이파이(wi-fi)
+                                        와이파이
                                     </label>
-                                    <input type="checkbox" name="" id="Facilities2" class="Facilities displayNone" />
+                                    <input value='커피 메이커' onChange={onChangeInputs} type="checkbox" name="convenience" id="Facilities2" class="Facilities displayNone" />
                                     <label for="Facilities2" class="thirdOrderPageOptionBlockFacilities Facilities2" style={{ color: "grey" }}>
                                         <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="23.000000pt" height="16.000000pt"
                                             viewBox="0 0 23.000000 16.000000" preserveAspectRatio="xMidYMid meet">
@@ -418,7 +468,7 @@ export default function Home() {
                                         </svg>
                                         커피 메이커
                                     </label>
-                                    <input type="checkbox" name="" id="Facilities3" class="Facilities displayNone" />
+                                    <input value='음향기기' onChange={onChangeInputs} type="checkbox" name="convenience" id="Facilities3" class="Facilities displayNone" />
                                     <label for="Facilities3" class="thirdOrderPageOptionBlockFacilities Facilities3" style={{ color: "grey" }}>
                                         <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="18.000000pt" height="18.000000pt"
                                             viewBox="0 0 18.000000 18.000000" preserveAspectRatio="xMidYMid meet">
@@ -429,7 +479,7 @@ export default function Home() {
                                         </svg>
                                         음향기기
                                     </label>
-                                    <input type="checkbox" name="" id="Facilities4" class="Facilities displayNone" />
+                                    <input value='전좌석 usb포트' onChange={onChangeInputs} type="checkbox" name="convenience" id="Facilities4" class="Facilities displayNone" />
                                     <label for="Facilities4" class="thirdOrderPageOptionBlockFacilities Facilities4" style={{ color: "grey" }}>
                                         <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="23.000000pt" height="14.000000pt"
                                             viewBox="0 0 23.000000 14.000000" preserveAspectRatio="xMidYMid meet">
@@ -441,7 +491,7 @@ export default function Home() {
 
                                         전좌석 usb포트
                                     </label>
-                                    <input type="checkbox" name="" id="Facilities5" class="Facilities displayNone" />
+                                    <input value='영화관람' onChange={onChangeInputs} type="checkbox" name="convenience" id="Facilities5" class="Facilities displayNone" />
                                     <label for="Facilities5" class="thirdOrderPageOptionBlockFacilities Facilities5" style={{ color: "grey" }}>
                                         <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="23.000000pt" height="19.000000pt"
                                             viewBox="0 0 23.000000 19.000000" preserveAspectRatio="xMidYMid meet">
@@ -455,10 +505,10 @@ export default function Home() {
                                             </g>
                                         </svg>
 
-                                        영화관람(DVD)
+                                        영화관람
                                     </label>
                                 </div>
-                                <div class="thirdOrderPageCheckingBoxBtn">선택</div>
+                                <div onClick={onClickConvenience} class="thirdOrderPageCheckingBoxBtn">선택</div>
                             </div>
 
                             <div class="thirdOrderPageOptonCover displayNone"></div>

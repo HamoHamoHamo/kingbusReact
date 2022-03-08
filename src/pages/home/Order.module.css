@@ -5,7 +5,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: none;
+    background-color: rgba(0, 0, 0, 0.55);
+    z-index: 10000;
 }
 
 .searchConBox {
@@ -88,6 +89,7 @@
     color: white;
     font-size: 1.6rem;
     border-radius: 0.3rem;
+    cursor: pointer;
 }
 
 .routeDataCell {
@@ -98,7 +100,7 @@
     display: flex;
     justify-content: space-between;
     background-color: white;
-    
+    cursor: pointer;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
@@ -140,4 +142,19 @@
 .addressResButton{
     right: 0;
     position: absolute;
+}
+
+.stopoverImgBox{
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #B00020;
+    font-size: 1rem;
+}
+
+.stopoverImg{
+    font-size: 5rem;
 }
