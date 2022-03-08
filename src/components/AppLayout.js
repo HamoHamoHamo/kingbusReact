@@ -10,12 +10,12 @@ function AppLayout({ children }) {
     
 
     return (
-        <div>
+        <>
             <Header />
             { children }
             
             <Footer />
-        </div>
+        </>
     )
 }
 
