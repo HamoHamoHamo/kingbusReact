@@ -1,7 +1,6 @@
 import "./AppLayout.css";
 import "./Header.css";
 import "./Footer.css";
-import "./Responsible.css";
 import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";

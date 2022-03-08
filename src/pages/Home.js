@@ -1,6 +1,7 @@
 /* global kakao */
 import React, { useEffect, useState, useRef } from "react";
 import "./Home.css";
+import "./Responsive.css";
 import "./mainPage.js";
 import { useAppContext } from "../Store";
 import axios from "axios";
