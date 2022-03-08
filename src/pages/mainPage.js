@@ -429,20 +429,21 @@ document.addEventListener("DOMContentLoaded", function () {
     const thirdOrderPage = document.querySelector(".thirdOrderPage")
     const withDriver = document.querySelector("#withDriver")
     const thirdOrderPageNextBtn = document.querySelectorAll(".thirdOrderPageNextBtn")
-    let ChoiceToWithDriver = 0;
+    
 
     secondOrderPageNextBtn.addEventListener("click", finishedSecondOrder);
     function finishedSecondOrder() {
+        console.log("withDriver.checked", withDriver, thirdOrderPageNextBtn);
         secondOrderPage.classList.add("displayNone")
         thirdOrderPage.classList.remove("displayNone")
-        if (withDriver.checked) {
-            ChoiceToWithDriver = 1;
-        }
-        if (ChoiceToWithDriver == 1) {
-            thirdOrderPageNextBtn[1].classList.remove("displayNone")
-        } else {
-            thirdOrderPageNextBtn[0].classList.remove("displayNone")
-        }
+    //    if (withDriver.checked) {
+    //        console.log("CHC")
+    //        thirdOrderPageNextBtn[1].classList.remove("displayNone")
+    //    }
+    //    else {
+    //        console.log("NOCHEKC")
+    //        thirdOrderPageNextBtn[0].classList.remove("displayNone")
+    //    }
     }
 
     //버스 구하는 목적 체크박스

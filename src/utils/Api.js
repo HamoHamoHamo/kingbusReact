@@ -2,8 +2,6 @@ import React, { useContext, useState } from "react";
 import axios, { AxiosRequestConfig } from "axios";
 import Cookies from 'universal-cookie';
 
-
-
 const cookies = new Cookies();
 
 // const refreshRes = (req) => {
@@ -50,8 +48,8 @@ const cookies = new Cookies();
 
 export { Api, tokenRefresh, IP };
 
-const IP = 'http://localhost:5000/'
-
+const IP = process.env.REACT_APP_IP;
+console.log("IPIPIP", IP);
 const Api = axios.create({
     baseURL: IP,
     headers: {
@@ -104,7 +102,7 @@ Api.interceptors.response.use(response => {
 
 async function tokenRefresh(refreshToken){
     let access = ''
-    let res = await fetch(`${IP}token/refresh/`, {
+    let res = await fetch(`${IP}token/refresh`, {
         method: 'POST',
         mode: 'cors',
         cache: 'no-cache',

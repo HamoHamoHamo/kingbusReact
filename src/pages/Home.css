@@ -974,4 +974,6 @@
   }
 
 
-  
+.overflowHidden {
+  overflow: hidden;
+}

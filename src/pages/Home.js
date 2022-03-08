@@ -7,6 +7,7 @@ import axios from "axios";
 import { SearchAddress } from './home/Search';
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 import Stopover from "./home/Stopover";
+import { Api } from "../utils/Api";
 
 const { kakao } = window;
 
@@ -44,6 +45,20 @@ export default function Home() {
     const departureRef = useRef();
     const arrivalRef = useRef();
 
+    const postOrder = async (e) => {
+        e.preventDefault();
+        try{
+            console.log("INPUTSSS", inputs);
+            console.log(Api);
+            const result =  await Api.post('order', inputs)
+
+        }
+        catch(err){
+            console.log("ERR", err);
+        }
+
+    }
+
     const addWayPoint = () => {
         setCnt(cnt+1);
         setIndex(index.concat(cnt));
@@ -56,9 +71,9 @@ export default function Home() {
         if (useStopover === true){
             const arr = window.document.getElementsByName('stopover');
             console.log("ARRRRR", arr);
-            let stopover = [];
-            Array.from(arr).map(val => {
-                stopover = stopover.concat(val.value);
+            let stopover = '';
+            Array.from(arr).map((val, index) => {
+                stopover = index == 0 ? val.value : stopover + ',' + val.value;
             });
             setInputs(prev => {
                 return ({
@@ -71,6 +86,7 @@ export default function Home() {
     function onClickRoute(e) {
         //console.log("ONCLICK", e.target);
         setSearchDatas('');
+        window.document.body.classList.add('overflowHidden')
         setTypes(() => ({
             name: e.target.name,
             title: e.target.placeholder,
@@ -83,6 +99,7 @@ export default function Home() {
     }
 
     const onClose = () => {
+        window.document.body.classList.remove('overflowHidden')
         setTypes(() => ({
             display: 'hidden'
         }))
@@ -115,8 +132,9 @@ export default function Home() {
         }
     }
     const onClickWaypoint = () => {
-        setSearchDatas('');
         addWayPoint();
+        setSearchDatas('');
+        window.document.body.classList.add('overflowHidden')
         setTypes(() => ({
             name: 'stopover',
             title: '경유지',
@@ -137,6 +155,7 @@ export default function Home() {
         if (useStopover === false){
             addWayPoint();
             setSearchDatas('');
+            window.document.body.classList.add('overflowHidden')
             setTypes(() => ({
                 name: 'stopover',
                 title: '경유지',
@@ -152,16 +171,26 @@ export default function Home() {
     }
     const onClickConvenience = (e) => {
         const arr = window.document.getElementsByName('convenience');
-        let convenience = [];
-        Array.from(arr).map(val => {
+        let convenience = '';
+        Array.from(arr).map((val, index) => {
             if(val.checked){
-                convenience = convenience.concat(val.value);
+                convenience = convenience == '' ? val.value : convenience + "," + val.value;
             }
             setInputs((prev) => ({
                 ...prev,
                 convenience
             }))
         });
+    }
+    const onCLickSecondBtn = () => {
+        const button = document.querySelectorAll(".thirdOrderPageNextBtn")
+        console.log("BUTTOn", button);
+        console.log(inputs['is_driver']);
+        if(inputs['is_driver'] == 'true'){
+            button[0].classList.remove('displayNone');
+        }else{
+            button[1].classList.remove('displayNone');
+        }
     }
 
     const onChangeDate = (e) => {
@@ -269,7 +298,7 @@ export default function Home() {
                         </a>
                     </div>
 
-                    <form method='post' action="">
+                    <form onSubmit={postOrder}>
                         <div class="firstOrderPage">
 
                             <div class="way">
@@ -362,7 +391,7 @@ export default function Home() {
                                     모든일정 기사님 동행
                                 </label>
                             </div>
-                            <div class="secondOrderPageNextBtn mainOrderBtn">다음</div>
+                            <div onClick={onCLickSecondBtn} class="secondOrderPageNextBtn mainOrderBtn">다음</div>
                         </div>
 
                         <div class="thirdOrderPage displayNone">
@@ -382,7 +411,7 @@ export default function Home() {
                             <textarea onChange={onChangeInputs} name="reference" class="additionalRequests" placeholder="추가요청사항을 입력해주세요.(선택)
                             ex)45인승 부탁드려요. 쾌적하게 가고 싶어요~~"></textarea>
                             <div class="thirdOrderPageNextBtn mainOrderBtn displayNone">다음</div>
-                            <input onClick={() => { console.log("INPUTS", inputs)}} type="text" class="thirdOrderPageNextBtn mainOrderBtn displayNone thirdOrderPageSubmit" value="완료" />
+                            <input onClick={() => { console.log("INPUTS", inputs)}} type="submit" class="thirdOrderPageNextBtn mainOrderBtn displayNone thirdOrderPageSubmit" value="완료" />
 
                             <div class="thirdOrderPageCheckingBox itIsReal displayNone">
                                 <div class="thirdOrderPageCheckingBoxTitle">버스를 구하시는 목적을 선택해주세요.</div>
@@ -517,7 +546,7 @@ export default function Home() {
 
                         <div class="fourthOrderPage displayNone">
                             <div class="fourthOrderPageBox">
-                                <textarea class="specificSchedule" placeholder="구체적인 일정을 작성해 주세요."></textarea>
+                                <textarea onChange={onChangeInputs} name='driver_schedule' class="specificSchedule" placeholder="구체적인 일정을 작성해 주세요."></textarea>
                                 <div class="fourthOrderPageInfor">일정의 변동사항이 생기면 <span>'기사님과 채팅하기'</span>기능을 통해 일정부분 조율이 가능합니다.</div>
                             </div>
                             <input type="submit" class="secondOrderPageNextBtn mainOrderBtn thirdOrderPageSubmit" value="완료" />
