@@ -1,0 +1,161 @@
+.signupForm{
+    width: 100rem;
+    min-height: calc( 100vh - 62rem);
+    margin: 25rem auto 0 auto;
+}
+  
+  .signupHeader{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 14rem;
+  }
+  .signupHeaderTitle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-size: 4.2rem;
+    font-weight: bold;
+    color: black;
+  }
+  .signupHeaderLocateBox{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 4rem;
+    border-bottom: 0.3rem solid #b00020;
+  }
+  .locateTitle{
+    font-size: 3rem;
+    font-weight: bold;
+    color: black;
+  }
+  .signupHeaderNavBox{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 34rem;
+    height: 100%;
+  }
+  .signupHeaderNavBox div:nth-child(1) span{
+    color: #b00020;
+  }
+  .signupHeaderNavCell{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 11.4rem;
+    height: 100%;
+  }
+  .signupHeaderNavBox span{
+    font-size: 2rem;
+    font-weight: bold;
+    color: black;
+  }
+  .signupHeaderNavCell span{  
+    font-size: 2rem;
+    font-weight: bold;
+    color: black;
+  }
+  .signupHeaderNavCell img{  
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+  
+  .signupcontents{
+    width: 100%;
+    height: 67rem;
+    margin: 3rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .signupBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 46%;
+    height: 5.6rem;
+    margin: 3rem 0 0 27%;
+    border-radius: 1rem;
+    font-size: 2.4rem;
+    font-weight: bold;
+    color: white;
+    background-color: #b00020;
+    cursor: pointer;
+  }
+  
+  /*ckeckingAllTerms*/
+  .ckeckingAllTerms{
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 2.8rem;
+    cursor: pointer;
+  }
+  .ckeckingAllTerms label{
+    font-size: 2.2rem;
+    padding-left: 4rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .allTerms{
+    position: absolute;
+    left: 0;
+    width: 2.8rem;
+    height: 100%;
+    margin-right: 1rem;
+    border: 0.1rem solid #707070;
+    border-radius: 0.2rem;
+    cursor: pointer;
+  }
+  
+  /*TermsOfUse*/
+  .termsBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+  }
+  .termsCell{
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 1rem;
+    cursor: pointer;
+  }
+  .termsCell label{
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-left: 0.8rem;
+    padding-left: 2rem;
+    cursor: pointer;
+  }
+  .termsCheckbox{
+    position: absolute;
+    left: 0;
+    width: 1.8rem;
+    height: 1.8rem;
+    border: 0.1rem solid #707070;
+    border-radius: 0.1rem;
+    cursor: pointer;
+  }
+  .TermsOfUse{
+    width: calc(100% - 2rem);
+    height: 24rem;
+    padding: 1rem;
+    border: 0.1rem solid black;
+    border-radius: 0.1rem;
+    font-size: 1.4rem;
+    overflow-y: scroll;
+  }

@@ -1,3 +1,10 @@
+.loginErrorText{
+  margin-bottom: 2.4rem;
+  font-size: 1.8rem;
+  color:#b00020;
+  font-weight: 500;
+}
+
 .loginContents{
     height: 32rem;
   }

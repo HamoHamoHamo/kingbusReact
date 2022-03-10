@@ -1,61 +1,55 @@
-import React, { useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
-import { Api } from "../../utils/Api";
+import React, { useState, useRef } from "react";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { Api, IP } from "../../utils/Api";
 import axios from "axios";
 import { useAppContext, setToken } from "../../Store";
 import './Login.css';
 
 export function LoginUser() {
+    
     return (
-        <div>
-            User
-
-        </div>
+        <Login role={'u'} str={'승객'} />
     )
 }
 
 export function LoginCompany() {
-    // const context = useOutletContext();
+
     return (
-        <div>
-            company
-        </div>
+        <Login role={'c'} str={'회사'} />
     )
 }
 
-export function LoginDriver(user) {
+export function LoginDriver() {
+    
     return (
-        <div>
-            Driver
-
-        </div>
+        <Login role={'d'} str={'기사'} />
     )
 }
 
 
 
-export function Login() {
+export function Login({ role, str }) {
     const { dispatch } = useAppContext();
     let navigate = useNavigate();
-    const [inputs, setInputs] = useState({});
-    const [fieldErrors, setFieldErrors] = useState({});
+    const [fieldError, setFieldError] = useState('');
+    const usernameRef = useRef();
+    const passwordRef = useRef();
 
-    const onChange = (e) => {
-        const { name, value } = e.target;
-        setInputs(prev => ({
-            ...prev,
-            [name]: value
-        }));
-        // console.log(inputs);
-    };
     const onSubmit = (e) => {
         e.preventDefault();
+        console.log("RRRRRROOLE", role);
+
+        const data = {
+            username: usernameRef.current.value,
+            password: passwordRef.current.value,
+            role
+        };
+
         async function fn() {
-            setFieldErrors({});
-            const URL = `http://localhost:5000/login`;
-            const response = axios.post(URL, inputs)
+            setFieldError('');
+            const URL = `${IP}/login`;
+            const response = axios.post(URL, data)
                 .then(response => {
-                    alert("로그인 완료");
                     const {
                         data: {
                             refresh: refreshToken,
@@ -67,26 +61,33 @@ export function Login() {
                     console.log("로그인 완료 토큰", refreshToken, accessToken, "이름", name);
                     dispatch(setToken({ refreshToken, name }));
                     Api.defaults.headers['Authorization'] = `Bearer ${accessToken}`;
-                    navigate("/");
+                    window.location.href = '/';
                 })
                 .catch(error => {
                     console.log("ERROR", error.response);
                     if (error.response) {
                         const { data: fieldsErrorMessages } = error.response;
                         // fieldsErrorMessages = > { username : "m1 m2", password: [] }
-                        setFieldErrors(
-                            Object.entries(fieldsErrorMessages).reduce(
-                                (acc, [fieldName, errors]) => {
-                                    acc[fieldName] = errors.join(" ")
-
-                                    return acc;
-                                },
-                                {}
-                            )
+                        const errors = Object.entries(fieldsErrorMessages).reduce(
+                            (acc, [fieldName, errors]) => {
+                                acc[fieldName] = errors.join(" ")
+                                return acc;
+                            },
+                            {}
                         )
-                        console.log("ERRRORS", fieldErrors);
+                        console.log("ERRRORS", errors);
+                        if(errors.username){
+                            setFieldError('아이디를 입력해 주세요.');
+                        }
+                        else if (errors.password){
+                            setFieldError('비밀번호를 입력해 주세요.');
+                        }
+                        else if (errors.non_field_errors === 'Invalid login credentials'){
+                            setFieldError('아이디 또는 비밀번호가 일치하지 않습니다.');
+                        }
+                        console.log(fieldError);
+                        //navigate(url);   
                     }
-
                 });
         }
         fn();
@@ -94,45 +95,44 @@ export function Login() {
 
     return (
         <>
-            <Outlet />
             <form onSubmit={onSubmit} class="loginForm">
                 <div class="loginMainHeader">
-                    승객 로그인
+                    {str} 로그인
                 </div>
 
                 <div class="loginContents">
                     <div class="inputCell">
                         <label class="loginLabel">아이디</label>
-                        <input onChange={onChange} type="text" name='username' class="loginInput" placeholder="아이디를 입력해 주세요." />
+                        <input ref={usernameRef} type="text" name='username' class="loginInput" placeholder="아이디를 입력해 주세요." />
                     </div>
                     <div class="inputCell">
                         <label class="loginLabel">비밀번호</label>
-                        <input onChange={onChange} type="password" name='password' class="loginInput" placeholder="비밀번호를 입력해 주세요." />
+                        <input ref={passwordRef} type="password" name='password' class="loginInput" placeholder="비밀번호를 입력해 주세요." />
                     </div>
                     <div class="SaveIdCell">
                         <input type="checkbox" class="checkingSaveId" />
-                            <label for="" class="SaveId">아이디 저장</label>
+                        <label for="" class="SaveId">아이디 저장</label>
                     </div>
                 </div>
 
+                {fieldError && <div class="loginErrorText">{fieldError}</div>}
+
                 <div class="searchIdAndPw">
-                    <a href="searchId.html">
+                    <NavLink to="/recovery/id">
                         <div class="searchId">아이디 찾기</div>
-                    </a>
-                    <a href="searchPw.html">
+                    </NavLink>
+                    <NavLink to="/recovery/password">
                         <div class="searchPw">비밀번호 찾기</div>
-                    </a>
+                    </NavLink>
                 </div>
 
                 <input type="submit" class="loginBtn" value="로그인" />
-
                     <div class="goSignup">
                         <div class="signCheck">킹버스 아이디가 없으신가요?</div>
                         <a href="../signup/passenger.html">
                             <div class="goSignupLink">회원가입</div>
                         </a>
                     </div>
-
 
             </form>
         </>

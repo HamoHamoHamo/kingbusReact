@@ -75,13 +75,13 @@ export default function Header() {
                             </li>
                         </ul>
                         <div class="hembugerLoginBox" style={{display: 'none'}}>
-                            <a href="login/passenger.html">
+                            <a href="/login/user">
                                 <div class="hembugeroptionBox ontherColor">승객 로그인</div>
                             </a>
-                            <a href="login/driver.html">
+                            <a href="/login/driver">
                                 <div class="hembugeroptionBox">기사 로그인</div>
                             </a>
-                            <a href="login/company.html">
+                            <a href="/login/company">
                                 <div class="hembugeroptionBox">회사 로그인</div>
                             </a>
                             <div class="turnBackHemburger">
@@ -116,24 +116,24 @@ export default function Header() {
                     </div>
                 </div>
                 <div class="loginHidden displayNone loginOption">
-                    <a href="/login">
+                    <a href="/login/user">
                         <div class="loginCell passenger">승객<br/>로그인</div>
                     </a>
-                    <a href="/">
+                    <a href="/login/driver">
                         <div class="loginCell loginCellOther">기사<br/>로그인</div>
                     </a>
-                    <a href="/">
+                    <a href="/login/company">
                         <div class="loginCell loginCellOther">회사<br/>로그인</div>
                     </a>
                 </div>
                 <div class="loginHidden displayNone singupOption">
-                    <a href="/">
+                    <a href="/signupterm/user">
                         <div class="loginCell passenger">승객<br/>회원가입</div>
                     </a>
-                    <a href="/">
+                    <a href="/signupterm/driver">
                         <div class="loginCell loginCellOther">기사<br/>회원가입</div>
                     </a>
-                    <a href="/">
+                    <a href="/signupterm/company">
                         <div class="loginCell loginCellOther">회사<br/>회원가입</div>
                     </a>
                 </div>
