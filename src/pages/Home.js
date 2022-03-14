@@ -9,6 +9,7 @@ import { SearchAddress } from './home/Search';
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 import Stopover from "./home/Stopover";
 import { Api } from "../utils/Api";
+import { useNavigate } from "react-router-dom";
 
 const { kakao } = window;
 
@@ -51,13 +52,13 @@ export default function Home() {
         try{
             console.log("INPUTSSS", inputs);
             console.log(Api);
-            const result =  await Api.post('order', inputs)
-
+            const result =  await Api.post('order', inputs);
+            window.location.href = '/';
         }
         catch(err){
             console.log("ERR", err);
+            window.alert(err.result);
         }
-
     }
 
     const addWayPoint = () => {
@@ -69,6 +70,13 @@ export default function Home() {
         setIndex(index.filter(y => y !== i));
     }
     const setInputsStopover = () => {
+        if(inputs.arrival_date && inputs.arrival_time){
+            console.log("st delete arrival_date, time")
+            delete inputs.arrival_date;
+            delete inputs.arrival_time;
+            
+        }
+
         if (useStopover === true){
             const arr = window.document.getElementsByName('stopover');
             console.log("ARRRRR", arr);
@@ -82,7 +90,7 @@ export default function Home() {
                     stopover
                 });
             });
-        }        
+        }
     }
     function onClickRoute(e) {
         //console.log("ONCLICK", e.target);
@@ -171,6 +179,7 @@ export default function Home() {
         console.log("ONCLLLL", types);
     }
     const onClickConvenience = (e) => {
+        console.log("INPUTTESTTST", inputs)
         const arr = window.document.getElementsByName('convenience');
         let convenience = '';
         Array.from(arr).map((val, index) => {

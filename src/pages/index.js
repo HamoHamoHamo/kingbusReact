@@ -9,6 +9,7 @@ import { SignupDone } from './account/SignupDone';
 import { LoginUser, LoginDriver, LoginCompany } from './account/Login';
 import RecoveryId from './account/RecoveryId';
 import RecoveryPw from './account/RecoveryPw';
+import EstimateList from './estimate/EstimateList';
 
 
 function NotFound() {
@@ -18,7 +19,7 @@ function Root() {
   return (
     <AppLayout>
       <Routes>
-        <Route path="" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="signupterm/user" element={<SignupTermUser />} />
         <Route path="signupterm/driver" element={<SignupTermDriver />} />
         <Route path="signupterm/company" element={<SignupTermCompany />} />
@@ -30,7 +31,6 @@ function Root() {
         <Route path="signupdone/user" element={<SignupDone />} />
         <Route path="signupdone/driver" element={<SignupDone />} />
         <Route path="signupdone/company" element={<SignupDone />} />
-
         
         <Route path="login/user" element={<LoginUser /> } />
         <Route path="login/driver" element={<LoginDriver /> } />
@@ -41,7 +41,7 @@ function Root() {
         <Route path="recovery/password" element={<RecoveryPw />} />
         {/* <Route path="recovery/password/res" element={<RecoveryId />} /> */}
 
-        
+        <Route path="estimate/list" element={<EstimateList /> } />
         
         <Route path="*" element={<NotFound />} />
       </Routes>

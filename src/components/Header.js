@@ -85,7 +85,7 @@ export default function Header() {
                                 <div class="hembugeroptionBox">회사 로그인</div>
                             </a>
                             <div class="turnBackHemburger">
-                                <img src="images/goBack.png" alt="뒤로가기 아이콘" />
+                                <img src="/assets/goBack.png" alt="뒤로가기 아이콘" />
                                 뒤로가기
                             </div>
                         </div>
@@ -100,7 +100,7 @@ export default function Header() {
                                 <div class="hembugeroptionBox">회사 회원가입</div>
                             </a>
                             <div class="turnBackHemburger">
-                                <img src="images/goBack.png" alt="뒤로가기 아이콘" />
+                                <img src="/assets/goBack.png" alt="뒤로가기 아이콘" />
                                 뒤로가기
                             </div>
                         </div>

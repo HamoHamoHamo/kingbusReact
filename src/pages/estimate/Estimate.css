@@ -1,0 +1,1355 @@
+
+/* order/base */
+body{
+    background-color: #F4F4F4;
+  }
+  
+  /*상단 주문메뉴*/
+  .topOrder{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 129.6rem;
+    margin-top: 6rem;
+    padding: 0 calc( (100vw - 129.6rem - 1.7rem) / 2 );
+    background-color: white;  
+    box-shadow: 0 0.1rem 0.1rem rgba(0, 0, 0, 0.6);
+  }
+  .topOrderPageName{
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #b00020;
+  }
+  /*상단 주문메뉴 - 메인정보*/
+  .topOrderMainInfor{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 12rem;
+    border-bottom: 0.1rem dashed grey;
+    background-color: white;
+  }
+  .startInfor{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 40rem;
+    height: 100%;
+  }
+  .start{
+    font-size: 2rem;
+    font-weight: bold;
+    color: #b00020;
+  }
+  .startInforCell{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: calc(100% - 2rem);
+    padding: 1rem 0 ;
+  }
+  .startInforDate{
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+  .startInforTime{
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+  .startInforPlace{
+    font-size: 1.6rem;
+  } 
+  .wayPointInfor{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: auto;
+    height: 100%;
+  }
+  .wayPoint{
+    font-size: 1.6rem;
+    color: #b00020;
+  }
+  .wayPointicon{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 1.6rem;
+  }
+  .wayPointDotCell{
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 96%;
+    height: 100%;
+  }
+  .wayPointDot{
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 100%;
+    background-color: #b00020;
+  }
+  .wayPointInforBox{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 14rem;
+  }
+  .wayPointInforCell{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .wayPointInforCell span{
+    font-size: 1.6rem;
+    color: #b00020;
+  }
+  .kilometer{
+    font-size: 1.6rem;
+    color: #8A8A8A;
+  }
+  .endInfor{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 40rem;
+    height: 100%;
+  }
+  .end{
+    font-size: 2rem;
+    font-weight: bold;
+    color: #b00020;
+  }
+  .endInforCell{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: calc(100% - 2rem);
+    padding: 1rem 0 ;
+  }
+  .endInforDate{
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+  .endInforTime{
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+  .endInforPlace{
+    font-size: 1.6rem;
+  } 
+  
+  /*상단 주문메뉴 - 서브정보*/
+  .topOrderSubInfor{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 4rem;
+    border-bottom: 0.1rem solid grey;
+    background-color: white;
+  }
+  .morInforCell{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 36rem;
+    height: 100%;
+  }
+  .morInforCell div{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .morInforCell div span:nth-child(2){
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #b00020;
+    margin: 0 0.4rem;
+  }
+  .morInforCell div span:nth-child(3){
+    font-size: 1.6rem;
+    color: black;
+  }
+  .moreInforBtn{
+    position: absolute;
+    top: 50%;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 8rem;
+    height: 3.4rem;
+    padding: 0 1rem;
+    border-radius: 1.7rem;
+    background-color: #b00020;
+    transform: translate(0, -50%);
+    cursor: pointer;
+  }
+  .moreInforBtn span{
+    font-size: 1.4rem;
+    color: white;
+  }
+  .cancelOrder{
+    position: absolute;
+    top: calc(100% + 0.1rem);
+    left: calc((100vw - 129.6rem + 1.7rem)/2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 12rem;
+    height: 2.4rem;
+    border: none;
+    font-size: 1.7rem;
+    font-weight: bold;
+    color: black;
+    background-color: #F4F4F4;
+    cursor: pointer;
+  }
+  .cancelOrder img{
+    margin-left: 0.8rem;
+  }
+  /*상단 주문메뉴 - 추가정보*/
+  .topOrderMoreInfor{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    min-height: 22rem;
+    background-color: white;
+  }
+  .waypointList{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: auto;
+    height: auto;
+    margin-left: 12rem;
+  }
+  .waypointList span{
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: black;
+    margin: 0.6rem 0;
+  }
+  .waypointList img:nth-child(4){
+    transform: rotate(180deg);
+  }
+  .addWaypoint{
+    font-size: 1.4rem;
+    margin: 0.6rem 0;
+  }
+  .topOrderMoreInforBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 60rem;
+    margin-left: 6rem;
+  }
+  .FacilitiesCell{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 5rem;
+    margin-bottom: 2rem;
+  }
+  .Facilities{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 10rem;
+    height: 100%;
+  }
+  .Facilities span{
+    font-size: 1.6rem;
+    font-weight: bold;
+  }
+  .additionalRequestCell{
+    width: calc(100% - 2rem);
+    min-height: 8rem;
+    padding: 1rem;
+    border: 0.1rem solid grey;
+    border-radius: 0.2rem;
+    resize: none;
+    outline: none;
+  }
+  
+  /*메인 컨테이너*/
+  .mainContainer{
+    display: flex;
+    justify-content: space-between;
+    width: 129.6rem;
+    height: auto;
+    min-height: 60rem;
+    margin-top: 5rem;
+    padding: 0 calc( (100vw - 129.6rem - 1.7rem) / 2 );
+  }
+  .mainContainerProfile{
+    margin-top: 10rem;
+  }
+  
+  /*사이드 메뉴*/
+  .sidemenuContainer{
+    width: 24rem;
+    height: 20rem;
+  }
+  .sidemenuBox{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+  .sidemenuMenu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 6rem;
+    height: 8rem;
+    background-color: #b00020;
+    border-radius: 0.3rem;
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: white;
+  }
+  .sidemenuCell{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 16rem;
+    height: 100%;
+  }
+  .sidemenuCell a{
+    width: 100%;
+    height: 3.2rem;
+  }
+  .sidemenuNav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 3.2rem;
+    margin-top: 1.2rem;
+    border: 0.1rem solid grey;
+    border-radius: 0.3rem;
+    font-size: 1.6rem;
+    color: black;
+    background-color: white;
+    cursor: pointer;
+  }
+  .sidemenuNav:hover{
+    box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.4);
+  }
+  .sidemenuCell div:nth-child(1){
+    margin: 0;
+  }
+  .filterBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1.8rem 0;
+    border-top: 0.2rem solid #b00020;
+    margin-top: 1rem;
+  }
+  .filterBoxTitle{
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: black;
+  }
+  .filterInput{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 2rem;
+    font-size: 1.6rem;
+  }
+  .filterInput input{
+    height: 100%;
+    padding-left: 1rem;
+    border: 0.1rem solid grey;
+    border-radius: 0.3rem;
+    font-size: 1.6rem;
+    outline: none;
+  }
+  .thisPage{
+    border: 0.2rem solid #b00020;
+    color:#b00020;
+  }
+  .hiddenFilter{
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .visibleFilterBtn{
+    position: relative;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 18.5rem;
+    height: 4.6rem;
+    padding-left: 1.5rem;
+    border: 0.2rem solid #b00020;
+    border-radius: 0.4rem;
+    font-size: 2.2rem;
+    color: black;
+    background-color: white;
+    cursor: pointer;
+    box-shadow: 0.1rem 0.1rem 0.2rem rgba(0, 0, 0, 0.4);
+  }
+  .visibleFilterBtn img{
+    position: absolute;
+    left: 5%;
+    top: 50%;
+    width: 2.8rem;
+    height: 2.8rem;
+    transform: translate(0, -50%);
+  }
+  .filterSearchBtn{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 20rem;
+    height: 4rem;
+    border-radius: 0.5rem;
+    background-color: #b00020;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+  }
+  
+  /*메인 컨텐츠*/
+  .mainContentsArea{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 88rem;
+    height: auto;
+    min-height: 42rem;
+  }
+  .orderStatus{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 6.4rem;
+    min-height: 6.4rem;
+    margin-bottom: 5rem;
+    font-size: 2rem;
+    font-weight: bold;
+    color: black;
+    border: 0.1rem solid #a7a7a7;
+    border-radius: 0.5rem;
+    background-color: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  }
+  .orderStatus span{
+    font-size: 2.4rem;
+    font-weight: bold;
+    color: #b00020;
+  }
+  /*order Container*/
+  .orderContainerPlusBtn{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .statusInfo{
+    position: absolute;
+    top: 0.8rem;
+    left: 0.8rem;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #001DB0;
+    text-shadow: 0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.6) ;
+  }
+  .orderContainer{
+    display: flex;
+    justify-content: space-between;
+    width: calc(100% - 4rem);
+    height: 16rem;
+    padding: 3rem 2rem;
+    margin-bottom: 2rem;
+    border: 0.1rem solid #a7a7a7;
+    border-radius: 0.5rem;
+    background-color: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    cursor: pointer;
+  }
+  /*프로필*/
+  .orderContainer a{
+    width: 16rem;
+    height: 16rem;
+  }
+  .profileBox{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 0 4px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.24);
+  }
+  .profileBox img{
+    width: 100%;
+    height: 100%;
+  }
+  .profileBtn{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 20%;
+    font-size: 1.6rem;
+    color: grey;
+  }
+  .orderContainer:hover .profileBtn{
+    color: white;
+  }
+  .orderInfoContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 63rem;
+    height: 100%;
+  }
+  /*상단정보*/
+  .orderInfoContainerTop{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    height: 50%;
+  }
+  .driverInfoBox{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 65%;
+    height: 100%;
+  }
+  .driverGradeCell{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 5rem;
+    height: 100%;
+  }
+  .driverGradeCell span{
+    font-size: 1.4rem;
+    font-weight: bold;
+  }
+  .driverInfoCell{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: calc(100% - 5rem);
+    height: 100%;
+    padding-left: 1rem;
+  }
+  .driverInfoCell span:nth-child(1){
+    margin-bottom: 0.8rem;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  .driverInfoCell span:nth-child(2){
+    font-size: 1.6rem;
+  }
+  .priceCell{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    width: 35%;
+  }
+  .priceCell span:nth-child(1){
+    margin-bottom: 1rem;
+    font-size: 3.2rem;
+    font-weight: bold;
+  }
+  .priceCell span:nth-child(2){
+    font-size: 2rem;
+  }
+  /*하단정보*/
+  .orderInfoContainerBottom{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+    height: 50%;  
+  }
+  .certificationBox{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    width: 50%;
+    height: 100%;
+    margin-bottom: 1rem;
+  }
+  .certificationCell{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50%;
+    margin-right: 1.4rem;
+  }
+  .certificationCell img{
+    width: 2rem;
+    height: 2rem;
+    margin-right: 1rem;
+  }
+  .certificationCell div{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+  }
+  .certificationCell div span:nth-child(1){
+    font-size: 1.3rem;
+    font-weight: medium;
+  }
+  .certificationCell div span:nth-child(2){
+    font-size: 1rem;
+    color: #707070;
+  }
+  .certificationCompany{
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #b00020;
+  }
+  .SurchargeBox{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    width: 50%;
+    height: 50%;
+  }
+  .SurchargeCell{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    margin-right: 0.6rem;
+  }
+  .SurchargeCell img{
+    width: 2.4rem;
+  }
+  .SurchargeCell span:nth-child(2){
+    font-size: 1.3rem;
+    font-weight: medium;
+    color: grey;
+  }
+  .orderCheckBox{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 8rem;
+    margin-bottom: 2rem;
+  }
+  .guide{
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: flex-end;
+    width: 100%;
+    font-size: 1.4rem;
+  }
+  .guide span{
+    color: #b00020;
+  }
+  .orderCheckBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 16rem;
+    height: 4rem;
+    border-radius: 0.5rem;
+    background-color: #b00020;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+  }
+  
+  
+  .displayNone{
+    display: none;
+  }
+
+
+
+
+/* order.css */
+.sidemenuBox{
+    height: 17.2rem;
+  }
+  .sidemenuMenu{
+    height: 17.2rem;
+  }
+  .gradeFilter{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 20rem;
+  }
+  .filterInput input{  
+    width: calc(47% - 1rem);
+  }
+  .gradeCell{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 3.6rem;
+    font-size: 1.6rem;
+    cursor: pointer;
+  }
+  .checkThis{
+    background-color: #b00020;
+    color: white;
+  }
+  .notThis:hover{
+    background-color: #F3D9D9;
+  }
+
+  /* other order.css */
+.topOrder{
+    justify-content: center;
+    height: 4rem;
+  }
+  .sidemenuBox{
+    height: 17.2rem;
+  }
+  .sidemenuMenu{
+    height: 17.2rem;
+  }
+  .filterInput input{  
+    width: calc(100% - 1rem);
+  }
+  .filterBox span{
+    width: 100%;
+    margin-top: 0.4rem;
+    text-align: right;
+    font-size: 1.2rem;
+    color: #b00020;
+  }
+  .bothLinkMain{
+    width: 100%;
+    color: black;
+  }
+  .orderContainerPlusBtn{
+    width: 100%;
+    height: auto;
+    min-height: 16rem;
+    border: 0.1rem solid #a7a7a7;
+    border-radius: 0.5rem;  
+    box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
+    cursor: pointer;
+  }
+  .topOrderMainInfor{
+    width: calc(100% - 4rem);
+    padding: 0 2rem;
+  }
+  .startInfor{
+    width: auto;
+    min-width: 20rem;
+  }
+  .endInfor{
+    width: auto;
+    min-width: 20rem;
+  }
+  .topOrderSubInfor{  
+    justify-content: flex-start;
+    width: calc(100% - 4rem);
+    padding: 0 2rem;
+  }
+  .moreInforBtn{
+    top: 2rem;
+    right: 2rem;
+  }
+  .topOrderMoreInfor{
+    width: calc(100% - 4rem);
+    padding: 0 2rem;
+  }
+  .waypointList{
+    margin: 0;
+  }
+  .topOrderMoreInforBox {
+    width: 48rem;
+    margin-left: 3rem;
+  }
+  .bothLinkBox{
+    position: relative;
+    width: 100%;
+  }
+
+  /* base.css */
+
+.mainContentsArea{
+    min-height: 90rem;
+  }
+  .bothLinkBox{
+    margin-bottom: 2rem;
+  }
+  .peopleFilter{  
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 20rem;
+  }
+  .peopleCell{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 3.6rem;
+    font-size: 1.6rem;
+    cursor: pointer;
+  }
+  .createEstimate{
+    position: absolute;
+    top: calc(100% + 2rem);
+    left: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 16rem;
+    height: 4rem;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: #b00020;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    outline: none;
+    transform: translate(-50%, 0);
+  }
+  .priceCell{
+    font-size: 3.2rem;
+  }
+  .previwePrice{
+    font-size: 2rem;
+  }
+  .previweVehicles{
+    font-size: 3.2rem;
+    font-weight: bold;
+  }
+  .surchargeContainer{
+    width: 100%;
+  }
+  .SurchargeBox{
+    justify-content: space-around;
+    width: 100%;
+  }
+  .prviweSurchargeBox{
+    justify-content: flex-start;
+  }
+  .previweSurchargeCell{
+    margin-right: 4rem;
+  }
+  .SurchargeCell{
+    cursor: pointer;
+  }
+  .SurchargeCell svg{
+    height: 8rem;
+  }
+  .SurchargeCell img{
+    width: 3rem;
+  }
+  .SurchargeCell span{
+    font-size: 1.6rem;
+    margin-top: 0.4rem;
+  }
+  .sidemenuBox{
+    height: 22rem;
+  }
+  .sidemenuMenu{
+   height: 22rem;
+  }
+  .cancelBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 6rem;
+    margin-top: 0.6rem
+  }
+  .cancelCell{
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    height: auto;
+  }
+  .cancelCell label{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 12rem;
+    height: 100%;
+    cursor: pointer;
+  }
+  .checkToCancel{
+    width: 2rem;
+    height: 2rem;
+    border: 0.1rem solid black;
+    border-radius: 0.2rem;
+  }
+  .cancelCell span{
+    margin-left: 0.4rem;
+    font-size: 1.6rem;
+    color: #b00020;
+  }
+  .cancelBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 16rem;
+    height: 4rem;
+    border-radius: 0.5rem;
+    background-color: #b00020;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .displayNone{
+    display: none;
+  }
+
+
+
+/* orderResponse */
+@media screen and (max-width: 1295px) and (min-width: 1024px) {
+    html {
+      font-size: 50%;
+    }
+    .topOrder{
+      width: 129.6rem;
+    }
+    .mainContainer{
+      justify-content: space-around;
+      width: 125rem;
+      padding: 0 calc( (100vw - 128rem - 2.125rem) / 2 )
+    }
+  }
+  
+  @media screen and (max-width: 1023px) and (min-width: 768px) {
+    html {
+      font-size: 50%;
+    }
+    .topOrder{
+      width: 96rem;
+      padding: 0 calc( (100vw - 96rem) / 2 );
+    }
+    .startInfor{
+      width: 30rem;
+    }
+    .endInfor{
+      width: 30rem;
+    }
+    .mainContainer{
+      width: 96rem;
+      padding: 0 calc( (100vw - 96rem) / 2 );
+    }
+    .mainContainer{
+      flex-direction: column;
+      align-items: center;
+    }
+    .sidemenuContainer{
+      position: relative;
+      top: 0;
+      display: flex;
+      justify-content: space-between;
+      width: 88rem;
+      height: 15rem;
+    }
+    .sidemenuBox{
+      width: 44rem;
+      height: 10rem;
+    }
+    .sidemenuMenu{
+      height: 8.4rem;
+    }
+    .sidemenuCell{
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(45%, auto));
+      width: 36rem;
+    }
+    .hiddenFilter{
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 10;
+      display: none;
+      width: calc(100% - 10rem);
+      height: auto;
+      padding: 5rem;
+      border: 0.1rem solid grey;
+      border-radius: 0.5rem;
+      background-color: white;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    }
+    .visibleFilterBtn{
+      display: flex;
+      margin-top: 5.2rem;
+      width: 16rem;
+      height: 3.6rem;
+      font-size: 1.8rem;
+    }
+    .filterInput{
+      height: 3rem;
+    }
+    .gradeFilter{
+      height: 20rem;
+    }
+    .filterSearchBtn{
+      display: flex;
+    }
+    .cancelOrder{
+      left: calc((100vw - 96rem)/2);
+    }
+  }
+  
+  @media screen and (max-width: 767px) and (min-width: 360px) {
+    html {
+      font-size: 62.5%;
+    }
+    .topOrder{
+      width: 36rem;
+      padding: 0 calc( (100vw - 36rem) / 2 );
+    }
+    .topOrderMainInfor{
+      flex-direction: column;
+      justify-content: center;
+      height: 24rem;
+    }
+    .startInfor{
+      width: 100%;
+      height: 50%;
+      order: 1;
+    }
+    .start{
+      width: 5rem;
+      margin-right: 3rem;
+    }
+    .startInforCell{
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      width: 100%;
+    }
+    .startCell{
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+    .startCell img{
+      width: 1.2rem;
+      height: 0.8rem;
+    }
+    .startInforCell span:nth-child(2){
+      margin-left: 2rem;     
+    }
+    .wayPointInfor{
+      height: 50%;
+      order: 3;
+    }
+    .endInfor{
+      width: 100%;
+      height: 50%;
+      order: 2;
+    }
+    .endInforCell{
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      width: 100%;
+      order: 2;
+    }
+    .endInforCell span:nth-child(2){
+      margin-left: 2rem;     
+    }
+    .end{
+      width: 5rem;
+      margin-right: 3rem;
+      order: 1;
+    }
+    .topOrderSubInfor{
+      flex-direction: column;
+      align-items: center;
+      height: 8rem;
+    } 
+    .morInforCell{
+      height: 4rem;
+    }
+    .moreInforBtn{
+      position: static;
+      transform: translate(0, 0);
+    }
+    .waypointList{
+      width: 20rem;
+      margin-left: 0;
+      text-align: center;
+    }
+    .waypointList span{
+      font-size: 1.4rem;
+      font-weight: bold;
+    }
+    .topOrderMoreInfor {
+      min-height: 30rem;
+    }
+    .topOrderMoreInforBox{
+      width: 15rem;
+      margin: 0.8rem 0 0.8rem 1rem;
+    }
+    .FacilitiesCell{
+      flex-wrap: wrap;
+      height: 9rem;
+    }
+    .Facilities{
+      width: 5rem;
+      height: calc((100% - 1rem)/2);
+    }
+    .Facilities span{
+      display: none;
+    }
+    .additionalRequestCell{
+      min-height: 12rem;
+    }
+    .mainContainer{
+      flex-direction: column;
+      align-items: center;
+      width: 36rem;
+    }
+    .sidemenuContainer{
+      position: relative;
+      top: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      width: 36rem;
+      height: 10rem;
+      margin-bottom: 2rem;
+    }
+    .sidemenuBox{
+      width: 24rem;
+      height: 10rem;
+      margin: 0;
+    }
+    .sidemenuMenu{
+      width: 4rem;
+      height: 8.4rem;
+      font-size: 1.8rem;
+    }
+    .sidemenuCell{
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(45%, auto));
+      width: 18rem;
+      margin-left: 2rem;
+    }
+    .sidemenuNav{
+      font-size: 1.4rem;
+    }
+    .hiddenFilter{
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 10;
+      display: none;
+      width: calc(100% - 10rem);
+      height: auto;
+      padding: 5rem;
+      border: 0.1rem solid grey;
+      border-radius: 0.5rem;
+      background-color: white;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    }
+    .visibleFilterBtn{
+      display: flex;
+      width: 9rem;
+      height: 2.8rem;
+      padding-left: 1rem;
+      margin-bottom: 0.8rem;
+      font-size: 1.4rem;
+    }
+    .visibleFilterBtn img{
+      width: 2rem;
+      height: 2rem;
+    }
+    .filterInput{
+      height: 3rem;
+    }
+    .gradeFilter{
+      height: 20rem;
+    }
+    .filterSearchBtn{
+      display: flex;
+    }
+    .mainContentsArea{
+      width: 36rem;
+    }
+    .orderStatus span{
+      margin: 0 0.3rem;
+    }
+    .orderContainer{
+      position: relative;
+      width: 34.6rem;
+      height: 18rem;
+      padding: 1rem 0.6rem;
+    }
+    .orderContainerClick{
+      padding: 1rem 0.5rem;
+    }
+    .orderContainer a{
+      position: absolute;
+      top: 34%;
+      width: 10rem;
+      height: 12rem;
+    }
+    .orderInfoContainer{
+      justify-content: flex-start;
+    }
+    .profileBtn{
+      font-size: 1.2rem;
+    }
+    .orderInfoContainerTop{
+      height: 30%;
+    }
+    .orderInfoContainer{
+      align-items: flex-end;
+      width: 100%;
+    }
+    .driverInfoBox{
+      width: 65%;
+    }
+    .priceCell{
+      height: 100%;
+    }
+    .driverGradeCell{
+      width: 2.4rem;
+      height: 2.4rem;
+    }
+    .driverGradeCell img{
+      width: 2.4rem;
+      height: 1.8rem;
+    }
+    .driverInfoCell span:nth-child(1){
+      font-size: 1.8rem;
+    }
+    .driverInfoCell span:nth-child(2){
+      font-size: 1.4rem;
+    }
+    .priceCell span:nth-child(1){
+      font-size: 2.2rem;
+    }
+    .priceCell span:nth-child(2){
+      font-size: 1.6rem;
+    }
+    .orderInfoContainerBottom{
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      width: calc(100% - 12rem);
+      height: 70%;
+      margin-left: 2rem;
+    }
+    .certificationBox{
+      width: 100%;
+    }
+    .SurchargeBox{
+      width: 100%;
+    }
+    .guide{
+      font-size: 1.2rem;
+    }
+    .cancelOrder{
+      left: calc((100vw - 36rem)/2);
+    }
+     
+    .topOrderMainInfor{
+      padding-top: 1.6rem;
+    }
+  }
+
+  /* estimateResponse */
+@media screen and (max-width: 1295px) and (min-width: 1024px) {
+    html {
+      font-size: 50%;
+    }
+  }
+  
+  @media screen and (max-width: 1023px) and (min-width: 768px) {
+    html {
+      font-size: 50%;
+    }
+    .sidemenuBox{
+      height: 13rem;
+    }
+    .sidemenuMenu{
+      height: 11.6rem;
+    }
+    .peopleFilter{
+      height: 22rem;
+    }
+    .wayPointInfor{
+      width: 100%;
+    }
+    .visibleFilterBtn{
+      margin-top: 8.2rem
+    }
+  }
+  
+  @media screen and (max-width: 767px) and (min-width: 360px) {
+    html {
+      font-size: 62.5%;
+    }
+    .sidemenuContainer{
+      height: 14rem;
+    }
+    .sidemenuBox{
+      height: 14rem;
+    }
+    .sidemenuMenu{
+      height: 12.4rem;
+    }
+    .peopleFilter{
+      height: 22rem;
+    }
+    .orderContainerClick{
+      padding: 1rem 0.5rem;
+    }
+  }

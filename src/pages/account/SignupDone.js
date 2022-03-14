@@ -5,20 +5,24 @@ import styles from "./SignupDone.module.css";
 export function SignupDone() {
     const { pathname } = useLocation();
     console.log("PATHNAME", pathname);
+    let str = '';
     let type = '';
     if (pathname === '/signupdone/user') {
-        type = '승객';
+        str = '승객';
+        type = 'user';
     }
     else if (pathname === '/signupdone/driver') {
-        type = '기사';
+        str = '기사';
+        type = 'driver';
     }
     else if (pathname === '/signupdone/company') {
-        type = '회사';
+        str = '회사';
+        type = 'company';
     }
     return (
         <div className={styles.signupForm}>
             <div className={styles.signupHeader}>
-                <div className={styles.signupHeaderTitle}>{type} 회원가입</div>
+                <div className={styles.signupHeaderTitle}>{str} 회원가입</div>
                 <div className={styles.signupHeaderLocateBox}>
                     <span className={styles.locateTitle}>가입완료</span>
                     <div className={styles.signupHeaderNavBox}>
@@ -39,7 +43,7 @@ export function SignupDone() {
                 <span>가입이 완료되었습니다.</span>
             </div>
 
-            <a href="../login/passenger.html">
+            <a href={`/login/${type}`}>
                 <div className={styles.signupBtn}>
                     로그인하기
                 </div>

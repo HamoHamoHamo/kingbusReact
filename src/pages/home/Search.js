@@ -97,22 +97,7 @@ export function SearchAddress({ onChange, type, datas, onClose, onClickButton })
 
 
     const { title, display, name, text, value, id } = type ? type : '';
-    // let title = ''
-    // let display = ''
-    // let name = ''
-    // let text = ''
-    // let value = ''
-    // let id = ''
-    // if (type) {
-    //     title = type.title;
-    //     display = type.display;
-    //     name = type.name;
-    //     text = type.text;
-    //     value = type.value;
-    //     id = type.id;
-    // } else {
-    //     title = ''
-    // }
+    
     console.log("TITLE", title, display, name, text, value, id)
 
     useEffect(() => {

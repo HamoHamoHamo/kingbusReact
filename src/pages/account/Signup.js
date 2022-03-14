@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import styles from './Signup.module.css';
 import { Api, IP } from "../../utils/Api";
 import axios from "axios";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export function SignupUser() {
     const name = useRef();
@@ -10,12 +10,9 @@ export function SignupUser() {
     const com = useRef();
     
 
-    const middleDatas = {
-        name: name.current != undefined ? name.current.value : '',
-        email: email.current != undefined ? `${email.current.value}@${com.current.value}` : ''
-    }
-
+    
     function Middle() {
+        
         return (
             <>
                 <div className={styles.dataInputBox}>
@@ -42,7 +39,14 @@ export function SignupUser() {
         )
     }
     return (
-        <Signup Middle={Middle} type={'user'} str={'승객'} middleDatas={middleDatas}></Signup>
+        <Signup 
+            Middle={Middle} 
+            type={'user'} 
+            str={'승객'} 
+            name={name}
+            email={email}
+            com={com}
+        ></Signup>
     )
 }
 
@@ -54,16 +58,9 @@ export function SignupDriver() {
     const file = useRef();
     const fileName = useRef();
 
-    const middleDatas = {
-        name: name.current != undefined ? name.current.value : '',
-        email: email.current != undefined ? `${email.current.value}@${com.current.value}` : '',
-        driver_com_name: company.current != undefined ? company.current.value : '',
-        driver_car_driverlicense: file.current != undefined ? file.current.value : '',
-    }
-
     function Middle() {
         const onChangeFile = () => {
-            console.log("AASAA", middleDatas)
+            console.log("FILE", file.current.files[0])
             console.log("FILENAME", file.current.files[0].name)
             fileName.current.value = file.current.files[0].name;
         }
@@ -112,24 +109,102 @@ export function SignupDriver() {
         <Signup Middle={Middle}
         type={'driver'}
         str={'기사'}
-        middleDatas={middleDatas}
+        name={name}
+        email={email}
+        com={com}
+        company={company}
+        file={file}
         >
         </Signup>
     )
 }
 
+export function SignupCompany() {
+    const name = useRef();
+    const email = useRef();
+    const com = useRef();
+    const company = useRef();
+    const file = useRef();
+    const fileName = useRef();
 
-export function Signup({ Middle, type, str, middleDatas }) {
+    const middleDatas = {
+        name: name.current != undefined ? name.current.value : '',
+        email: email.current != undefined ? `${email.current.value}@${com.current.value}` : '',
+        driver_com_name: company.current != undefined ? company.current.value : '',
+        driver_car_driverlicense: file.current != undefined ? file.current.value : '',
+    }
+
+    function Middle() {
+        const onChangeFile = () => {
+            console.log("FILE", file.current.files[0])
+            console.log("FILENAME", file.current.files[0].name)
+            fileName.current.value = file.current.files[0].name;
+        }
+        return (
+            <>
+                <div className={styles.dataInputBox}>
+                    <div className={styles.dataInputName}>회사명</div>
+                    <div className={styles.dataInputCell + " " + styles.fit}>
+                        <input ref={company} name="company_com_name" type="text" className={styles.dataInput} placeholder="회사명을 입력해 주세요." />
+                    </div>
+                </div>
+                <div className={styles.dataInputBox}>
+                    <div className={styles.dataInputName}>담당자 이름</div>
+                    <div className={styles.dataInputCell + " " + styles.fit}>
+                        <input ref={name} name="name" type="text" className={styles.dataInput} placeholder="담당자 이름을 입력해 주세요." />
+                    </div>
+                </div>
+                <div className={styles.dataInputBox}>
+                    <div className={styles.dataInputName}>담당자 이메일</div>
+                    <div className={styles.dataInputCell + " " + styles.fit}>
+                        <input required ref={email} name="email" type="text" className={styles.dataInputEmail} placeholder="이메일을 입력해 주세요." />
+                        <span>@ </span>
+                        <select ref={com} name="com" id="" className={styles.dataInputSelect}>
+                            <option name="com" value="naver.com">naver.com</option>
+                            <option name="com" value="daum.com">daum.com</option>
+                            <option name="com" value="nate.com">nate.com</option>
+                            <option name="com" value="gmail.com">gmail.com</option>
+                            <option name="com" value="kakao.com">kakao.com</option>
+                        </select>
+                    </div>
+                </div>
+                <div className={styles.dataInputBox}>
+                    <div className={styles.dataInputName}>사업자 등록증</div>
+                    <div className={styles.dataInputCell}>
+                        <input ref={fileName} type="text" className={styles.dataInput + " " + styles.dataInputFileText} placeholder="첨부파일" readOnly />
+                        <input onChange={onChangeFile} name="driver_car_driverlicense" ref={file} type="file" className={styles.dataInput + " " + styles.dataInputFile} id="dataInputFile" />
+                    </div>
+                    <div className={styles.dataInputBtnCell}>
+                        <label for="dataInputFile" className={styles.dataInputBtn + " " + styles.dataInputBtnGrey}>파일선택</label>
+                    </div>
+                </div>
+            </>
+        )
+    }
+    return (
+        <Signup Middle={Middle}
+        type={'company'}
+        str={'회사'}
+        name={name}
+        email={email}
+        com={com}
+        company={company}
+        file={file}
+        >
+        </Signup>
+    )
+}
+
+export function Signup({ Middle, type, str, name, email, com, company, file }) {
     const username = useRef();
     const password = useRef();
     const password2 = useRef();
     const num = useRef();
-
-
     const [check, setCheck] = useState(false);
+    let navigate = useNavigate();
 
     const onClickCheck = async () => {
-        console.log("MIDDLEDATASS", middleDatas)
+        setCheck(false);
 
         if (username.current.value.length < 4) {
             return window.alert('아이디가 너무 짧습니다.');
@@ -149,7 +224,6 @@ export function Signup({ Middle, type, str, middleDatas }) {
             if (err.response.status === 409) {
                 window.alert('이미 사용 중인 아이디입니다.');
             }
-            setCheck(false);
             username.current.focus();
 
         }
@@ -161,21 +235,56 @@ export function Signup({ Middle, type, str, middleDatas }) {
         if (password.current.value != password2.current.value) {
             return window.alert('비밀번호가 일치하지 않습니다.');
         }
-
+        if(check === false){
+            return window.alert('아이디 중복확인을 해주세요.')
+        }
         try {
             const url = `${IP}/register/${type}`;
             // var frm = new FormData();
-            const data = {
-                ...middleDatas,
+            const inputs = {
                 username: username.current.value,
                 password: password.current.value,
                 num: num.current.value,
             }
-            console.log("URL", data, "MIDDLE=", middleDatas);
-            const result = await axios.post(url, data)
+            let data = {};
+            if(type === 'user') {
+                data = {
+                    ...inputs,
+                    name: name.current.value,
+                    email: `${email.current.value}@${com.current.value}`
+                };
+            }
+            else if(type === 'driver') {
+                data = {
+                    ...inputs,
+                    name: name.current.value,
+                    email: `${email.current.value}@${com.current.value}`,
+                    driver_com_name: company.current.value,
+                    driver_car_driverlicense: file.current.files[0]
+                };
+            }
+            else if(type === 'company') {
+                data = {
+                    ...inputs,
+                    name: name.current.value,
+                    email: `${email.current.value}@${com.current.value}`,
+                    company_com_name: company.current.value,
+                    company_business_registration: file.current.files[0]
+                };
+            }
+            const formData = new FormData();
+            Object.entries(data).forEach(([key, value]) => {
+                console.log('value', key, value);
+                formData.append(key, value);
+
+            })
+            console.log("formData", formData);
+            
+            const result = await axios.post(url, formData)
             console.log("RESULT", result);
             if (result.status === 201) {
-                <Navigate to=''></Navigate>
+                window.alert("SUCCESSSSSSSSSSSSSSSS");
+                navigate(`/signupdone/${type}`, { replace: true });
             }
         }
         catch (err) {
@@ -212,7 +321,7 @@ export function Signup({ Middle, type, str, middleDatas }) {
                             <input required ref={username} name="username" type="text" className={styles.dataInput} placeholder="아이디를 입력해 주세요." />
                         </div>
                         <div className={styles.dataInputBtnCell}>
-                            <div onChange={() => { setCheck(false) }} onClick={onClickCheck} className={styles.dataInputBtn + " " + styles.dataInputBtnRed}>중복확인</div>
+                            <div onClick={onClickCheck} className={styles.dataInputBtn + " " + styles.dataInputBtnRed}>중복확인</div>
                         </div>
                     </div>
                     <div className={styles.dataInputBox}>
@@ -246,12 +355,5 @@ export function Signup({ Middle, type, str, middleDatas }) {
 
 
         </div>
-    )
-}
-
-export function SignupCompany() {
-
-    return (
-        <></>
     )
 }

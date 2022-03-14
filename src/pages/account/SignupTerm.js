@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import './SignupTerm.css';
 
 
@@ -25,6 +25,21 @@ export function SignupTermCompany() {
 
 
 function SignupTerm({ str, type }) {
+    const allCheck = useRef();
+    const check1 = useRef();
+    const check2 = useRef();
+
+    const onChange = (e) => {
+        // console.log(e.target.checked);
+        if(e.target.checked){
+            check1.current.checked = true;
+            check2.current.checked = true;
+        }
+        else{
+            check1.current.checked = false;
+            check2.current.checked = false;
+        }
+    }
     return (
         <div class="signupForm">
             <div class="signupHeader">
@@ -46,20 +61,20 @@ function SignupTerm({ str, type }) {
             </div>
             <div class="signupcontents signupcontentsTerms">
                 <div class="ckeckingAllTerms">
-                    <input type="checkbox" id="allTerms" class="allTerms"/>
+                    <input onChange={onChange} ref={allCheck} type="checkbox" id="allTerms" class="allTerms"/>
                         <label for="allTerms">모든 약관에 동의합니다.</label>
                 </div>
                 <div class="termsBox">
                     <div class="TermsOfUse"></div>
                     <div class="termsCell">
-                        <input type="checkbox" id="TermsOfUse" class="termsCheckbox"/>
+                        <input ref={check1} type="checkbox" id="TermsOfUse" class="termsCheckbox"/>
                             <label for="TermsOfUse">이용약관에 동의합니다.</label>
                     </div>
                 </div>
                 <div class="termsBox">
                     <div class="TermsOfUse"></div>
                     <div class="termsCell">
-                        <input type="checkbox" id="TermsOfPersonalInformationCollection" class="termsCheckbox"/>
+                        <input ref={check2} type="checkbox" id="TermsOfPersonalInformationCollection" class="termsCheckbox"/>
                             <label for="TermsOfPersonalInformationCollection">개인정보 수집 및 이용 약관에 동의합니다.</label>
                     </div>
                 </div>

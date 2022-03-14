@@ -102,7 +102,7 @@ Api.interceptors.response.use(response => {
 
 async function tokenRefresh(refreshToken){
     let access = ''
-    let res = await fetch(`${IP}token/refresh`, {
+    let res = await fetch(`${IP}/token/refresh`, {
         method: 'POST',
         mode: 'cors',
         cache: 'no-cache',
