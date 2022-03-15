@@ -14,47 +14,47 @@ document.addEventListener("DOMContentLoaded", function () {
     hiddenFilter.style.display = "none"
   }
 
-  // moreinfo
-  const moreInfoBtn = document.querySelector(".moreInforBtn")
-  const topOrderMoreInfor = document.querySelector(".topOrderMoreInfor")
-  const moreInfoBtnImg = document.querySelector(".moreInforBtn img")
-  moreInfoBtn.addEventListener("click", openMoreInfo);
-  function openMoreInfo(){
-    console.log("CLICCKCK");
-    if(topOrderMoreInfor.classList.contains("displayNone")){
-      topOrderMoreInfor.classList.remove("displayNone")
-      moreInfoBtnImg.style.transform = "rotate(180deg)"
-    }else{
-      topOrderMoreInfor.classList.add("displayNone")
-      moreInfoBtnImg.style.transform = "rotate(0deg)"
-    }
-  }
+  // // moreinfo
+  // const moreInfoBtn = document.querySelector(".moreInforBtn")
+  // const topOrderMoreInfor = document.querySelector(".topOrderMoreInfor")
+  // const moreInfoBtnImg = document.querySelector(".moreInforBtn img")
+  // moreInfoBtn.addEventListener("click", openMoreInfo);
+  // function openMoreInfo(){
+  //   console.log("CLICCKCK");
+  //   if(topOrderMoreInfor.classList.contains("displayNone")){
+  //     topOrderMoreInfor.classList.remove("displayNone")
+  //     moreInfoBtnImg.style.transform = "rotate(180deg)"
+  //   }else{
+  //     topOrderMoreInfor.classList.add("displayNone")
+  //     moreInfoBtnImg.style.transform = "rotate(0deg)"
+  //   }
+  // }
 
-  // underSideMoreInfo
-  moreInfoBtn.addEventListener("click", underSideOpenMoreInfo);
-  function underSideOpenMoreInfo(){
-    if(topOrderMoreInfor.classList.contains("displayNone")){
-      topOrderMoreInfor.style.borderBottom = "none"
-    }else{
-      topOrderMoreInfor.style.borderBottom = "0.1rem dashed grey"
-    }
-  }
+  // // underSideMoreInfo
+  // moreInfoBtn.addEventListener("click", underSideOpenMoreInfo);
+  // function underSideOpenMoreInfo(){
+  //   if(topOrderMoreInfor.classList.contains("displayNone")){
+  //     topOrderMoreInfor.style.borderBottom = "none"
+  //   }else{
+  //     topOrderMoreInfor.style.borderBottom = "0.1rem dashed grey"
+  //   }
+  // }
 
-  const moreInforBtn = document.querySelector(".moreInforBtn")
-  let BlockA = 0;
-  moreInforBtn.addEventListener("mouseover", blockToA)
-  function blockToA(){
-    BlockA = 1;
-  }
-  moreInforBtn.addEventListener("mouseout", useToA)
-  function useToA(){
-    BlockA = 0;
-  }
-  function preventClick(e){
-    if(BlockA == 1){
-      e.preventDefault()
-    }
-  }
+  // const moreInforBtn = document.querySelector(".moreInforBtn")
+  // let BlockA = 0;
+  // moreInforBtn.addEventListener("mouseover", blockToA)
+  // function blockToA(){
+  //   BlockA = 1;
+  // }
+  // moreInforBtn.addEventListener("mouseout", useToA)
+  // function useToA(){
+  //   BlockA = 0;
+  // }
+  // function preventClick(e){
+  //   if(BlockA == 1){
+  //     e.preventDefault()
+  //   }
+  // }
 
   // create
   const bothLinkBox = document.querySelectorAll(".bothLinkBox")

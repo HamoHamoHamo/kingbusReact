@@ -2,7 +2,7 @@ import React from 'react';
 import './Estimate.css';
 import './estimateActive.js';
 
-export default function Estimate({ Content, datas }) {
+export default function Estimate({ Content }) {
     return (
         <>
             <div class="topOrder">
@@ -72,7 +72,7 @@ export default function Estimate({ Content, datas }) {
                                 검색필터
                         </div>
                     </div>
-                    <Content datas={datas}></Content>
+                    <Content />
                 </div>
             </>
             )
