@@ -238,11 +238,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const applicationBtn = document.querySelector(".applicationBtn")
     const firstOrderPage = document.querySelector(".firstOrderPage")
     const secondOrderPage = document.querySelector(".secondOrderPage")
-    console.log("AAAAAAAAAAAAAAAAAAAAAAAAWWWWWWWWWWWWWWWWWWWWWWWWW", applicationBtn);
     applicationBtn.addEventListener("click", startOrder);
 
     function startOrder() {
-        console.log("CLLLLLLLLLLL")
         firstOrderPage.classList.add("displayNone")
         secondOrderPage.classList.remove("displayNone")
         firstContainer.classList.remove("firstContainerJs")

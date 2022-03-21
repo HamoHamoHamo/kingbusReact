@@ -57,29 +57,29 @@ document.addEventListener("DOMContentLoaded", function () {
   // }
 
   // create
-  const bothLinkBox = document.querySelectorAll(".bothLinkBox")
-  const orderContainerPlusBtn = document.querySelectorAll(".orderContainerPlusBtn")
-  const createEstimate = document.querySelectorAll(".createEstimate")
-  for (let i = 0; i < bothLinkBox.length; i++) {
-    bothLinkBox[i].addEventListener("focusin", pickOrder)
-    bothLinkBox[i].addEventListener("focusout", bulrOrder)
-    createEstimate[i].addEventListener('mousedown', blockEvent)
-  }
-  function blockEvent(event) {
-    event.preventDefault()
-  }
-  function pickOrder() {
-    let createEstimate = this.querySelector(".createEstimate")
-    this.querySelector(".orderContainerPlusBtn").style.border = "0.2rem solid #001DB0";
-    this.querySelector(".orderContainerPlusBtn").style.marginBottom = "1rem";
-    this.style.margin = "-0.1rem 0 10rem -0.1rem";
-    createEstimate.classList.remove("displayNone")
-  }
-  function bulrOrder() {
-    let createEstimate = this.querySelector(".createEstimate")
-    this.querySelector(".orderContainerPlusBtn").style.border = "0.1rem solid #a7a7a7";
-    this.querySelector(".orderContainerPlusBtn").style.marginBottom = "2rem";
-    this.style.margin = "0";
-    createEstimate.classList.add("displayNone")
-  }
+  // const bothLinkBox = document.querySelectorAll(".bothLinkBox")
+  // const orderContainerPlusBtn = document.querySelectorAll(".orderContainerPlusBtn")
+  // const createEstimate = document.querySelectorAll(".createEstimate")
+  // for (let i = 0; i < bothLinkBox.length; i++) {
+  //   bothLinkBox[i].addEventListener("focusin", pickOrder)
+  //   bothLinkBox[i].addEventListener("focusout", bulrOrder)
+  //   createEstimate[i].addEventListener('mousedown', blockEvent)
+  // }
+  // function blockEvent(event) {
+  //   event.preventDefault()
+  // }
+  // function pickOrder() {
+  //   let createEstimate = this.querySelector(".createEstimate")
+  //   this.querySelector(".orderContainerPlusBtn").style.border = "0.2rem solid #001DB0";
+  //   this.querySelector(".orderContainerPlusBtn").style.marginBottom = "1rem";
+  //   this.style.margin = "-0.1rem 0 10rem -0.1rem";
+  //   createEstimate.classList.remove("displayNone")
+  // }
+  // function bulrOrder() {
+  //   let createEstimate = this.querySelector(".createEstimate")
+  //   this.querySelector(".orderContainerPlusBtn").style.border = "0.1rem solid #a7a7a7";
+  //   this.querySelector(".orderContainerPlusBtn").style.marginBottom = "2rem";
+  //   this.style.margin = "0";
+  //   createEstimate.classList.add("displayNone")
+  // }
 })

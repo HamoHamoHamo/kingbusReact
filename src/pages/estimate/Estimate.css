@@ -25,7 +25,7 @@ body{
   /*상단 주문메뉴 - 메인정보*/
   .topOrderMainInfor{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     width: 100%;
     height: 12rem;
@@ -36,7 +36,7 @@ body{
     display: flex;
     justify-content: space-around;
     align-items: center;
-    width: 40rem;
+    width: 40%;
     height: 100%;
   }
   .start{
@@ -53,22 +53,21 @@ body{
     padding: 1rem 0 ;
   }
   .startInforDate{
-    font-size: 1.8rem;
-    font-weight: bold;
+    font-size: 1.6rem;
   }
   .startInforTime{
-    font-size: 1.8rem;
-    font-weight: bold;
+    font-size: 1.6rem;
   }
   .startInforPlace{
     font-size: 1.6rem;
+    font-weight: bold;
   } 
   .wayPointInfor{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    width: auto;
+    width: 20%;
     height: 100%;
   }
   .wayPoint{
@@ -120,7 +119,7 @@ body{
     display: flex;
     justify-content: space-around;
     align-items: center;
-    width: 40rem;
+    width: 40%;
     height: 100%;
   }
   .end{
@@ -137,15 +136,16 @@ body{
     padding: 1rem 0 ;
   }
   .endInforDate{
-    font-size: 1.8rem;
-    font-weight: bold;
+    font-size: 1.6rem;
+    
   }
   .endInforTime{
-    font-size: 1.8rem;
-    font-weight: bold;
+    font-size: 1.6rem;
+    
   }
   .endInforPlace{
     font-size: 1.6rem;
+    font-weight: bold;
   } 
   
   /*상단 주문메뉴 - 서브정보*/
@@ -160,14 +160,13 @@ body{
   }
   .morInforCell{
     display: flex;
-    justify-content: space-between;
     align-items: center;
     width: 36rem;
     height: 100%;
   }
   .morInforCell div{
     display: flex;
-    justify-content: space-around;
+    margin-right: 2rem;
     align-items: center;
   }
   .morInforCell div span:nth-child(2){
@@ -232,7 +231,7 @@ body{
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    width: auto;
+    width: 30rem;
     height: auto;
     margin-left: 12rem;
   }
@@ -242,7 +241,7 @@ body{
     color: black;
     margin: 0.6rem 0;
   }
-  .waypointList img:nth-child(4){
+  .stopoverUnderImg{
     transform: rotate(180deg);
   }
   .addWaypoint{
@@ -259,7 +258,6 @@ body{
   }
   .FacilitiesCell{
     display: flex;
-    justify-content: space-between;
     align-items: center;
     width: 100%;
     height: 5rem;
@@ -778,14 +776,6 @@ body{
     width: calc(100% - 4rem);
     padding: 0 2rem;
   }
-  .startInfor{
-    width: auto;
-    min-width: 20rem;
-  }
-  .endInfor{
-    width: auto;
-    min-width: 20rem;
-  }
   .topOrderSubInfor{  
     justify-content: flex-start;
     width: calc(100% - 4rem);
@@ -953,7 +943,7 @@ body{
 
 
 
-/* orderResponse */
+/* orderResponsive */
 @media screen and (max-width: 1295px) and (min-width: 1024px) {
     html {
       font-size: 50%;
@@ -976,12 +966,7 @@ body{
       width: 96rem;
       padding: 0 calc( (100vw - 96rem) / 2 );
     }
-    .startInfor{
-      width: 30rem;
-    }
-    .endInfor{
-      width: 30rem;
-    }
+    
     .mainContainer{
       width: 96rem;
       padding: 0 calc( (100vw - 96rem) / 2 );
@@ -1326,9 +1311,7 @@ body{
     .peopleFilter{
       height: 22rem;
     }
-    .wayPointInfor{
-      width: 100%;
-    }
+    
     .visibleFilterBtn{
       margin-top: 8.2rem
     }

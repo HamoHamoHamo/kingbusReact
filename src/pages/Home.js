@@ -43,15 +43,24 @@ export default function Home() {
     });
     const [index, setIndex] = useState([]);
     const [cnt, setCnt] = useState(0);
+    const [nav, setNav] = useState({stopover: {}});
 
     const departureRef = useRef();
     const arrivalRef = useRef();
 
     const postOrder = async (e) => {
         e.preventDefault();
+     
+
+        // const stopover = Object.entries(nav.stopover).reduce((acc, [i,cur]) => {
+        //     return acc !== '' ? acc + "," + cur : cur;
+        // }, '')
+        console.log("stopover")
         try{
             console.log("INPUTSSS", inputs);
-            console.log(Api);
+            // console.log(Api);
+            
+            // const distance = await axios.post(`https://naveropenapi.apigw.ntruss.com/map-direction-15/v1/driving?start=${nav.departure[0]},${nav.departure[1]}&goal=${nav.arrival[0]},${nav.arrival[1]}&waypoints${stopover}`)
             const result =  await Api.post('order', inputs);
             window.location.href = '/';
         }
@@ -67,13 +76,70 @@ export default function Home() {
     }
     const onRemove = (i) => {
         //console.log("CNT=",cnt, "INDEX=", index);
+        const { [i]: idx, ...other } = nav.stopover
+        console.log(i, "TTESTT", idx);
+        console.log("OTHTER", other);
+        setNav((prev) => ({
+            ...prev,
+            stopover: other
+
+        }))
         setIndex(index.filter(y => y !== i));
     }
-    const setInputsStopover = () => {
-        if(inputs.arrival_date && inputs.arrival_time){
-            console.log("st delete arrival_date, time")
-            delete inputs.arrival_date;
-            delete inputs.arrival_time;
+    const setInputsStopover = async () => {
+        console.log("NAV", nav);
+
+        const headers = {
+            Authorization: 'KakaoAK 89c319742a7efca01255c48b9579a68a'
+        };
+        let query = '';
+        let type = '';
+        for(let i=0; i<2; i++){
+            if(i === 0){
+                query = inputs.departure;
+                type = 'departure_short';
+            }
+            else {
+                query = inputs.arrival;
+                type = 'arrival_short';
+            }
+            
+            console.log('query', query);
+            
+            try {
+                const keywordResult = await axios.get(`https://dapi.kakao.com/v2/local/search/keyword.json?query=${query}&page=1&size=5`, { headers })
+                const { data: { meta: { same_name: { selected_region } } } } = keywordResult;
+                console.log("SELECTE REGION", selected_region);
+                console.log("RESULTTTTt", keywordResult);
+                
+                setInputs((prev) => ({
+                    ...prev,
+                    [type]: selected_region
+                }))
+                console.log("INPUSTss", inputs);
+            }
+            catch (err) {
+                console.log("Kakao API ERROR", err);
+            }
+        }
+
+        // 네이버 api 
+        // const stopover = Object.entries(nav.stopover).reduce((acc, [i,cur]) => {
+            
+        //     return acc !== '' ? acc + "," + cur : cur;
+        // }, '')
+        // const url = `/naver/map-direction-15/v1/driving?start=${nav.departure[0]},${nav.departure[1]}&goal=${nav.arrival[0]},${nav.arrival[1]}&waypoints=${stopover}`;
+        // const headers = {
+        //     'X-NCP-APIGW-API-KEY-ID': 'etu1t8yjz0',
+        //     'X-NCP-APIGW-API-KEY': 'IBFWyZllEw98Ftvecb4wfZa7V4AQS7jqhOY9Q5Ez'
+        // }
+        // const distance = await axios.get(url, { headers })
+        // console.log("DISTANCE", distance);
+        // 여기까지
+        if(inputs.comeback_date && inputs.comeback_time && inputs.way === 'st'){
+            console.log("st delete comeback_date, time")
+            delete inputs.comeback_date;
+            delete inputs.comeback_time;
             
         }
 
@@ -113,10 +179,12 @@ export default function Home() {
             display: 'hidden'
         }))
     }
-    const onClickButton = (e, title, name, id) => {
+    const onClickButton = (e, title, address, name, id, center) => {
         onClose();
         //document.querySelector(`#${}`)
-        console.log("BUBBBBBBBBBBBBB", title, 'name', name);
+
+        console.log("address", address, 'name', name, 'title: ', title);
+        
         let ref = '';
         if (name === 'departure') {
             ref = departureRef.current;
@@ -130,14 +198,26 @@ export default function Home() {
         console.log(ref);
         ref.value = title;
         
-
         if(name !== 'stopover'){
             setInputs(prev => {
                 return ({
                     ...prev,
-                    [name]: title
+                    [name]: address
                 })
             });
+            setNav((prev) => ({
+                ...prev,
+                [name]: [center.lng, center.lat],
+            }));
+        }
+        else {
+            setNav((prev) => ({
+                ...prev,
+                stopover: {
+                    ...prev.stopover,
+                    [cnt-1]: [center.lng, center.lat]
+                }
+            }));
         }
     }
     const onClickWaypoint = () => {
@@ -193,6 +273,7 @@ export default function Home() {
         });
     }
     const onCLickSecondBtn = () => {
+        console.log("INPUTSs", inputs);
         const button = document.querySelectorAll(".thirdOrderPageNextBtn")
         console.log("BUTTOn", button);
         console.log(inputs['is_driver']);
@@ -226,49 +307,44 @@ export default function Home() {
         let { name, value } = e.target;
         
         // console.log("inputs", inputs);
-        if (value.length > 1){
-            const headers = {
-                Authorization: 'KakaoAK 89c319742a7efca01255c48b9579a68a'
-            };
-            let addressResult = '';
+        
+        const headers = {
+            Authorization: 'KakaoAK 89c319742a7efca01255c48b9579a68a'
+        };
+        let addressResult = '';
+        try {
+            addressResult = await axios.get(`https://dapi.kakao.com/v2/local/search/address.json?query=${value}&page=1&size=5`, { headers })
+        }
+        catch (err) {
+            console.log("Kakao API ERROR", err);
+        }
+        if (addressResult) {
+            const { data: { documents: addressData } } = addressResult;
+            console.log("address RESULT", addressData);
+
+            let keywordResult = '';
             try {
-                addressResult = await axios.get(`https://dapi.kakao.com/v2/local/search/address.json?query=${value}&page=1&size=5`, { headers })
+                keywordResult = await axios.get(`https://dapi.kakao.com/v2/local/search/keyword.json?query=${value}&page=1&size=5`, { headers })
+
             }
             catch (err) {
                 console.log("Kakao API ERROR", err);
             }
-            if (addressResult) {
-                const { data: { documents: addressData } } = addressResult;
-                //console.log("RESULT", addressData);
-    
-                let keywordResult = '';
-                try {
-                    keywordResult = await axios.get(`https://dapi.kakao.com/v2/local/search/keyword.json?query=${value}&page=1&size=5`, { headers })
-    
-                }
-                catch (err) {
-                    console.log("Kakao API ERROR", err);
-                }
-                const { data: { documents: keywordData } } = keywordResult;
-                // console.log("RESULT", keywordData);
-    
-                let dataList = []
-                dataList.push(...addressData);
-                dataList.push(...keywordData);
-                dataList = dataList.slice(0, 5);
-                //console.log("DATALIST", dataList)
-    
-                setSearchDatas(dataList);
-                console.log("DATALIST", searchDatas);
-            }
-            else {
-                setSearchDatas([]);
-            }
+            const { data: { documents: keywordData } } = keywordResult;
+            console.log("keyword RESULT", keywordData);
+
+            let dataList = []
+            dataList.push(...addressData);
+            dataList.push(...keywordData);
+            dataList = dataList.slice(0, 5);
+            console.log("DATALIST", dataList)
+
+            setSearchDatas(dataList);
         }
-        
         else {
             setSearchDatas([]);
         }
+        
 
     };
     return (
@@ -365,7 +441,7 @@ export default function Home() {
                                     </div>
 
                                     <div class="orderInputCell moreGapTopIcon blinkcell">
-                                        <input onChange={onChangeDate} name="arrival_date" type="datetime-local" class="orderInputCellText" placeholder="도착일" />
+                                        <input onChange={onChangeDate} name="comeback_date" type="datetime-local" class="orderInputCellText" placeholder="도착일" />
                                         <img class="orderInputCellImg" src="/assets/calenderGrey.png" alt="위치아이콘" />
                                     </div>
 
@@ -474,7 +550,7 @@ export default function Home() {
                             <div class="thirdOrderPageCheckingBox itIsReal2 displayNone">
                                 <div class="thirdOrderPageCheckingBoxTitle">원하시는 편의시설을 추가해 주세요.</div>
                                 <div class="thirdOrderPageCheckingCellFacilities">
-                                    <input value='손 소독제 비치' onChange={onChangeInputs} type="checkbox" name="convenience" id="Facilities0" class="Facilities displayNone" />
+                                    <input value='미니냉장고' onChange={onChangeInputs} type="checkbox" name="convenience" id="Facilities0" class="Facilities displayNone" />
                                     <label for="Facilities0" class="thirdOrderPageOptionBlockFacilities Facilities0" style={{ color: "grey" }}>
                                         <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="26.000000pt" height="9.000000pt" viewBox="0 0 26.000000 9.000000" preserveAspectRatio="xMidYMid meet">
                                             <g transform="translate(0.000000,9.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
@@ -483,7 +559,7 @@ export default function Home() {
                                                 -67 -19 -37 1 -38 2 -12 8 16 3 31 12 34 19 6 18 -89 16 -114 -3z" />
                                             </g>
                                         </svg>
-                                        손 소독제 비치
+                                        미니냉장고
                                     </label>
                                     <input value='와이파이' onChange={onChangeInputs} type="checkbox" name="convenience" id="Facilities1" class="Facilities displayNone" />
                                     <label for="Facilities1" class="thirdOrderPageOptionBlockFacilities Facilities1" style={{ color: "grey" }}>
@@ -518,7 +594,7 @@ export default function Home() {
                                         </svg>
                                         음향기기
                                     </label>
-                                    <input value='전좌석 usb포트' onChange={onChangeInputs} type="checkbox" name="convenience" id="Facilities4" class="Facilities displayNone" />
+                                    <input value='USB포트' onChange={onChangeInputs} type="checkbox" name="convenience" id="Facilities4" class="Facilities displayNone" />
                                     <label for="Facilities4" class="thirdOrderPageOptionBlockFacilities Facilities4" style={{ color: "grey" }}>
                                         <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="23.000000pt" height="14.000000pt"
                                             viewBox="0 0 23.000000 14.000000" preserveAspectRatio="xMidYMid meet">
@@ -528,7 +604,7 @@ export default function Home() {
                                             </g>
                                         </svg>
 
-                                        전좌석 usb포트
+                                        USB포트
                                     </label>
                                     <input value='영화관람' onChange={onChangeInputs} type="checkbox" name="convenience" id="Facilities5" class="Facilities displayNone" />
                                     <label for="Facilities5" class="thirdOrderPageOptionBlockFacilities Facilities5" style={{ color: "grey" }}>

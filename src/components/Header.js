@@ -35,7 +35,7 @@ export default function Header() {
 
                 <ul>
                     <li>
-                        <a href="">주문</a>
+                        <a href="/estimate/list">주문</a>
                     </li>
                     <li>
                         <a href="">커뮤니티</a>
@@ -62,7 +62,7 @@ export default function Header() {
                         </div>
                         <ul class="hembugerNav">
                             <li>
-                                <a href="">주문</a>
+                                <a href="/estimate/list">주문</a>
                             </li>
                             <li>
                                 <a href="">커뮤니티</a>

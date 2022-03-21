@@ -24,6 +24,7 @@ function CreateMap({ setCenter, center, setAddress }) {
                 let addressResult = '';
                 try {
                     addressResult = await axios.get(`https://dapi.kakao.com/v2/local/geo/coord2address.json?x=${lng}&y=${lat}`, { headers })
+                    console.log("RESULTS", addressResult);
                 }
                 catch (err) {
                     console.log("Kakao Address API ERROR", err);
@@ -33,7 +34,9 @@ function CreateMap({ setCenter, center, setAddress }) {
                 
 
                 const address = documents[0].road_address ? documents[0].road_address.address_name : documents[0].address.address_name;
-                console.log("AADDRESS", address);
+                console.log("addressss", address);
+                // setShort(documents[0].road_address ? `${documents[0].road_address.region_1depth_name} ${documents[0].road_address.region_2depth_name} ${documents[0].road_address.region_3depth_name} ${documents[0].road_address.road_name}` 
+                //     : `${documents[0].address.region_1depth_name} ${documents[0].address.region_2depth_name} ${documents[0].address.region_3depth_name}`)
                 setAddress(address)
             }}
             
@@ -48,6 +51,7 @@ export default Map;
 export function SearchAddress({ onChange, type, datas, onClose, onClickButton }) {
     const [center, setCenter] = useState({lat: 37.24548819705312, lng: 126.9925381461988});
     const [address, setAddress] = useState('');
+    
 
     const searchInput = useRef();
     
@@ -63,25 +67,28 @@ export function SearchAddress({ onChange, type, datas, onClose, onClickButton })
             searchInput.current.value = title;
             setAddress('');
         }
+
         if (datas) {
             return (
-                datas.map((data) => {
+                datas.map((data, idx) => {
                     let { place_name: title, address_name: detail, x, y } = data;
+                    setAddress(detail + " " + title);
                     if (!title) {
                         console.log("KEYWORD");
                         title = detail
+                        setAddress(detail);
                     }
 
-                    //console.log("DATA", data)
+                    // console.log("DATA", data)
                     return (
                         
-                        <div class={styles.routeDataCell} onClick={(e) => { onClickRes(title, x, y) }}>
+                        <div key={idx} class={styles.routeDataCell} onClick={(e) => { onClickRes(title, x, y) }}>
                             <div class={styles.routeDataCellRow}>
                                 <p class={styles.routeDataTextTitle}>{title}</p>
                                 <p class={styles.routeDataTextDetail}>{detail}</p>
                             </div>
                             <div class={styles.routeDataCellRow}>
-                                <button className={styles.routeDataCellRowButton} onClick={(e) => {onClickButton(e, title, name, id)}}>{text}</button>
+                                <button className={styles.routeDataCellRowButton} onClick={(e) => {onClickButton(e, title, address, name, id, center)}}>{text}</button>
                             </div>
                         </div>
                     )
@@ -125,7 +132,7 @@ export function SearchAddress({ onChange, type, datas, onClose, onClickButton })
                     </div>
 
                 </div>
-                <CreateMap setAddress={setAddress} center={center} setCenter={setCenter}></CreateMap>
+                <CreateMap setAddress={setAddress} center={center} setCenter={setCenter} ></CreateMap>
                 {/* 마우스로 지도 움직이면 주소 보여줌 */}
                 {address && <div className={styles.addressRes}>
                     <div className={styles.addressResText}>
@@ -135,7 +142,7 @@ export function SearchAddress({ onChange, type, datas, onClose, onClickButton })
                         </svg>
                     </div>
                     <div className={`${styles.routeDataCellRow} ${styles.addressResButton}`}>
-                        <button className={`${styles.routeDataCellRowButton}`} onClick={(e) => {onClickButton(e, address, name, id)}}>{text}</button>
+                        <button className={`${styles.routeDataCellRowButton}`} onClick={(e) => {onClickButton(e, address, address, name, id, center)}}>{text}</button>
                     </div>
                     
                 </div>}
