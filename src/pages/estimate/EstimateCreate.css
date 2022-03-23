@@ -1,0 +1,125 @@
+.estimateCreate{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 60rem;
+  }
+  
+  .estimateCreateContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: calc(100% - 2rem);
+    height: 14rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background-color: white;
+    margin-bottom: 3rem;
+  }
+  .estimateinputBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 9rem;
+    padding-bottom: 1rem;
+    border-bottom: 0.1rem solid gray;
+  }
+  .paymentInputCell{
+    width: 18%;
+    border-right: 0.1rem dashed grey;
+  }
+  .busKindsInputCell{
+    width: 18%;
+    border-right: 0.1rem dashed grey;
+  }
+  .additionalFeeInputCell{
+    width: calc(46% - 0.3rem);
+    border-right: 0.1rem dashed grey;
+  }
+  .vehiclesInputCell{
+    width: 10%;
+  }
+  .estimateInputCell{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 100%;
+    padding: 0 1%;
+  }
+  .estimateInputCell span{
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 2.4rem;
+  }
+  .estimateTotalBox{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 4rem;
+    margin-top: 0.5rem;
+  }
+  .estimateTotalBox span{
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+  .estimateInput{
+    width: calc(100% - 1rem);
+    height: 2rem;
+    padding: 0.2rem 0 0.2rem 1rem;
+    border: 0.1rem solid black;
+    border-radius: 0.3rem;
+    font-size: 1.6rem;
+    outline: none;
+  }
+  .paymentInputCell{
+    position: relative;
+  }
+  .estimateInputPayment{
+    width: 70%;
+  }
+  .paymentUnit{
+    position: absolute;
+    top: 4.4rem;
+    right: 0.8rem;
+  }
+  .estimateSelect{
+    width: 100%;
+    height: 2.4rem;
+    border: 0.1rem solid black;
+    border-radius: 0.3rem;
+    font-size: 1.6rem;
+    outline: none;
+  }
+  
+  .previweCell{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+    height: 1.6rem;
+    margin-bottom: 3rem;
+  }
+  .previweCell span{
+    font-size: 1.6rem;
+    font-weight: bold;
+  }
+  .previweCellDashed{
+    border: 0.2rem dashed black;
+  }
+  .frontDashed{
+    width: 10rem;
+  }
+  .backDashed{
+    width: calc(100% - 20rem);
+  }
+  
+  .createEstimateregistration{
+    position: static;
+    transform: translate(0, 0);
+  }

@@ -30,11 +30,47 @@ body{
     width: 100%;
     height: 12rem;
     border-bottom: 0.1rem dashed grey;
+    
+  }
+  .waypointLine{
+    position: absolute;
+    height: 30%;
+    top: 3rem;
+    width: auto;
+    left: 0.6rem;
+    border: 0.4rem dashed #707070;
+  }
+  .waypointLocation{
+    height: 2.8rem;
+    
+  }
+  .waypointMargin{
+    margin-left: 2rem;
+  }
+  .waypointBox{
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    z-index: 1;
+  }
+  .waypointBox:first-child{
+    margin-top: 2rem;
+  }
+  .waypointBox:last-child{
+    margin-bottom: 2rem;
+  }
+  .waypointCircle{
+    border-radius: 100%;
+    border: 0.2rem solid black;
+    width: 1.6rem;
+    height: 1.6rem;
     background-color: white;
+    z-index: 1;
   }
   .startInfor{
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
     width: 40%;
     height: 100%;
@@ -43,17 +79,18 @@ body{
     font-size: 2rem;
     font-weight: bold;
     color: #b00020;
+    margin-bottom: 1rem;
   }
   .startInforCell{
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
-    height: calc(100% - 2rem);
-    padding: 1rem 0 ;
+    height: 50%;
   }
   .startInforDate{
     font-size: 1.6rem;
+    margin-top: 1.5rem;
   }
   .startInforTime{
     font-size: 1.6rem;
@@ -65,10 +102,10 @@ body{
   .wayPointInfor{
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     width: 20%;
-    height: 100%;
+    height: 50%;
   }
   .wayPoint{
     font-size: 1.6rem;
@@ -79,7 +116,7 @@ body{
     display: flex;
     justify-content: center;
     width: 100%;
-    height: 1.6rem;
+
   }
   .wayPointDotCell{
     position: absolute;
@@ -161,7 +198,7 @@ body{
   .morInforCell{
     display: flex;
     align-items: center;
-    width: 36rem;
+    /* width: 36rem; */
     height: 100%;
   }
   .morInforCell div{
@@ -169,7 +206,8 @@ body{
     margin-right: 2rem;
     align-items: center;
   }
-  .morInforCell div span:nth-child(2){
+  /* .morInforCell div span:nth-child(2){ */
+  .infoBoxBottomText{
     font-size: 1.8rem;
     font-weight: bold;
     color: #b00020;
@@ -230,23 +268,23 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    align-items: center;
-    width: 30rem;
+    align-items: baseline;
+    width: 43rem;
     height: auto;
-    margin-left: 12rem;
+    position: relative;
   }
-  .waypointList span{
+  .waypointTitle{
     font-size: 1.6rem;
     font-weight: bold;
     color: black;
-    margin: 0.6rem 0;
+
   }
+  
   .stopoverUnderImg{
     transform: rotate(180deg);
   }
   .addWaypoint{
-    font-size: 1.4rem;
-    margin: 0.6rem 0;
+    font-size: 1.6rem;
   }
   .topOrderMoreInforBox{
     display: flex;
@@ -272,7 +310,7 @@ body{
     height: 100%;
   }
   .Facilities span{
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-weight: bold;
   }
   .additionalRequestCell{
@@ -364,6 +402,11 @@ body{
     border-top: 0.2rem solid #b00020;
     margin-top: 1rem;
   }
+  .filterBox:first-child{
+    border-top: none;
+    margin-top: 0;
+  }
+  
   .filterBoxTitle{
     margin-bottom: 1rem;
     font-size: 1.8rem;
@@ -771,6 +814,7 @@ body{
     border-radius: 0.5rem;  
     box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
     cursor: pointer;
+    background-color: white;
   }
   .topOrderMainInfor{
     width: calc(100% - 4rem);
@@ -789,12 +833,9 @@ body{
     width: calc(100% - 4rem);
     padding: 0 2rem;
   }
-  .waypointList{
-    margin: 0;
-  }
   .topOrderMoreInforBox {
-    width: 48rem;
-    margin-left: 3rem;
+    width: 40rem;
+    margin-left: 0rem;
   }
   .bothLinkBox{
     position: relative;
@@ -1041,21 +1082,25 @@ body{
     .topOrderMainInfor{
       flex-direction: column;
       justify-content: center;
-      height: 24rem;
+      height: 20rem;
     }
     .startInfor{
+      flex-direction: row; 
       width: 100%;
       height: 50%;
       order: 1;
     }
     .start{
-      width: 5rem;
-      margin-right: 3rem;
+      width: 4.5rem;
+      font-size: 1.8rem;
+      
+    }
+    .infoBoxBottomText{
+      font-size: 1.6rem;
     }
     .startInforCell{
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: flex-start;
+      margin-left: 1.5rem;
+      align-items: baseline;
       width: 100%;
     }
     .startCell{
@@ -1067,12 +1112,21 @@ body{
       width: 1.2rem;
       height: 0.8rem;
     }
-    .startInforCell span:nth-child(2){
-      margin-left: 2rem;     
+    .wayPointInforBox{
+      justify-content: normal;
+      width: auto;
+
+    }
+    .wayPointInforCell{
+      margin-left: 2rem;
+      margin-right: 2rem;
     }
     .wayPointInfor{
       height: 50%;
       order: 3;
+      flex-direction: row;
+      justify-content: center;
+      width: 100%;
     }
     .endInfor{
       width: 100%;
@@ -1095,16 +1149,14 @@ body{
       order: 1;
     }
     .topOrderSubInfor{
-      flex-direction: column;
+      /* flex-direction: column; */
       align-items: center;
-      height: 8rem;
     } 
     .morInforCell{
       height: 4rem;
     }
     .moreInforBtn{
-      position: static;
-      transform: translate(0, 0);
+      top: 50%;
     }
     .waypointList{
       width: 20rem;
@@ -1322,7 +1374,7 @@ body{
       font-size: 62.5%;
     }
     .sidemenuContainer{
-      height: 14rem;
+      height: 2rem;
     }
     .sidemenuBox{
       height: 14rem;
@@ -1342,6 +1394,7 @@ body{
 .CreateBtnfocusIn{
   border: 0.2rem solid #001DB0;
   margin-bottom: 1rem;
+  vertical-align: middle;
 }
 .CreateBtnfocusOut{
   border: 0.1rem solid #a7a7a7;

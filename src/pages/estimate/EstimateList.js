@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
-import Estimate from './Estimate';
+import EstimateForm from './EstimateForm';
 import { Api } from '../../utils/Api';
+import { useNavigate  } from 'react-router-dom';
 
 export default function EstimateList() {
     const [datas, setDatas] = useState({});
@@ -27,12 +28,16 @@ export default function EstimateList() {
 
 
     function Content() {
+        const navigate = useNavigate();
         //const infoRef = useRef();
         const week = ['일', '월', '화', '수', '목', '금', '토'];
         const dayOfWeek = (date) => {
             return week[new Date(date).getDay()]
         };
-
+        const onClickCreate = (id) => {
+            console.log("CLICDKLJLSC", id)
+            navigate(`/estimate/${id}`);
+        }
         const onClickInfo = (idx) => {
             console.log("class length", document.querySelectorAll('.topOrderMoreInfor')[idx].classList.length);
             const qry = document.querySelectorAll('.topOrderMoreInfor')[idx];
@@ -68,7 +73,7 @@ export default function EstimateList() {
             console.log("ONFOCUS")
         }
         const dataContent = datas.results && datas.results.map((data, idx) => {
-            const { orders: {
+            const { order, orders: {
                 arrival,
                 arrival_short,
                 comeback_date,
@@ -96,46 +101,44 @@ export default function EstimateList() {
 
                         <div class="topOrderMainInfor">
                             <div class="startInfor">
+                                <div class="start">출발</div>
                                 <div class="startInforCell">
-                                    
-                                    <div class="start">출발</div>
-                                    <div class="typeTitle">
-                                        <div class="startInforPlace">{departure_short}</div>
-                                        <span class="startInforDate">{departure_date}{` (${dayOfWeek(departure_date)})`} {departure_time.slice(0, -3)}</span>
-                                    </div>
-                                    
+                                    <div class="startInforPlace">{departure_short}</div>
+                                    <span class="startInforDate">{departure_date}{` (${dayOfWeek(departure_date)})`} {departure_time.slice(0, -3)}</span>
                                 </div>
                             </div>
 
                             <div class="wayPointInfor">
                                 <div class="wayPoint">{`경유지 ${stopoverCnt}`}</div>
-                                <div class="wayPointicon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="157.257" height="19.62" viewBox="0 0 157.257 19.62">
-                                        <g id="그룹_1073" data-name="그룹 1073" transform="translate(-1076 -882.623)">
-                                            <line id="선_1587" data-name="선 1587" x2="150" transform="translate(1076 893.154)" fill="none" stroke="#b00020" stroke-width="4" />
-                                            <path id="Icon_feather-chevron-right" data-name="Icon feather-chevron-right" d="M0,11.135,5.567,5.567,0,0" transform="translate(1224.689 886.865)" fill="none" stroke="#b00020" stroke-linecap="round" stroke-linejoin="round" stroke-width="6" />
-                                            <g id="타원_132" data-name="타원 132" transform="translate(1145.689 888.154)" fill="#b00020" stroke="#b00020" stroke-width="1">
-                                                <circle cx="5" cy="5" r="5" stroke="none" />
-                                                <circle cx="5" cy="5" r="4.5" fill="none" />
-                                            </g>
-                                        </g>
-                                    </svg>
-                                </div>
+                                {/* <div class="wayPointicon">
+                                    {way === 'st' &&
+                                        <img src="/assets/stArrow.png" />
+                                    }
+                                    {way === 'lt' &&
+                                        <img src="/assets/ltArrow.png" />
+                                    }
+                                    
+                                </div> */}
                                 <div class="wayPointInforBox">
                                     <div class="wayPointInforCell">
-                                        <img src="/assets/aroundTrip.png" alt="왕복 아이콘" class="roundTrip" />
-                                        <img src="/assets/oneway.png" alt="편도 아이콘" class="roundTrip displayNone" />
+                                        {way === 'lt' &&
+                                            <img src="/assets/aroundTrip.png" alt="왕복 아이콘" class="roundTrip" />
+                                        }
+                                        {way === 'st' &&
+                                            <img src="/assets/oneway.png" alt="편도 아이콘" class="roundTrip" />
+                                        }
+                                        
                                         <span>{way === 'st' ? '편도' : '왕복'}</span>
                                     </div>
                                     <div class="kilometer">약 999km </div>
                                 </div>
                             </div>
 
-                            <div class="endInfor">
-                                <div class="endInforCell">
-                                    <div class="end">{way === 'st' ? '도착' : '복귀'}</div>
-                                    <div class="endInforPlace">{arrival_short}</div>
-                                    <span class="endInforDate">{comeback_date}{comeback_date && ` (${dayOfWeek(comeback_date)})`} {comeback_time && comeback_time.slice(0, -3)}</span>
+                            <div class="startInfor">
+                                <div class="start">{way === 'st' ? '도착' : '복귀'}</div>
+                                <div class="startInforCell">
+                                    <div class="startInforPlace">{arrival_short}</div>
+                                    <span class="startInforDate">{comeback_date}{comeback_date && ` (${dayOfWeek(comeback_date)})`} {comeback_time && comeback_time.slice(0, -3)}</span>
                                 </div>
                             </div>
                         </div>
@@ -143,19 +146,19 @@ export default function EstimateList() {
                         <div class="topOrderSubInfor">
                             <div class="morInforCell">
                                 <div class="morInforPeople">
-                                    <img src="/assets/peopleIcon.png" alt="" />
-                                    <span>인원수</span>
-                                    <span>{total_number}</span>
+                                    {/* <img src="/assets/peopleIcon.png" alt="" /> */}
+                                    
+                                    <span class="infoBoxBottomText">{total_number}명</span>
                                 </div>
                                 <div class="morInforPurpose">
-                                    <img src="/assets/purpose.png" alt="" />
-                                    <span>목적</span>
-                                    <span>{purpose}</span>
+                                    {/* <img src="/assets/purpose.png" alt="" /> */}
+                                    
+                                    <span class="infoBoxBottomText">{purpose}</span>
                                 </div>
                                 {is_driver &&
                                     <div class="morInforDriver">
-                                        <img src="/assets/driverIcon.png" alt="" />
-                                        <span>기사동행</span>
+                                        {/* <img src="/assets/driverIcon.png" alt="" /> */}
+                                        <span class="infoBoxBottomText">기사동행</span>
                                     </div>}
                             </div>
                             <div onClick={() => { onClickInfo(idx) }} class="moreInforBtn">
@@ -166,13 +169,24 @@ export default function EstimateList() {
 
                         <div class='topOrderMoreInfor displayNone'>
                             <div class="waypointList">
-                                <span>{departure}</span>
-                                <img src="/assets/waypointLink.png" alt="연결선 아이콘" />
-                                {stopoverList.map((data) => {
-                                    return <div class="addWaypoint">{data}</div>
+                                <div class="waypointLine"></div>
+                                <div class="waypointBox">
+                                    <img class="waypointLocation" src="/assets/locationRed.png" />
+                                    <div class="waypointMargin waypointTitle">{departure}</div>
+                                </div>
+                                {stopover && stopoverList.map((data) => {
+                                    return (
+                                        <div class="waypointBox">
+                                            <div class="waypointCircle"></div>
+                                            <div class="waypointMargin addWaypoint">{data}</div>
+                                        </div>
+                                        
+                                    )
                                 })}
-                                <img className="stopoverUnderImg" src="/assets/waypointLink.png" alt="연결선 아이콘" />
-                                <span>{arrival}</span>
+                                <div class="waypointBox">
+                                    <img class="waypointLocation" src="/assets/locationRed.png" />
+                                    <div class="waypointMargin waypointTitle">{arrival}</div>
+                                </div>
                             </div>
                             <div class="topOrderMoreInforBox">
                                 <div class="FacilitiesCell">
@@ -200,7 +214,7 @@ export default function EstimateList() {
                                             <span>음향기기</span>
                                         </div>
                                     }
-                                    {convenience.includes('커피메이커') &&
+                                    {convenience.includes('커피 메이커') &&
                                         <div class="Facilities">
                                             <img src="/assets/cup.png" alt="" />
                                             <span>커피메이커</span>
@@ -218,7 +232,7 @@ export default function EstimateList() {
                         </div>
                     </div>
                     <a href="estimateCreate.html">
-                        <button class="createEstimate displayNone">견적 등록하기</button>
+                        <button onMouseDown={() => {onClickCreate(order)}} class="createEstimate displayNone">견적 등록하기</button>
                     </a>
                 </div>
             )
@@ -235,7 +249,7 @@ export default function EstimateList() {
     }
     return (
         <>
-            <Estimate Content={Content}></Estimate>
+            <EstimateForm Content={Content} />
         </>
     )
 }

@@ -10,6 +10,7 @@ import { LoginUser, LoginDriver, LoginCompany } from './account/Login';
 import RecoveryId from './account/RecoveryId';
 import RecoveryPw from './account/RecoveryPw';
 import EstimateList from './estimate/EstimateList';
+import Estimate from './estimate/Estimate';
 
 
 function NotFound() {
@@ -42,6 +43,7 @@ function Root() {
         {/* <Route path="recovery/password/res" element={<RecoveryId />} /> */}
 
         <Route path="estimate/list" element={<EstimateList /> } />
+        <Route path="estimate/:id" element={<Estimate /> } />
         
         <Route path="*" element={<NotFound />} />
       </Routes>

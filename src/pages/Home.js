@@ -138,8 +138,12 @@ export default function Home() {
         // 여기까지
         if(inputs.comeback_date && inputs.comeback_time && inputs.way === 'st'){
             console.log("st delete comeback_date, time")
-            delete inputs.comeback_date;
-            delete inputs.comeback_time;
+            setInputs(prev => {
+                delete prev.comeback_date;
+                delete prev.comeback_time;
+                return prev;
+            })
+            
             
         }
 
