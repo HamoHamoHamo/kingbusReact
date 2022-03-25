@@ -44,7 +44,7 @@ export default function Home() {
     const [index, setIndex] = useState([]);
     const [cnt, setCnt] = useState(0);
     const [nav, setNav] = useState({stopover: {}});
-
+    
     const departureRef = useRef();
     const arrivalRef = useRef();
 

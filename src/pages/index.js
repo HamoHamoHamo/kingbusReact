@@ -1,6 +1,6 @@
 import React from 'react';
 import AppLayout from '../components/AppLayout';
-import { Route, Routes  } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Home from './Home';
 //import Account from './account/index'
 import { SignupUser, SignupDriver, SignupCompany } from './account/Signup';
@@ -10,7 +10,7 @@ import { LoginUser, LoginDriver, LoginCompany } from './account/Login';
 import RecoveryId from './account/RecoveryId';
 import RecoveryPw from './account/RecoveryPw';
 import EstimateList from './estimate/EstimateList';
-import Estimate from './estimate/Estimate';
+import EstimateCreate from './estimate/EstimateCreate';
 import routes from '../utils/Routes';
 
 
@@ -21,7 +21,7 @@ function Root() {
   return (
     <AppLayout>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path={routes.home} element={<Home />} />
         <Route path={routes.signupTermUser} element={<SignupTermUser />} />
         <Route path={routes.signupTermDriver} element={<SignupTermDriver />} />
         <Route path={routes.signupTermCompany} element={<SignupTermCompany />} />
@@ -44,7 +44,7 @@ function Root() {
         {/* <Route path={routes.}res" element={<RecoveryId />} /> */}
 
         <Route path={routes.estimateList} element={<EstimateList /> } />
-        <Route path={routes.estimateCreate()} element={<Estimate /> } />
+        <Route path={routes.estimateCreate()} element={<EstimateCreate /> } />
         
         <Route path="*" element={<NotFound />} />
       </Routes>
