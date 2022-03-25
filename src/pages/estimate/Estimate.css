@@ -326,7 +326,7 @@ body{
   /*메인 컨테이너*/
   .mainContainer{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     width: 129.6rem;
     height: auto;
     min-height: 60rem;

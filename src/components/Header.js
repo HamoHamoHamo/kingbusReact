@@ -1,5 +1,6 @@
 import React from "react";
 import { useAppContext } from "../Store";
+import routes from '../utils/Routes';
 
 export default function Header() {
     const { store: { isAuthenticated, name } } = useAppContext();
@@ -35,7 +36,7 @@ export default function Header() {
 
                 <ul>
                     <li>
-                        <a href="/estimate/list">주문</a>
+                        <a href={routes.estimateList}>주문</a>
                     </li>
                     <li>
                         <a href="">커뮤니티</a>
@@ -62,7 +63,7 @@ export default function Header() {
                         </div>
                         <ul class="hembugerNav">
                             <li>
-                                <a href="/estimate/list">주문</a>
+                                <a href={routes.estimateList}>주문</a>
                             </li>
                             <li>
                                 <a href="">커뮤니티</a>
@@ -75,13 +76,13 @@ export default function Header() {
                             </li>
                         </ul>
                         <div class="hembugerLoginBox" style={{display: 'none'}}>
-                            <a href="/login/user">
+                            <a href={routes.loginUser}>
                                 <div class="hembugeroptionBox ontherColor">승객 로그인</div>
                             </a>
-                            <a href="/login/driver">
+                            <a href={routes.loginDriver}>
                                 <div class="hembugeroptionBox">기사 로그인</div>
                             </a>
-                            <a href="/login/company">
+                            <a href={routes.loginCompany}>
                                 <div class="hembugeroptionBox">회사 로그인</div>
                             </a>
                             <div class="turnBackHemburger">
@@ -90,13 +91,13 @@ export default function Header() {
                             </div>
                         </div>
                         <div class="hembugerSignupBox" style={{display: 'none'}}>
-                            <a href="signup/pessengerTerms.html">
+                            <a href={routes.signupTermUser}>
                                 <div class="hembugeroptionBox ontherColor">승객 회원가입</div>
                             </a>
-                            <a href="signup/dreiverTerms.html">
+                            <a href={routes.signupTermDriver}>
                                 <div class="hembugeroptionBox">기사 회원가입</div>
                             </a>
-                            <a href="signup/companyTerms.html">
+                            <a href={routes.signupTermCompany}>
                                 <div class="hembugeroptionBox">회사 회원가입</div>
                             </a>
                             <div class="turnBackHemburger">
@@ -116,24 +117,24 @@ export default function Header() {
                     </div>
                 </div>
                 <div class="loginHidden displayNone loginOption">
-                    <a href="/login/user">
+                    <a href={routes.loginUser}>
                         <div class="loginCell passenger">승객<br/>로그인</div>
                     </a>
-                    <a href="/login/driver">
+                    <a href={routes.loginDriver}>
                         <div class="loginCell loginCellOther">기사<br/>로그인</div>
                     </a>
-                    <a href="/login/company">
+                    <a href={routes.loginCompany}>
                         <div class="loginCell loginCellOther">회사<br/>로그인</div>
                     </a>
                 </div>
                 <div class="loginHidden displayNone singupOption">
-                    <a href="/signupterm/user">
+                    <a href={routes.signupTermUser}>
                         <div class="loginCell passenger">승객<br/>회원가입</div>
                     </a>
-                    <a href="/signupterm/driver">
+                    <a href={routes.signupTermDriver}>
                         <div class="loginCell loginCellOther">기사<br/>회원가입</div>
                     </a>
-                    <a href="/signupterm/company">
+                    <a href={routes.signupTermCompany}>
                         <div class="loginCell loginCellOther">회사<br/>회원가입</div>
                     </a>
                 </div>

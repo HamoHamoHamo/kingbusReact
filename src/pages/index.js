@@ -11,6 +11,7 @@ import RecoveryId from './account/RecoveryId';
 import RecoveryPw from './account/RecoveryPw';
 import EstimateList from './estimate/EstimateList';
 import Estimate from './estimate/Estimate';
+import routes from '../utils/Routes';
 
 
 function NotFound() {
@@ -21,29 +22,29 @@ function Root() {
     <AppLayout>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="signupterm/user" element={<SignupTermUser />} />
-        <Route path="signupterm/driver" element={<SignupTermDriver />} />
-        <Route path="signupterm/company" element={<SignupTermCompany />} />
+        <Route path={routes.signupTermUser} element={<SignupTermUser />} />
+        <Route path={routes.signupTermDriver} element={<SignupTermDriver />} />
+        <Route path={routes.signupTermCompany} element={<SignupTermCompany />} />
 
-        <Route path="signup/user" element={<SignupUser />} />
-        <Route path="signup/driver" element={<SignupDriver />} />
-        <Route path="signup/company" element={<SignupCompany />} />
+        <Route path={routes.signupUser} element={<SignupUser />} />
+        <Route path={routes.signupDriver} element={<SignupDriver />} />
+        <Route path={routes.signupCompany} element={<SignupCompany />} />
         
-        <Route path="signupdone/user" element={<SignupDone />} />
-        <Route path="signupdone/driver" element={<SignupDone />} />
-        <Route path="signupdone/company" element={<SignupDone />} />
+        <Route path={routes.signupDoneUser} element={<SignupDone />} />
+        <Route path={routes.signupDoneDriver} element={<SignupDone />} />
+        <Route path={routes.signupDoneCompany} element={<SignupDone />} />
         
-        <Route path="login/user" element={<LoginUser /> } />
-        <Route path="login/driver" element={<LoginDriver /> } />
-        <Route path="login/company" element={<LoginCompany />} />
+        <Route path={routes.loginUser} element={<LoginUser /> } />
+        <Route path={routes.loginDriver} element={<LoginDriver /> } />
+        <Route path={routes.loginCompany} element={<LoginCompany />} />
         
-        <Route path="recovery/id" element={<RecoveryId />} />
-        {/* <Route path="recovery/id/res" element={<RecoveryId />} /> */}
-        <Route path="recovery/password" element={<RecoveryPw />} />
-        {/* <Route path="recovery/password/res" element={<RecoveryId />} /> */}
+        <Route path={routes.recoveryId} element={<RecoveryId />} />
+        {/* <Route path={routes.}res" element={<RecoveryId />} /> */}
+        <Route path={routes.recoveryPw} element={<RecoveryPw />} />
+        {/* <Route path={routes.}res" element={<RecoveryId />} /> */}
 
-        <Route path="estimate/list" element={<EstimateList /> } />
-        <Route path="estimate/:id" element={<Estimate /> } />
+        <Route path={routes.estimateList} element={<EstimateList /> } />
+        <Route path={routes.estimateCreate()} element={<Estimate /> } />
         
         <Route path="*" element={<NotFound />} />
       </Routes>
