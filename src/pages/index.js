@@ -7,11 +7,12 @@ import { SignupUser, SignupDriver, SignupCompany } from './account/Signup';
 import { SignupTermUser, SignupTermDriver, SignupTermCompany } from './account/SignupTerm';
 import { SignupDone } from './account/SignupDone';
 import { LoginUser, LoginDriver, LoginCompany } from './account/Login';
+import routes from '../utils/Routes';
 import RecoveryId from './account/RecoveryId';
 import RecoveryPw from './account/RecoveryPw';
 import EstimateList from './estimate/EstimateList';
 import EstimateCreate from './estimate/EstimateCreate';
-import routes from '../utils/Routes';
+import EstimateWaiting from './estimate/EstimateWaiting';
 
 
 function NotFound() {
@@ -45,7 +46,12 @@ function Root() {
 
         <Route path={routes.estimateList} element={<EstimateList /> } />
         <Route path={routes.estimateCreate()} element={<EstimateCreate /> } />
-        
+        <Route path={routes.estimateWaiting} element={<EstimateWaiting status={1} /> } />
+
+        <Route path={routes.estimateSelected} element={<EstimateWaiting status={2}/> } />
+        <Route path={routes.estimateCheckout} element={<EstimateWaiting /> } />
+        <Route path={routes.estimateDone} element={<EstimateWaiting /> } />
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AppLayout>

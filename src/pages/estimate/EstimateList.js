@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import EstimateForm from './EstimateForm';
+import { EstimateForm } from './Component';
 import { Api } from '../../utils/Api';
 import { useNavigate  } from 'react-router-dom';
 import { OrderInfo } from './Component';
@@ -10,7 +10,7 @@ export default function EstimateList() {
     useEffect(() => {
         async function getData() {
             try {
-                const response = await Api.get('orderlist');
+                const response = await Api.get('order/list');
                 console.log('test');
                 console.log("RES", response);
                 const { data: { count, results } } = response;
@@ -38,38 +38,24 @@ export default function EstimateList() {
             // navigate(routes.estimateCreate(id));
             window.location.href = routes.estimateCreate(id);
         }
-        const onClickInfo = (idx) => {
-            console.log("class length", document.querySelectorAll('.topOrderMoreInfor')[idx].classList.length);
-            const qry = document.querySelectorAll('.topOrderMoreInfor')[idx];
-            const imgQry = document.querySelectorAll(".moreInforBtn img")[idx];
-            if (qry.classList.length === 1) {
-                qry.classList.add('displayNone');
-                imgQry.style.transform = "rotate(0deg)";
-            }
-            else {
-                qry.classList.remove('displayNone');
-                imgQry.style.transform = "rotate(180deg)";
-            }
-        }
+        
         const onBlur = (e, idx) => {
-            const container = document.querySelectorAll(".orderContainerPlusBtn")[idx];
+            const container = document.querySelectorAll(".bothLinkBox")[idx];
             const button = document.querySelectorAll(".createEstimate")[idx];
             container.classList.remove('CreateBtnfocusIn')
             container.classList.add('CreateBtnfocusOut')
             button.classList.add('displayNone');
-
-            e.target.style.margin = "0";
         }
 
         const onFocus = (e, idx) => {
             console.log("EEEE", e.target);
-            const container = document.querySelectorAll(".orderContainerPlusBtn")[idx];
+            const container = document.querySelectorAll(".bothLinkBox")[idx];
             const button = document.querySelectorAll(".createEstimate")[idx];
             container.classList.remove('CreateBtnfocusOut')
             container.classList.add('CreateBtnfocusIn')
             button.classList.remove('displayNone');
 
-            e.target.style.margin = "-0.1rem 0 10rem -0.1rem";
+            
             console.log("ONFOCUS")
         }
         const dataContent = datas.results && datas.results.map((data, idx) => {
@@ -101,9 +87,9 @@ export default function EstimateList() {
 
                         <OrderInfo data={data.orders} idx={idx}/>
                     </div>
-                    <a href="estimateCreate.html">
-                        <button onMouseDown={() => {onClickCreate(order)}} class="createEstimate displayNone">견적 등록하기</button>
-                    </a>
+                    
+                    <button onMouseDown={() => {onClickCreate(order)}} class="createEstimate displayNone">견적 등록하기</button>
+                    
                 </div>
             )
         })

@@ -12,6 +12,7 @@ export default function EstimateCreate() {
     const accomodation = useRef();
     const meal = useRef();
     const convenience = useRef();
+    const totalPrice = useRef();
     const [datas, setDatas] = useState();
 
     useEffect(async () => {
@@ -21,10 +22,11 @@ export default function EstimateCreate() {
     }, [])
 
     const onChange = (e) => {
+        
         const { value, name } = e.target;
         setInputs(prev => ({
             ...prev,
-            [name]: value
+            [name]: value,
         }))
         console.log("INPUts", inputs);
     }
@@ -158,7 +160,7 @@ export default function EstimateCreate() {
                             <div class="estimateTotalBox">
                                 <span>총 금액</span>
                                 <div>
-                                    <span class="totalAmount"></span>
+                                    <span ref={totalPrice} class="totalAmount">{inputs.pricebycar && inputs.bus_cnt && inputs.pricebycar * inputs.bus_cnt}</span>
                                     <span>만원</span>
                                 </div>
                             </div>

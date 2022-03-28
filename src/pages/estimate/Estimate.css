@@ -19,8 +19,10 @@ body{
   }
   .topOrderPageName{
     font-size: 1.8rem;
-    font-weight: bold;
-    color: #b00020;
+    /* font-weight: bold; */
+    /* color: #b00020; */
+    color: black;
+    margin-right: 2rem;
   }
   /*상단 주문메뉴 - 메인정보*/
   .topOrderMainInfor{
@@ -806,9 +808,7 @@ body{
     width: 100%;
     height: auto;
     min-height: 16rem;
-    border: 0.1rem solid #a7a7a7;
-    border-radius: 0.5rem;  
-    box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
+    border-radius: 0.5rem;
     cursor: pointer;
     background-color: white;
   }
@@ -845,6 +845,9 @@ body{
   }
   .bothLinkBox{
     margin-bottom: 2rem;
+    border: 0.1rem solid #a7a7a7;
+    border-radius: 0.5rem;  
+    box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
   }
   .peopleFilter{  
     display: flex;
@@ -1393,10 +1396,21 @@ body{
   
 .CreateBtnfocusIn{
   border: 0.2rem solid #001DB0;
-  margin-bottom: 1rem;
+  margin: -0.1rem 0 8rem -0.1rem;
   vertical-align: middle;
+  
 }
 .CreateBtnfocusOut{
   border: 0.1rem solid #a7a7a7;
   margin-bottom: 2rem;
+}
+
+.CreateBtnfocusInOrderEstimate{
+  border: 0.2rem solid #001DB0;
+  
+  vertical-align: middle;
+}
+.CreateBtnfocusOutOrderEstimate{
+  border: 0.1rem solid #a7a7a7;
+  
 }

@@ -23,6 +23,14 @@ const RECOVERY_PASSWORD = '/recovery/password';
 // Estimate
 const ESTIMATE_LIST = '/estimate/list';
 const ESTIMATE_CREATE = '/estimate/create/:id';
+const ESTIMATE_WAITING = '/estimate/waiting';
+const ESTIMATE_DETAIL = '/estimate/:id'
+const ESTIMATE_SELECTED = '/estimate/selected'
+const ESTIMATE_CHECKOUT = '/estimate/checkout'
+const ESTIMATE_DONE = '/estimate/done'
+
+
+
 
 const routes = {
     home: HOME,
@@ -48,10 +56,24 @@ const routes = {
         // return id ? `/estimate/create/${id}` : ESTIMATE_CREATE
         if(id){
             return `/estimate/create/${id}`;
-        } else{
+        } 
+        // else 부분 없으니까 견적 리스트에서 견적 등록 눌렀을때 아무것도 안뜸, 이유는 모름
+        else{
             return ESTIMATE_CREATE;
         }
-    }
+    },
+    estimateWaiting: ESTIMATE_WAITING,
+    estimateDetail: (id) => {
+        if(id){
+            return `/estimate/${id}`;
+        }
+        else{
+            return ESTIMATE_DETAIL;
+        }
+    },
+    estimateSelected: ESTIMATE_SELECTED,
+    estimateCheckout: ESTIMATE_CHECKOUT,
+    estimateDone: ESTIMATE_DONE
 }
 
 export default routes;
