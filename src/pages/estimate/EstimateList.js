@@ -29,7 +29,8 @@ export default function EstimateList() {
     }, []);
 
 
-    function Content() {
+    function Content({ filter }) {
+        let cnt = -1;
         const navigate = useNavigate();
         //const infoRef = useRef();
         
@@ -40,58 +41,78 @@ export default function EstimateList() {
         }
         
         const onBlur = (e, idx) => {
-            const container = document.querySelectorAll(".bothLinkBox")[idx];
-            const button = document.querySelectorAll(".createEstimate")[idx];
+            
+            const container = e.target
+            const button = container.querySelector('.createEstimate');
             container.classList.remove('CreateBtnfocusIn')
             container.classList.add('CreateBtnfocusOut')
-            button.classList.add('displayNone');
+            button.classList.add('displayNone');            
         }
 
         const onFocus = (e, idx) => {
             console.log("EEEE", e.target);
-            const container = document.querySelectorAll(".bothLinkBox")[idx];
-            const button = document.querySelectorAll(".createEstimate")[idx];
+            const container = e.target
+            const button = container.querySelector('.createEstimate');
             container.classList.remove('CreateBtnfocusOut')
             container.classList.add('CreateBtnfocusIn')
             button.classList.remove('displayNone');
-
-            
-            console.log("ONFOCUS")
         }
-        const dataContent = datas.results && datas.results.map((data, idx) => {
-            const { order } = data;
-            // const { order, orders: {
-            //     arrival,
-            //     arrival_short,
-            //     comeback_date,
-            //     comeback_time,
-            //     departure,
-            //     departure_short,
-            //     departure_date,
-            //     departure_time,
-            //     convenience,
-            //     driver_schedule,
-            //     is_driver,
-            //     purpose,
-            //     reference,
-            //     stopover,
-            //     total_number,
-            //     way
-            // } } = data
-            // console.log("ORDER", orders);
-            
-            
-            return (
-                <div onBlur={(e) => { onBlur(e, idx) }} onFocus={(e) => { onFocus(e, idx) }} class="bothLinkBox" tabIndex="0" key={data.order}>
-                    <div class="orderContainerPlusBtn">
 
-                        <OrderInfo data={data.orders} idx={idx}/>
+        const dataContent = datas.results && datas.results.map((data, idx) => {
+            const { orders: order } = data;
+            const startDate = new Date(filter.startDate);
+            const finishDate = new Date(filter.finishDate);
+            const departureDate = new Date(order.departure_date);
+            
+            
+            if(filter.departure && !order.departure.includes(filter.departure)){
+                console.log("1", order.departure.includes(filter.departure))
+                return <></>
+            }
+            else if(filter.arrival && !order.arrival.includes(filter.arrival)){
+                console.log("2")
+                return <></>
+            }
+            else if(filter.startDate && !(departureDate >= startDate)){
+                console.log("3")
+                return <></>
+            }
+            else if(filter.finishDate && !(departureDate <= finishDate)){
+                console.log("4")
+                return <></>
+            }
+            else if(filter.total_number && !order.total_number){
+                console.log("5")
+                return <></>
+            }
+            else if(filter.total_number+10 && !order.total_number){
+                console.log("6")
+                return <></>
+            }
+            else if(filter.total_number && !(order.total_number >= filter.total_number)){
+                console.log("5")
+                return <></>
+            }
+            else if(filter.total_number && !(order.total_number < parseInt(filter.total_number) + 10)){
+                console.log("6")
+                return <></>
+            }
+            
+            
+            else {
+                cnt = cnt+1;
+                return (
+                    <div onBlur={(e) => { onBlur(e, idx) }} onFocus={(e) => { onFocus(e, idx) }} class="bothLinkBox" tabIndex="0" key={data.order}>
+                        <div class="orderContainerPlusBtn">
+
+                            <OrderInfo data={order} idx={cnt}/>
+                        </div>
+                        
+                        <button onMouseDown={() => {onClickCreate(data.order)}} class="createEstimate displayNone">견적 등록하기</button>
+                        
                     </div>
-                    
-                    <button onMouseDown={() => {onClickCreate(order)}} class="createEstimate displayNone">견적 등록하기</button>
-                    
-                </div>
-            )
+                )
+            }
         })
         return (
             <div class="mainContentsArea">

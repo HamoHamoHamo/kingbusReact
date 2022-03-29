@@ -771,10 +771,7 @@ body{
     font-size: 1.6rem;
     cursor: pointer;
   }
-  .checkThis{
-    background-color: #b00020;
-    color: white;
-  }
+  
   .notThis:hover{
     background-color: #F3D9D9;
   }

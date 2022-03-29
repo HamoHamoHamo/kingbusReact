@@ -15,7 +15,7 @@ export const reducer = (prevState, action) => {
     const { type } = action;
     if ( type === SET_TOKEN ) {
         const { payload } = action;
-        const { refreshToken, name } = payload
+        const { refreshToken, name, role } = payload
         const newState = {...prevState, name, refreshToken, isAuthenticated: true};
         console.log("SETTOKENENNNNNN", newState);
         return UpdateWithSideEffect(newState, (state, dispatch) => {
@@ -33,6 +33,13 @@ export const reducer = (prevState, action) => {
                 //httpOnly: true, httpOnly 옵션은 ie 브라우져를 쓰거나 .com 등으로 끝나는 일반적인 도메인에만 적용가능하다.
                 }
             );
+            cookies.set('role', role, { 
+                path: '/',
+                expires: '',
+                // secure: true,
+                //httpOnly: true, httpOnly 옵션은 ie 브라우져를 쓰거나 .com 등으로 끝나는 일반적인 도메인에만 적용가능하다.
+                }
+            );
         });
     } else if ( type === DELETE_TOKEN ) {
         const newState = {...prevState, name: "", refreshToken: "", isAuthenticated: false};
@@ -40,6 +47,7 @@ export const reducer = (prevState, action) => {
         return UpdateWithSideEffect(newState, (state, dispatch) => {
             cookies.remove('token');
             cookies.remove('name');
+            cookies.remove('role');
         });
         
     }
@@ -49,10 +57,12 @@ export const reducer = (prevState, action) => {
 export const AppProvider = ({ children }) => {
     const refreshToken = cookies.get('token');
     const name = cookies.get('name');
+    const role = cookies.get('role');
     const [store, dispatch] = useReducerWithSideEffects(reducer, {
         refreshToken,
         isAuthenticated: refreshToken ? true : false,
         name,
+        role,
     });
     useEffect(()=>{
         console.log("EFFECT");

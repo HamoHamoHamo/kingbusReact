@@ -8,7 +8,7 @@ import routes from '../../utils/Routes';
 export default function EstimateWaiting({ status }) {
     const [datas, setDatas] = useState();
     const [refresh, setRefresh] = useState(0);
-    const [cnt, setCnt] = useState(-1);
+    
     useEffect(() => {
         async function getData() {
             try {
@@ -32,6 +32,7 @@ export default function EstimateWaiting({ status }) {
 
 
     function Content({ filter }) {
+        let cnt = -1;
         console.log("TEST", filter);
         // const dataContent = 
         const onBlur = (e, idx) => {
@@ -77,7 +78,7 @@ export default function EstimateWaiting({ status }) {
             const finishDate = new Date(filter.finishDate);
             const departureDate = new Date(order.departure_date);
             
-            console.log("status", status, data.dispatch_status);
+            // console.log("status", status, data.dispatch_status);
             if(status !== parseInt(data.dispatch_status)){
                 console.log("000");
                 return <></>
@@ -98,36 +99,24 @@ export default function EstimateWaiting({ status }) {
                 console.log("4")
                 return <></>
             }
-            else if(filter.total_number && !order.total_number){
+            else if(filter.total_number && !(order.total_number >= filter.total_number)){
                 console.log("5")
                 return <></>
             }
-            else if(filter.total_number+10 && !order.total_number){
+            else if(filter.total_number && !(order.total_number < parseInt(filter.total_number) + 10)){
                 console.log("6")
                 return <></>
             }
             
             
-
-            // if(!order.departure.includes(filter.departure) || 
-            //     !order.arrival.includes(filter.arrival) ||
-            //     !departureDate >= startDate ||
-            //     !departureDate <= finishDate ||
-            //     !order.total_number >= filter.total_number ||
-            //     !order.total_number < filter.total_number+10){
-            //     console.log("WWWw");
-            //     return(
-            //         <></>
-            //     )
-            // }
             else {
-                
-                
+                cnt = cnt+1;
+                console.log("CCCNT", cnt);
                 return (
                     <div onBlur={(e) => { onBlur(e, idx) }} onFocus={(e) => { onFocus(e, idx) }} class="bothLinkBox" tabIndex="0" key={idx}>
                         <div class="orderContainerPlusBtn">
     
-                            <OrderEstimateInfo data={data} idx={idx}/>
+                            <OrderEstimateInfo data={data} idx={cnt}/>
                         </div>
                         {data.dispatch_status !== 4 &&
                             <button onMouseDown={() => {onClickCreate(data.id)}} class="createEstimate displayNone">견적 취소하기</button>

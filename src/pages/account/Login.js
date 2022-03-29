@@ -54,12 +54,12 @@ export function Login({ role, str }) {
                         data: {
                             refresh: refreshToken,
                             access: accessToken,
-                            authenticatedUser: { name }
+                            authenticatedUser: { name, role }
                         }
                     } = response;
                     console.log("RESOPNONSE", response);
                     console.log("로그인 완료 토큰", refreshToken, accessToken, "이름", name);
-                    dispatch(setToken({ refreshToken, name }));
+                    dispatch(setToken({ refreshToken, name, role }));
                     Api.defaults.headers['Authorization'] = `Bearer ${accessToken}`;
                     window.location.href = '/';
                 })

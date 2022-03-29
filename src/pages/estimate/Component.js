@@ -45,7 +45,7 @@ export function EstimateForm({ Content }) {
 
                     <div class="hiddenFilter">
                         <div class="filterBox">
-                            <div class="filterBoxTitle">기간</div>
+                            <div class="filterBoxTitle">출발일</div>
                             <div class="filterInput">
                                 <input onChange={onChange} name="startDate" type="date" />
                                 <span>~</span>
@@ -94,7 +94,7 @@ export function EstimateForm({ Content }) {
     )
 }
 
-export function OrderInfo({ data, idx }) {
+export function OrderInfo({ data, idx=0 }) {
     const {
         arrival,
         arrival_short,

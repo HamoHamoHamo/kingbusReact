@@ -3,7 +3,7 @@ import { useAppContext } from "../Store";
 import routes from '../utils/Routes';
 
 export default function Header() {
-    const { store: { isAuthenticated, name } } = useAppContext();
+    const { store: { isAuthenticated, name, role } } = useAppContext();
 
     function ShowUsername() {
         if (isAuthenticated === true) {
@@ -23,8 +23,15 @@ export default function Header() {
             )
         }
     }
+    function ShowEstimateOrder(){
+        if(role==='d' || role==='d'){
 
+        }
+    }
+    
 
+    
+    
     return (
         <>
             <header>
@@ -36,7 +43,8 @@ export default function Header() {
 
                 <ul>
                     <li>
-                        <a href={routes.estimateList}>주문</a>
+                        {role==='c' || role==='d' && <a href={routes.estimateList}>견적</a>}
+                        {!(role==='d' || role==='c') && <a href={routes.estimateList}>주문</a>}
                     </li>
                     <li>
                         <a href="">커뮤니티</a>
