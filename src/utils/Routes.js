@@ -1,9 +1,9 @@
 const HOME = '/';
 
 // Account
-const SIGNUP_USER = '/signupterm/user';
-const SIGNUP_DRIVER = '/signupterm/driver';
-const SIGNUP_COMPANY = '/signupterm/company';
+const SIGNUP_USER = '/signup/user';
+const SIGNUP_DRIVER = '/signup/driver';
+const SIGNUP_COMPANY = '/signup/company';
 
 const SIGNUPTERM_USER = '/signupterm/user';
 const SIGNUPTERM_DRIVER = '/signupterm/driver';
@@ -24,12 +24,21 @@ const RECOVERY_PASSWORD = '/recovery/password';
 const ESTIMATE_LIST = '/estimate/list';
 const ESTIMATE_CREATE = '/estimate/create/:id';
 const ESTIMATE_WAITING = '/estimate/waiting';
-const ESTIMATE_DETAIL = '/estimate/:id'
-const ESTIMATE_SELECTED = '/estimate/selected'
-const ESTIMATE_CHECKOUT = '/estimate/checkout'
-const ESTIMATE_DONE = '/estimate/done'
+const ESTIMATE_DETAIL = '/estimate/:id';
+const ESTIMATE_SELECTED = '/estimate/selected';
+const ESTIMATE_CHECKOUT = '/estimate/checkout';
+const ESTIMATE_DONE = '/estimate/done';
 
+// Order
+const ORDER_LIST = '/order/list';
+const ORDER_WAITING = '/order/waiting';
+const ORDER_DETAIL = '/order/:id';
+const ORDER_SELECTED = '/order/selected';
+const ORDER_CHECKOUT = '/order/checkout';
+const ORDER_DONE = '/order/done';
 
+// Comunity
+const COMMUNITY_HOME = '/community';
 
 
 const routes = {
@@ -57,7 +66,7 @@ const routes = {
         if(id){
             return `/estimate/create/${id}`;
         } 
-        // else 부분 없으니까 견적 리스트에서 견적 등록 눌렀을때 아무것도 안뜸, 이유는 모름
+        // else 부분 없으니까 견적 리스트에서 견적 등록 눌렀을때 아무것도 안뜸, 이유는 모름 >> index.js에서 Route안에서는 /:id로 보내줘야 하니까 해줘야됨
         else{
             return ESTIMATE_CREATE;
         }
@@ -73,7 +82,23 @@ const routes = {
     },
     estimateSelected: ESTIMATE_SELECTED,
     estimateCheckout: ESTIMATE_CHECKOUT,
-    estimateDone: ESTIMATE_DONE
+    estimateDone: ESTIMATE_DONE,
+
+    orderList: ORDER_LIST,
+    orderWaiting: ORDER_WAITING,
+    orderDetail: (id) => {
+        if(id){
+            return `/order/${id}`;
+        }
+        else{
+            return ORDER_DETAIL;
+        }
+    },
+    orderSelected: ORDER_SELECTED,
+    orderCheckout: ORDER_CHECKOUT,
+    orderDone: ORDER_DONE,
+
+    communityHome: COMMUNITY_HOME,
 }
 
 export default routes;

@@ -105,6 +105,7 @@ export default function EstimateCreate() {
                                 <div class="busKindsInputCell estimateInputCell">
                                     <span class="estimateInputCellText">차량종류</span>
                                     <select onChange={onChange} name="bus_type" class="estimateSelect">
+                                        <option value=""></option>
                                         <option value="45인승">45인승</option>
                                         <option value="21인승">21인승</option>
                                         <option value="16인승">16인승</option>

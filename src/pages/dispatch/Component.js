@@ -3,8 +3,13 @@ import { Link, NavLink } from 'react-router-dom';
 import './Estimate.css';
 import './estimateActive.js';
 import routes from '../../utils/Routes';
+import Cookies from 'universal-cookie';
+import { IP } from '../../utils/Api';
 
-export function EstimateForm({ Content }) {
+const cookies = new Cookies();
+
+export function DispatchForm({ Content }) {
+    const role = cookies.get('role');
     const activeStyle = {
         color: '#b00020',
         fontWeight: 'bold',
@@ -22,21 +27,44 @@ export function EstimateForm({ Content }) {
     return (
         <>
             <div class="topOrder" style={{ flexDirection: 'row', }}>
-                <NavLink className="topOrderPageName" to={routes.estimateList} style={({ isActive }) => (isActive ? activeStyle : undefined)}>
-                    주문목록
-                </NavLink>
-                <NavLink className="topOrderPageName" to={routes.estimateWaiting} style={({ isActive }) => (isActive ? activeStyle : undefined)}>
-                    대기중인견적
-                </NavLink>
-                <NavLink className="topOrderPageName" to={routes.estimateSelected} style={({ isActive }) => (isActive ? activeStyle : undefined)}>
-                    선택완료견적
-                </NavLink>
-                <NavLink className="topOrderPageName" to={routes.estimateCheckout} style={({ isActive }) => (isActive ? activeStyle : undefined)}>
-                    결제완료견적
-                </NavLink>
-                <NavLink className="topOrderPageName" to={routes.estimateDone} style={({ isActive }) => (isActive ? activeStyle : undefined)}>
-                    운행완료견적
-                </NavLink>
+                {role!=='u' &&
+                    <>
+                        <NavLink className="topOrderPageName" to={routes.estimateList} style={({ isActive }) => (isActive ? activeStyle : undefined)}>
+                        주문목록
+                        </NavLink>
+                        <NavLink className="topOrderPageName" to={routes.estimateWaiting} style={({ isActive }) => (isActive ? activeStyle : undefined)}>
+                            대기중인견적
+                        </NavLink>
+                        <NavLink className="topOrderPageName" to={routes.estimateSelected} style={({ isActive }) => (isActive ? activeStyle : undefined)}>
+                            선택완료견적
+                        </NavLink>
+                        <NavLink className="topOrderPageName" to={routes.estimateCheckout} style={({ isActive }) => (isActive ? activeStyle : undefined)}>
+                            결제완료견적
+                        </NavLink>
+                        <NavLink className="topOrderPageName" to={routes.estimateDone} style={({ isActive }) => (isActive ? activeStyle : undefined)}>
+                            운행완료견적
+                        </NavLink>
+                    </>
+                }
+                {role==='u' &&
+                    <>
+                        <NavLink className="topOrderPageName" to={routes.orderList} style={({ isActive }) => (isActive ? activeStyle : undefined)}>
+                        주문목록
+                        </NavLink>
+                        <NavLink className="topOrderPageName" to={routes.orderWaiting} style={({ isActive }) => (isActive ? activeStyle : undefined)}>
+                            대기중인주문
+                        </NavLink>
+                        <NavLink className="topOrderPageName" to={routes.orderSelected} style={({ isActive }) => (isActive ? activeStyle : undefined)}>
+                            선택완료주문
+                        </NavLink>
+                        <NavLink className="topOrderPageName" to={routes.orderCheckout} style={({ isActive }) => (isActive ? activeStyle : undefined)}>
+                            결제완료주문
+                        </NavLink>
+                        <NavLink className="topOrderPageName" to={routes.orderDone} style={({ isActive }) => (isActive ? activeStyle : undefined)}>
+                            운행완료주문
+                        </NavLink>
+                    </>
+                }
             </div>
             <div class="mainContainer">
 
@@ -275,6 +303,7 @@ export function OrderInfo({ data, idx=0 }) {
 
 export function OrderEstimateInfo({ data, idx = 0 }) {
     const {
+        driverorcompany_profile,
         bus_cnt,
         bus_type,
         is_accomodation,
@@ -286,6 +315,9 @@ export function OrderEstimateInfo({ data, idx = 0 }) {
         pricebycar,
         name
     } = data ? data : undefined;
+
+    const { driver_car_photo: photo, driver_com_name: company } = driverorcompany_profile;
+
     return (
         <>
             <OrderInfo data={data.order} idx={idx} />
@@ -293,7 +325,7 @@ export function OrderEstimateInfo({ data, idx = 0 }) {
 
                 <a href="driverProfile.html">
                     <div class="profileBox">
-                        <img src="/assets/ceo_intro_kim.jpg" alt="기사님 사진(임시)" />
+                        <img src={IP+photo} alt="기사님 사진(임시)" />
                         <div class="profileBtn">프로필 자세히 보기</div>
                     </div>
                 </a>
@@ -328,7 +360,7 @@ export function OrderEstimateInfo({ data, idx = 0 }) {
                             <div class="certificationCell">
                                 <img src="/assets/certification.png" alt="인증서 아이콘" />
                                 <span>소속</span>
-                                <span>성화투어</span>
+                                <span>{company}</span>
                             </div>
                         </div>
 

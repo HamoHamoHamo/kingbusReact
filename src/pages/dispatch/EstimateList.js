@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { EstimateForm } from './Component';
+import { DispatchForm } from './Component';
 import { Api } from '../../utils/Api';
 import { useNavigate  } from 'react-router-dom';
 import { OrderInfo } from './Component';
 import routes from '../../utils/Routes';
 
 export default function EstimateList() {
+    
     const [datas, setDatas] = useState({});
     useEffect(() => {
         async function getData() {
@@ -126,7 +127,7 @@ export default function EstimateList() {
     }
     return (
         <>
-            <EstimateForm Content={Content} />
+            <DispatchForm Content={Content} />
         </>
     )
 }

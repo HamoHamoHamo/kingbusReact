@@ -10,10 +10,12 @@ import { LoginUser, LoginDriver, LoginCompany } from './account/Login';
 import routes from '../utils/Routes';
 import RecoveryId from './account/RecoveryId';
 import RecoveryPw from './account/RecoveryPw';
-import EstimateList from './estimate/EstimateList';
-import EstimateCreate from './estimate/EstimateCreate';
-import EstimateWaiting from './estimate/EstimateWaiting';
-
+import EstimateList from './dispatch/EstimateList';
+import EstimateCreate from './dispatch/EstimateCreate';
+import EstimateWaiting from './dispatch/EstimateWaiting';
+import OrderList from './dispatch/OrderList';
+import OrderDetail from './dispatch/OrderDetail';
+import Community from './community/Community';
 
 function NotFound() {
   return <h3>NotFound</h3>;
@@ -47,10 +49,18 @@ function Root() {
         <Route path={routes.estimateList} element={<EstimateList /> } />
         <Route path={routes.estimateCreate()} element={<EstimateCreate /> } />
         <Route path={routes.estimateWaiting} element={<EstimateWaiting status={1} /> } />
-
         <Route path={routes.estimateSelected} element={<EstimateWaiting status={2}/> } />
-        <Route path={routes.estimateCheckout} element={<EstimateWaiting /> } />
-        <Route path={routes.estimateDone} element={<EstimateWaiting /> } />
+        <Route path={routes.estimateCheckout} element={<EstimateWaiting status={3}/> } />
+        <Route path={routes.estimateDone} element={<EstimateWaiting status={4}/> } />
+
+        <Route path={routes.orderList} element={<OrderList /> } />
+        <Route path={routes.orderDetail()} element={<OrderDetail /> } />
+        <Route path={routes.orderWaiting} element={<EstimateWaiting status={1} /> } />
+        <Route path={routes.orderSelected} element={<EstimateWaiting status={2}/> } />
+        <Route path={routes.orderCheckout} element={<EstimateWaiting status={3}/> } />
+        <Route path={routes.orderDone} element={<EstimateWaiting status={4}/> } />
+
+        <Route path={routes.communityHome} element={<Community /> } />
 
         <Route path="*" element={<NotFound />} />
       </Routes>

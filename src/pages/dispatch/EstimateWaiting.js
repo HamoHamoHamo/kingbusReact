@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { EstimateForm } from './Component';
+import { DispatchForm } from './Component';
 import { Api } from '../../utils/Api';
 import { useNavigate  } from 'react-router-dom';
 import { OrderEstimateInfo } from './Component';
@@ -12,7 +12,7 @@ export default function EstimateWaiting({ status }) {
     useEffect(() => {
         async function getData() {
             try {
-                const response = await Api.get(`estimate/list/u`); // url 수정필요
+                const response = await Api.get(`estimate/list/u`); 
                 console.log('test');
                 console.log("RES", response);
                 const { data } = response;
@@ -141,7 +141,7 @@ export default function EstimateWaiting({ status }) {
 
     return (
         <>
-            <EstimateForm Content={Content} />
+            <DispatchForm Content={Content} />
         </>
     )
 }

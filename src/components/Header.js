@@ -44,10 +44,10 @@ export default function Header() {
                 <ul>
                     <li>
                         {role==='c' || role==='d' && <a href={routes.estimateList}>견적</a>}
-                        {!(role==='d' || role==='c') && <a href={routes.estimateList}>주문</a>}
+                        {!(role==='d' || role==='c') && <a href={routes.orderList}>주문</a>}
                     </li>
                     <li>
-                        <a href="">커뮤니티</a>
+                        <a href={routes.communityHome}>커뮤니티</a>
                     </li>
                     <li>
                         <a href="">이벤트</a>
