@@ -39,6 +39,11 @@ const ORDER_DONE = '/order/done';
 
 // Comunity
 const COMMUNITY_HOME = '/community';
+const COMMUNITY_DRIVER = '/community/driver';
+const COMMUNITY_FREE = '/community/free';
+const COMMUNITY_TRAVEL = '/community/travel';
+const COMMUNITY_POPULAR = '/community/popular';
+const COMMUNITY_DETAIL = '/community/:id';
 
 
 const routes = {
@@ -99,6 +104,18 @@ const routes = {
     orderDone: ORDER_DONE,
 
     communityHome: COMMUNITY_HOME,
+    communityDriver: COMMUNITY_DRIVER,
+    communityFree: COMMUNITY_FREE,
+    communityPopular: COMMUNITY_POPULAR,
+    communityDetail: (id) => {
+        if(id){
+            return `/community/${id}`;
+        }
+        else{
+            return COMMUNITY_DETAIL;
+        }
+    },
+    communityTravel: COMMUNITY_TRAVEL,
 }
 
 export default routes;

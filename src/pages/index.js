@@ -16,6 +16,7 @@ import EstimateWaiting from './dispatch/EstimateWaiting';
 import OrderList from './dispatch/OrderList';
 import OrderDetail from './dispatch/OrderDetail';
 import Community from './community/Community';
+import Chat from './chat/chat';
 
 function NotFound() {
   return <h3>NotFound</h3>;
@@ -62,7 +63,10 @@ function Root() {
 
         <Route path={routes.communityHome} element={<Community /> } />
 
-        <Route path="*" element={<NotFound />} />
+        <Route path='/chat' element={<Chat /> } />
+        
+
+        {/* <Route path="*" element={<NotFound />} /> */}
       </Routes>
     </AppLayout>
   )

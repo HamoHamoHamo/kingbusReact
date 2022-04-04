@@ -74,7 +74,7 @@ export default function Header() {
                                 <a href={routes.estimateList}>주문</a>
                             </li>
                             <li>
-                                <a href="">커뮤니티</a>
+                                <a href={routes.communityHome}>커뮤니티</a>
                             </li>
                             <li>
                                 <a href="">이벤트</a>

@@ -1,0 +1,474 @@
+/*  base.css  */
+.communityNav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 4rem;
+    margin-top: 6rem;
+    background-color: white;
+    border-bottom: 0.1rem solid grey;
+}
+.communityNavLi{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3.8rem;
+    padding: 0 1.6rem;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #b00020;
+    cursor: pointer;
+}
+.communityNavLi:hover{
+    background-color: #b00020;
+    color: white;
+}
+
+.communityContents{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 129.6rem;
+}
+
+/* communitySideContents */
+.communitySideContents{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 26rem;
+    margin-top: 6rem;
+}
+.interface{
+    width: 96%;
+    height: 14rem;
+    padding: 0 2%;
+    border: 0.1rem solid black;
+    /* border-top: 0.4rem solid black; */
+    border-radius: 0 0 0.5rem 0.5rem;
+    background-color: #F6F6F6;
+}
+.interfaceTop{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    height: 6.5rem;
+    padding-top: 1.5rem;
+    border-bottom: 0.1rem dashed black;
+}
+.interfaceCharacter{
+    width: 4.5rem;
+    height: 4.5rem;
+}
+.userData{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 16rem;
+}
+.userName{
+    margin-bottom: 0.6rem;
+    font-size: 2rem;
+    font-weight: bold;
+    color: black;
+}
+.userName span{
+    font-size: 1.8rem;
+    font-weight: normal;
+}
+.mypageBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 7.2rem;
+    height: 2rem;
+    border-radius: 0.3rem;
+    background-color: #b00020;
+    font-size: 1.2rem;
+    color: white;
+}
+.settingIcon{
+    width: 2rem;
+    height: 2rem;
+}
+.interfaceBottom{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    margin-top: 0.6rem;
+}
+.userStatus{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 1.6rem;
+    color: black;
+}
+.userStatus div{
+    margin-left: 1rem;
+}
+.logoutBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 6rem;
+    height: 1.8rem;
+    border: 0.1rem solid grey;
+    border-radius: 0.3rem;
+    font-size: 1.2rem;
+    color: #b00020;
+    background-color: white;
+    margin-top: 0.6rem;
+    cursor: pointer;
+}
+.searchBoxForm{
+    width: 100%;
+}
+.searchBox{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 3.6rem;
+    margin-top: 1rem;
+}
+.searchBoxInput{
+    width: 20rem;
+    height: 3rem;
+    padding-left: 1rem;
+    border: 0.3rem solid #b00020;
+    border-radius: 0.3rem;
+    font-size: 1.6rem;
+    outline: none;
+}
+.searchBoxBtn{
+    width: 3.6rem;
+    height: 3.6rem;
+    /* background-image: url(assets/search.png); */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #b00020;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.brieflyposting{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 18rem;
+    margin-top: 2rem;
+    border: 0.1rem solid grey;
+    border-radius: 0.3rem;
+    box-shadow: 0.1rem 0.1rem 0.3rem rgba(0, 0, 0, 0.3);
+}
+.brieflypostingTitle{
+    margin-top: 0.8rem;
+    margin-bottom: 1rem;
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+.posting{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 94%;
+    margin-bottom: 0.8rem;
+    font-size: 1.4rem;
+    color: #707070;
+}
+.posting span{
+    margin-right: 0.3rem;
+}
+.near3{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1.4rem;
+    height: 1.4rem;
+    margin-right: 0.3rem;
+    border-radius: 0.2rem;
+    background-color: #b00020;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+}
+.communityMainContents{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100rem;
+    margin-top: 6rem;
+}
+.eventSlide{
+    width: 66rem;
+    height: 22rem;
+    margin-bottom: 4rem;
+    border: 0.1rem solid black;
+}
+.eventSlideBox{
+    display: None;
+}
+.postingArea{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 32rem;
+    height: 22rem;
+    margin-bottom: 4rem;
+    overflow: hidden;
+}
+.postingAreaheader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding-bottom: 0.6rem;
+    border-bottom: 0.1rem solid grey;
+}
+.postingAreaheader img{
+    width: 1.6rem;
+    height: 1.6rem;
+}
+.postingAreaTitleHot{
+    width: 24rem;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #b00020;
+}
+.postingAreaTitle{
+    width: 24rem;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: black;
+}
+.morePosting{
+    font-size: 1.4rem;
+    color: grey;
+}
+.postingAreaBody{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 19rem;
+    margin-top: 0.7rem;
+}
+.post{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 1.8rem;
+    margin-bottom: 0.6rem;
+    font-size: 1.4rem;
+}
+
+
+
+/*myPage*/
+.maypageHeader{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: calc(100% - 1rem);
+    height: 3.4rem;
+    padding-left: 1rem;
+    background-color: #b00020;
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+}
+.mypageBody{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    height: 55rem;
+    margin-top: 1rem;
+}
+.mypageSideMenu{
+    width: 16rem;
+    height: calc(100% - 4rem);
+    padding: 2rem;
+    border-right: 0.1rem solid #b00020;
+}
+.mypageSideMenuUl{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+.mypageSideMenuUl a{
+    width: 100%;
+    margin-bottom: 0.8rem;
+}
+.mypageSideMenuLi{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(100% - 0.2rem);
+    height: 3.4rem;
+    border: 0.1rem solid black;
+    background-color: white;
+    color: black;
+    font-size: 1.6rem;
+}
+.thisPage{
+    background-color: #b00020;
+    color: white;
+    width: 100%;
+    height: 3.6rem;
+    border: none;
+}
+.mypageContentsArea{
+    width: calc(100% - 24.1rem);
+    height: calc(100% - 2rem);
+    padding: 2rem 2rem 0 2rem;
+}
+.mypageContentsTitle{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 3.4rem;
+    border-bottom: 0.2rem solid #b00020;
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+.mypageContentsContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: calc(100% - 7.2rem);
+}
+.mypageContentsTitlepagenation{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 3.6rem;
+}
+
+/* community/responsive.css */
+
+@media screen and (max-width: 1295px) and (min-width: 1024px) {
+    html {
+      font-size: 50%;
+    }
+  }
+  
+  @media screen and (max-width: 1023px) and (min-width: 768px) {
+    html {
+      font-size: 62.5%;
+    }
+    .communityContents{
+      flex-direction: column;
+      width: 76.8rem;
+    }
+    .communitySideContents{
+      flex-wrap: wrap;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+      width: 100%;
+    }
+    .interface{
+      width: 44%;
+    }
+    .searchBoxForm{
+      width: 48%;
+    }
+    .searchBoxInput{
+      width: 31rem;
+    }
+    .brieflyposting{
+      width: 48%;
+    }
+    .communityMainContents{
+      width: 100%;
+    }
+    .eventSlide{
+      margin-left: 5.3rem;
+    }
+  }
+  
+  @media screen and (max-width: 767px) and (min-width: 360px) {
+    html {
+      font-size: 50%;
+    }
+    .communityContents{
+      flex-direction: column;
+      width: calc(100vw - 4rem);
+    }
+    .communitySideContents{
+      width: 100%;
+    }
+    .interfaceTop{
+      justify-content: flex-start;
+    }
+    .userData{
+      width: calc(100% - 5.2rem);
+      margin-left: 1rem;
+    }
+    .searchBoxInput{
+      width: calc(100% - 6rem);
+    }
+    .communityMainContents{
+      flex-wrap: nowrap;
+      flex-direction: column;
+      width: 100%;
+    }
+    .eventSlide{
+      width: 100%;
+    }
+    .postingArea{
+      width: 100%;
+    }
+    .postingAreaheader{
+      justify-content: flex-start;
+    }
+    .postingAreaTitleHot{
+      width: calc(100% - 6.5rem);
+      margin-left: 0.5rem;
+    }
+    .postingAreaTitle{
+      width: calc(100% - 6.5rem);
+      margin-left: 0.5rem;
+    }
+    .mypageBody{
+      flex-direction: column;
+    }
+    .mypageSideMenu{
+      width: calc(100% - 4rem);
+      height: 12rem;
+      border: none;
+    }
+    .mypageSideMenuUl{
+      flex-wrap: wrap;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .mypageSideMenuUl a{
+      width: 44%;
+    }
+    .mypageContentsArea{
+      width: calc(100% - 4rem);
+    }
+  }

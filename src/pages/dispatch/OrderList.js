@@ -105,7 +105,7 @@ export default function OrderList() {
                             <OrderInfo data={order} idx={cnt}/>
                         </div>
                         
-                        <button onMouseDown={() => {onClickCreate(data.id)}} class="createEstimate displayNone">견적 등록하기</button>
+                        <button onMouseDown={() => {onClickCreate(data.id)}} class="createEstimate displayNone">견적 선택하기</button>
                         
                     </div>
                 )

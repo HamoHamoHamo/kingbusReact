@@ -4,48 +4,6 @@ import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
 
-// const refreshRes = (req) => {
-//     // console.log("REFRESH", req);
-//     // const refreshToken = cookies.get('token');
-//     // const expiredTime = cookies.get('expiredTime');
-    
-//     // if (Date.now() > expiredTime && refreshToken){
-//     //     console.log("SILENT REFRESH");
-//         silentRefresh(req);
-//     // }
-     
-//     return req;
-// }
-
-// const silentRefresh = async (req) => {
-//     const refreshToken = cookies.get('token');
-//     try{
-//         console.log("REQ", req);
-//         const response = await axios.post('http://localhost:8000/token/refresh/', { refresh: refreshToken })
-//         const { data :{ access }} = response;
-//         req.headers['Authorization'] = `Bearer ${access}`;
-//         // console.log ("Success refresh", response);
-        
-//         let expiredTime = new Date();
-//         expiredTime.setTime(expiredTime.getTime() + 5 * 60 * 1000); // 5분후 만료
-//         cookies.set('expiredTime', expiredTime, {
-//             path: '/',
-//             expires: expiredTime
-//         });
-//     }
-//     catch(error){
-//         console.log("refresh token error : ", error);
-
-//     }
-//     return req;
-// }
-
-
-// const refreshErrorHandle = (err) => {
-//     console.log("err", err);
-//     return err;
-// }
-
 export { Api, tokenRefresh, IP };
 
 const IP = process.env.REACT_APP_IP;
