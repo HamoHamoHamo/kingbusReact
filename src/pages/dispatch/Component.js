@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import './Estimate.css';
 import './estimateActive.js';
 import routes from '../../utils/Routes';
@@ -32,7 +32,7 @@ export function DispatchForm({ Content }) {
                         <NavLink className="topOrderPageName" to={routes.estimateList} style={({ isActive }) => (isActive ? activeStyle : undefined)}>
                         주문목록
                         </NavLink>
-                        <NavLink className="topOrderPageName" to={routes.estimateWaiting} style={({ isActive }) => (isActive ? activeStyle : undefined)}>
+                        {/* <NavLink className="topOrderPageName" to={routes.estimateWaiting} style={({ isActive }) => (isActive ? activeStyle : undefined)}>
                             대기중인견적
                         </NavLink>
                         <NavLink className="topOrderPageName" to={routes.estimateSelected} style={({ isActive }) => (isActive ? activeStyle : undefined)}>
@@ -43,7 +43,7 @@ export function DispatchForm({ Content }) {
                         </NavLink>
                         <NavLink className="topOrderPageName" to={routes.estimateDone} style={({ isActive }) => (isActive ? activeStyle : undefined)}>
                             운행완료견적
-                        </NavLink>
+                        </NavLink> */}
                     </>
                 }
                 {role==='u' &&
@@ -51,7 +51,7 @@ export function DispatchForm({ Content }) {
                         <NavLink className="topOrderPageName" to={routes.orderList} style={({ isActive }) => (isActive ? activeStyle : undefined)}>
                         주문목록
                         </NavLink>
-                        <NavLink className="topOrderPageName" to={routes.orderWaiting} style={({ isActive }) => (isActive ? activeStyle : undefined)}>
+                        {/* <NavLink className="topOrderPageName" to={routes.orderWaiting} style={({ isActive }) => (isActive ? activeStyle : undefined)}>
                             대기중인주문
                         </NavLink>
                         <NavLink className="topOrderPageName" to={routes.orderSelected} style={({ isActive }) => (isActive ? activeStyle : undefined)}>
@@ -62,7 +62,7 @@ export function DispatchForm({ Content }) {
                         </NavLink>
                         <NavLink className="topOrderPageName" to={routes.orderDone} style={({ isActive }) => (isActive ? activeStyle : undefined)}>
                             운행완료주문
-                        </NavLink>
+                        </NavLink> */}
                     </>
                 }
             </div>
@@ -240,9 +240,9 @@ export function OrderInfo({ data, idx=0 }) {
                         <img class="waypointLocation" src="/assets/locationRed.png" />
                         <div class="waypointMargin waypointTitle">{departure}</div>
                     </div>
-                    {stopover && stopoverList.map((data) => {
+                    {stopover && stopoverList.map((data, idx) => {
                         return (
-                            <div class="waypointBox">
+                            <div class="waypointBox" key={idx}>
                                 <div class="waypointCircle"></div>
                                 <div class="waypointMargin addWaypoint">{data}</div>
                             </div>

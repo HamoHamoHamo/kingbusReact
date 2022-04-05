@@ -9,7 +9,7 @@ import { SearchAddress } from './home/Search';
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 import Stopover from "./home/Stopover";
 import { Api } from "../utils/Api";
-import { useNavigate } from "react-router-dom";
+
 
 const { kakao } = window;
 
@@ -355,7 +355,8 @@ export default function Home() {
         <>
             <SearchAddress onChange={onChange} type={types} datas={searchDatas} onClose={onClose} onClickButton={onClickButton} />
             <div class="chatting">
-                <img src="/assets/speechBubble.png" alt="말풍선" />
+                <img src="/assets/chatting.png" alt="말풍선" />
+                <span className="chattingCount">1</span>
                 <div>채팅</div>
             </div>
             <div class="mainContentsContainer">

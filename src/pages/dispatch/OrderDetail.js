@@ -1,21 +1,26 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DispatchForm } from './Component';
 import { Api } from '../../utils/Api';
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import { OrderEstimateInfo } from './Component';
 import routes from '../../utils/Routes';
 
+
 export default function OrderDetail() {
     const { id } = useParams();
-    const [datas, setDatas] = useState();
+    const [datas, setDatas] = useState({});
+    let navigate = useNavigate();
 
     useEffect(() => {
         async function getData() {
             try {
                 const response = await Api.get(`estimate/list/o/${id}`);
                 console.log("RES", response);
-                const { data } = response;
-                setDatas(data);
+                const { data: { estimate, order} } = response;
+                setDatas(() => ({
+                    estimate,
+                    order
+                }));
                 // setDatas(() => ({
                 //     count,
                 //     results
@@ -41,12 +46,28 @@ export default function OrderDetail() {
             try{
                 const result = await Api.post('dispatch', data);
                 window.alert("견적 선택완료");
-
             }
             catch(err){
                 console.log("ERR", err);
             }
-            
+        }
+
+        const onClickChat = async (id) => {
+            let roomId = '';
+            try{
+                const response = await Api.post(routes.createRoom, {driverorcompany: id});
+                console.log("RES", response);
+                roomId = response.data.room_id;
+
+            }
+            catch(err){
+                console.log("ERR", err.response);
+                if(err.response.status === 301){
+                    console.log("RRR", 301);
+                    roomId = err.response.data.room_id;
+                }
+            }
+            navigate(routes.chat(roomId));
         }
         
         const onBlur = (e, idx) => {
@@ -67,9 +88,9 @@ export default function OrderDetail() {
             button.classList.remove('displayNone');
         }
 
-        const dataContent = datas && datas.map((data, idx) => {
+        const dataContent = datas.estimate && datas.estimate.map((data, idx) => {
             console.log("data", data);
-            const order = data;
+            const { order } = datas;
 
             const startDate = new Date(filter.startDate);
             const finishDate = new Date(filter.finishDate);
@@ -113,15 +134,20 @@ export default function OrderDetail() {
             else {
                 cnt = cnt+1;
                 console.log("CCCNT", cnt);
+                const dataObject = {
+                    ...data,
+                    order: datas.order
+                }
                 return (
                     <div onBlur={(e) => { onBlur(e, idx) }} onFocus={(e) => { onFocus(e, idx) }} class="bothLinkBox" tabIndex="0" key={idx}>
                         <div class="orderContainerPlusBtn">
     
-                            <OrderEstimateInfo data={data} idx={cnt}/>
+                            <OrderEstimateInfo data={dataObject} idx={cnt}/>
                         </div>
-                        {data.dispatch_status !== 4 &&
-                            <button onMouseDown={() => {onClickCreate(data.order.id, data.id)}} class="createEstimate displayNone">견적 선택하기</button>
-                        }
+                        
+                        {/* <button onMouseDown={() => {onClickCreate(data.order.id, data.id)}} class="createEstimate displayNone">견적 선택하기</button> */}
+                        <button onMouseDown={() => {onClickChat(data.driverorcompany)}} class="createEstimate displayNone">채팅하기</button>
+                        
                     </div>
                 )
             }

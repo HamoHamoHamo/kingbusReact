@@ -1,16 +1,49 @@
-import React from "react";
-import { useAppContext } from "../Store";
+import React, { useRef } from "react";
+import { useAppContext, deleteToken } from "../Store";
 import routes from '../utils/Routes';
 
 export default function Header() {
-    const { store: { isAuthenticated, name, role } } = useAppContext();
+    const { store: { isAuthenticated, name, role }, dispatch } = useAppContext();
+    const mypageOptionBox = useRef();
+    
+    function logout() {
+        dispatch(deleteToken());
+        console.log("LOGOUT");
+        // window.location.href = "/"
+    }
 
     function ShowUsername() {
         if (isAuthenticated === true) {
+          let mypageCount = 0
+          
+          const onClick = () => {
+            mypageOptionBox.current.classList.remove("displayNone");
+          }
+          const onBlur = () => {
+            if(mypageCount === 0){
+              mypageOptionBox.current.classList.add("displayNone");
+            }
+          }
+          const onMouseOver = () => {
+            mypageCount = 1;
+            // console.log(mypageCount)
+          }
+          const onMouseOut = () => {
+            mypageCount = 0;
+            // console.log(mypageCount)
+          }
             return (
-                <div class="headerBtnTool">
-                    <div class="headerBtn" >{name}</div>
-
+                <div className="headerBtnToolBox">
+                    <div class="headerBtnTool" onClick={onClick} onBlur={onBlur} tabIndex="0" >
+                        <div class="headerBtn" >{name} 님</div>
+                        <img src="/assets/downArrow.png" />
+                    </div>
+                    <div className="mypageOptionBox displayNone" onMouseOver={onMouseOver} onMouseOut={onMouseOut} ref={mypageOptionBox}>
+                        <a href="">
+                          <div className="privacyBtn">개인정보</div>
+                        </a>
+                        <button className="mainLogoutBtn" onClick={logout}>로그아웃</button>
+                    </div>
                 </div>
             )
         }
@@ -23,15 +56,15 @@ export default function Header() {
             )
         }
     }
-    function ShowEstimateOrder(){
-        if(role==='d' || role==='d'){
+    function ShowEstimateOrder() {
+        if (role === 'd' || role === 'd') {
 
         }
     }
-    
 
-    
-    
+
+
+
     return (
         <>
             <header>
@@ -43,8 +76,8 @@ export default function Header() {
 
                 <ul>
                     <li>
-                        {role==='c' || role==='d' && <a href={routes.estimateList}>견적</a>}
-                        {!(role==='d' || role==='c') && <a href={routes.orderList}>주문</a>}
+                        {role === 'c' || role === 'd' && <a href={routes.estimateList}>견적</a>}
+                        {!(role === 'd' || role === 'c') && <a href={routes.orderList}>주문</a>}
                     </li>
                     <li>
                         <a href={routes.communityHome}>커뮤니티</a>
@@ -83,7 +116,7 @@ export default function Header() {
                                 <a href="">고객센터</a>
                             </li>
                         </ul>
-                        <div class="hembugerLoginBox" style={{display: 'none'}}>
+                        <div class="hembugerLoginBox" style={{ display: 'none' }}>
                             <a href={routes.loginUser}>
                                 <div class="hembugeroptionBox ontherColor">승객 로그인</div>
                             </a>
@@ -98,7 +131,7 @@ export default function Header() {
                                 뒤로가기
                             </div>
                         </div>
-                        <div class="hembugerSignupBox" style={{display: 'none'}}>
+                        <div class="hembugerSignupBox" style={{ display: 'none' }}>
                             <a href={routes.signupTermUser}>
                                 <div class="hembugeroptionBox ontherColor">승객 회원가입</div>
                             </a>
@@ -126,24 +159,24 @@ export default function Header() {
                 </div>
                 <div class="loginHidden displayNone loginOption">
                     <a href={routes.loginUser}>
-                        <div class="loginCell passenger">승객<br/>로그인</div>
+                        <div class="loginCell passenger">승객<br />로그인</div>
                     </a>
                     <a href={routes.loginDriver}>
-                        <div class="loginCell loginCellOther">기사<br/>로그인</div>
+                        <div class="loginCell loginCellOther">기사<br />로그인</div>
                     </a>
                     <a href={routes.loginCompany}>
-                        <div class="loginCell loginCellOther">회사<br/>로그인</div>
+                        <div class="loginCell loginCellOther">회사<br />로그인</div>
                     </a>
                 </div>
                 <div class="loginHidden displayNone singupOption">
                     <a href={routes.signupTermUser}>
-                        <div class="loginCell passenger">승객<br/>회원가입</div>
+                        <div class="loginCell passenger">승객<br />회원가입</div>
                     </a>
                     <a href={routes.signupTermDriver}>
-                        <div class="loginCell loginCellOther">기사<br/>회원가입</div>
+                        <div class="loginCell loginCellOther">기사<br />회원가입</div>
                     </a>
                     <a href={routes.signupTermCompany}>
-                        <div class="loginCell loginCellOther">회사<br/>회원가입</div>
+                        <div class="loginCell loginCellOther">회사<br />회원가입</div>
                     </a>
                 </div>
             </header>

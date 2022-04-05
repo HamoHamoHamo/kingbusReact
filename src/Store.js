@@ -45,9 +45,12 @@ export const reducer = (prevState, action) => {
         const newState = {...prevState, name: "", refreshToken: "", isAuthenticated: false};
         
         return UpdateWithSideEffect(newState, (state, dispatch) => {
-            cookies.remove('token');
-            cookies.remove('name');
-            cookies.remove('role');
+            cookies.remove('token', { path: '/' });
+            cookies.remove('name', { path: '/' });
+            cookies.remove('role', { path: '/' });
+            console.log(cookies.get('token'), "TOKEN");
+            console.log(cookies.get('name'), "NAME");
+            console.log(cookies.get('role'), "ROLE");
         });
         
     }

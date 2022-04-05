@@ -31,10 +31,9 @@ const ESTIMATE_DONE = '/estimate/done';
 
 // Order
 const ORDER_LIST = '/order/list';
-const ORDER_WAITING = '/order/waiting';
-const ORDER_DETAIL = '/order/:id';
-const ORDER_SELECTED = '/order/selected';
-const ORDER_CHECKOUT = '/order/checkout';
+const ORDER_DETAIL_LIST = '/order/:id/estimate';
+const ORDER_ESTIMATE_DETAIL = '/order/estimate/:id';
+
 const ORDER_DONE = '/order/done';
 
 // Comunity
@@ -45,6 +44,10 @@ const COMMUNITY_TRAVEL = '/community/travel';
 const COMMUNITY_POPULAR = '/community/popular';
 const COMMUNITY_DETAIL = '/community/:id';
 
+// Chat
+const CHAT = '/chat/:id';
+const NAME_CHECK = '/userinfo/name';
+const CREATE_ROOM = '/chat/';
 
 const routes = {
     home: HOME,
@@ -90,17 +93,22 @@ const routes = {
     estimateDone: ESTIMATE_DONE,
 
     orderList: ORDER_LIST,
-    orderWaiting: ORDER_WAITING,
-    orderDetail: (id) => {
+    orderDetailList: (id) => {
         if(id){
-            return `/order/${id}`;
+            return `/order/${id}/estimate`;
         }
         else{
-            return ORDER_DETAIL;
+            return ORDER_DETAIL_LIST;
         }
     },
-    orderSelected: ORDER_SELECTED,
-    orderCheckout: ORDER_CHECKOUT,
+    orderEstimateDetail: (id) => {
+        if(id){
+            return `/order/estimate/${id}`;
+        }
+        else{
+            return ORDER_ESTIMATE_DETAIL;
+        }
+    },
     orderDone: ORDER_DONE,
 
     communityHome: COMMUNITY_HOME,
@@ -116,6 +124,17 @@ const routes = {
         }
     },
     communityTravel: COMMUNITY_TRAVEL,
+    
+    chat: (id) => {
+        if(id){
+            return `/chat/${id}`;
+        }
+        else{
+            return CHAT;
+        }
+    },
+    nameCheck: NAME_CHECK,
+    createRoom: CREATE_ROOM,
 }
 
 export default routes;

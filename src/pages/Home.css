@@ -900,15 +900,17 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 8rem;
-    height: 11rem;
-    border-radius: 1rem;
+    width: 6rem;
+    height: 9rem;
+    border-radius:  0.5rem 0.5rem 0.8rem 0.8rem;
     background-color: #CB0000;
+    cursor: pointer;
   }
   .chatting img{
-    margin: 1.3rem 0 1.3rem 0
+    width: 4.6rem;
+    margin: 1.3rem 0 1.3rem 0.3rem
   }
-  .chatting div:nth-child(2){
+  .chatting div:nth-child(3){
     display: flex;
     justify-content: center;
     align-items: center;
@@ -916,9 +918,15 @@
     height: 3.6rem;
     border-top: 0.1rem solid white;
     border-radius: 0 0 1rem 1rem;
-    font-size: 1.8rem;
-    font-weight: bold;
+    font-size: 1.5rem;
     color: white;
+  }
+  .chattingCount{
+    position: absolute;
+    top: 34.5%;
+    left: 69%;
+    font-size: 1.3rem;
+    font-weight: bold;
   }
   
   

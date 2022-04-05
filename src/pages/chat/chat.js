@@ -1,54 +1,67 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Api, IP } from '../../utils/Api';
-import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import routes from '../../utils/Routes';
 import { useAppContext } from "../../Store";
-import axios from 'axios';
-import { io } from "socket.io-client";
 
 export default function Chat() {
+    const { id } = useParams();
     const { store: { refreshToken } } = useAppContext();
     const [name, setName] = useState('');
     const [msg, setMsg] = useState([]);
     const [ws, setWs] = useState('');
-    const [input, setInput] = useState('');
     const [children, setChildren] = useState(0);
+    const [roomName, setRoomName] = useState('');
     const inputRef = useRef();
     const chatBoxRef = useRef();
 
+    let prevDate = 0;
     useEffect(async () => {
-        const response = await Api.get(`${IP}/userinfo/name`);
-        console.log("RESPONSE", response);
-        setName(response.data.name);
+        try{
+            const response = await Api.get(routes.nameCheck);
+            console.log("RESPONSE", response);
+            setName(response.data.name);
 
-        const chatData = await Api.get(`${IP}/chat/room/6`);
-        console.log("CHAT", chatData)
-        setMsg(chatData.data);
-        scrollToBottom();
-        const chatSocket = new WebSocket('ws://' + 'localhost:8081' + '/ws/' + roomName + '/');
-        setWs(chatSocket);
+        }
+        catch(err){
+            console.log("NAME ERR", err.response);
+        }
+        try{
+            const chatData = await Api.get(`${IP}/chat/room/${id}`);
+            console.log("CHAT", chatData)
+            setMsg(chatData.data.messages);
+            setRoomName(chatData.data.roomname);
 
-        chatSocket.onmessage = function (e) {
-            console.log('onmessage', ws.onmessage);
-    
-            const data = JSON.parse(e.data);
-            console.log("onmessage", data);
-            if (data.message) {
-                setMsg((prev) => [
-                    ...prev,
-                    {
-                        username: data.user,
-                        content: data.message
-                    }
-                ])
-                // document
-                //     .querySelector('#chat-messages')
-                //     .innerHTML += ('<b>' + data.username + '</b>: ' + data.message + '<br>');
-            }
-    
-            // scrollToBottom();
-    
-        };
+            const chatSocket = new WebSocket('ws://' + 'localhost:8081' + '/ws/' + chatData.data.roomname + '/');
+            setWs(chatSocket);
+
+            chatSocket.onmessage = function (e) {
+                console.log('onmessage', ws.onmessage);
+        
+                const data = JSON.parse(e.data);
+                console.log("onmessage", data);
+                if (data.message) {
+                    setMsg((prev) => [
+                        ...prev,
+                        {
+                            username: data.user,
+                            content: data.message,
+                            date_added: data.date
+                        }
+                    ])
+                    // document
+                    //     .querySelector('#chat-messages')
+                    //     .innerHTML += ('<b>' + data.username + '</b>: ' + data.message + '<br>');
+                }
+        
+                // scrollToBottom();
+        
+            };
+            scrollToBottom();
+        }
+        catch(err){
+            console.log("ERR", err);
+        }
     }, []);
 
     useEffect(() => {
@@ -69,12 +82,7 @@ export default function Chat() {
         }
     }
 
-
-    // const roomName = JSON.parse(document.getElementById('json-roomname').textContent);
-    // const userName = JSON.parse(document.getElementById('json-username').textContent);
-
-    // const roomName = 'testroom6';
-    const roomName = 'dfa78ef0-d228-4ac5-be18-b8a7845035f2';
+    // const roomName = 'dfa78ef0-d228-4ac5-be18-b8a7845035f2';
     const userName = name;
 
     // const chatSocket = new WebSocket('ws://' + 'localhost:8081' + '/ws/' + roomName + '/');
@@ -84,7 +92,7 @@ export default function Chat() {
     //         token: `Bearer ${token}`,
     //     },
     // });
-    console.log("TEST");
+    console.log("TEST", roomName);
     // const chatSocket = new WebSocket('ws://' + 'localhost:8081' + '/ws/' + roomName + '/');
     // {% comment %} const chatSocket = new WebSocket('ws://' + window.location.host + '/ws/' + roomName + '/'); {% endcomment %} */}
     if(ws){
@@ -97,12 +105,26 @@ export default function Chat() {
     function onClickSubmit(e) {
         const message = inputRef.current.value;
         console.log("message", message);
-        ws.send(JSON.stringify({ 'message': message, 'user': userName, 'room': roomName }));
-        inputRef.current.value = '';
+        if(message){
+            let today = new Date(); // today 객체에 Date()의 결과를 넣어줬다
+            let time = {
+                year: today.getFullYear(),  //현재 년도
+                month: (today.getMonth() + 1)<10 ? `0${today.getMonth()+1}` : today.getMonth()+1, // 현재 월
+                date: today.getDate()<10 ? `0${today.getDate()}` : today.getDate(), // 현제 날짜
+                hours: today.getHours()<10 ? `0${today.getHours()}` : today.getHours(), //현재 시간
+                minutes: today.getMinutes()<10 ? `0${today.getMinutes()}` : today.getMinutes(), //현재 분
+            };
+            const date = `${time.year}-${time.month}-${time.date} ${time.hours}:${time.minutes}`;
+            
+            ws.send(JSON.stringify({ 'message': message, 'user': userName, 'room': roomName, 'date': date}));
+            inputRef.current.value = '';
+        }
+        
 
-        const cnt = chatBoxRef.current.childElementCount
-        console.log("FEFSEFLFJLEF", cnt);
-        setChildren(cnt);
+
+
+        // const cnt = chatBoxRef.current.childElementCount
+        // setChildren(cnt);
     };
 
     function enterPress(e) {
@@ -130,9 +152,21 @@ export default function Chat() {
                                 <div ref={chatBoxRef} id="chat-messages" style={{ maxHeight: '300px', overflowY: "scroll" }}>
                                     {msg && msg.map((data, idx) => {
                                         // console.log("AAAA", data);
-                                        
+                                        const date = data.date_added.slice(0,10);
+                                        const time = data.date_added.slice(11,16);
+                                        let visibleDate = false;
+                                        if(date !== prevDate){
+                                            visibleDate = true;
+                                            prevDate = date;
+                                        }
                                         return(
-                                            <div style={{fontSize: "20px"}} key={idx}>{data.username}: {data.content}   //</div>
+                                            <>
+                                                {visibleDate && 
+                                                <div style={{fontSize: "15px", margin: "10px"}}>{date}</div>
+                                                }
+                                                <div style={{fontSize: "20px"}} key={idx}>{data.username}: {data.content}<span style={{fontSize: "10px", marginLeft: "10px"}}>{time}</span></div>
+                                            
+                                            </>
                                         )
                                         
                                     })}

@@ -55,15 +55,13 @@ function Root() {
         <Route path={routes.estimateDone} element={<EstimateWaiting status={4}/> } />
 
         <Route path={routes.orderList} element={<OrderList /> } />
-        <Route path={routes.orderDetail()} element={<OrderDetail /> } />
-        <Route path={routes.orderWaiting} element={<EstimateWaiting status={1} /> } />
-        <Route path={routes.orderSelected} element={<EstimateWaiting status={2}/> } />
-        <Route path={routes.orderCheckout} element={<EstimateWaiting status={3}/> } />
+        <Route path={routes.orderDetailList()} element={<OrderDetail /> } />
+        <Route path={routes.orderEstimateDetail()} element={<OrderDetail /> } />
         <Route path={routes.orderDone} element={<EstimateWaiting status={4}/> } />
 
         <Route path={routes.communityHome} element={<Community /> } />
 
-        <Route path='/chat' element={<Chat /> } />
+        <Route path={routes.chat()} element={<Chat /> } />
         
 
         {/* <Route path="*" element={<NotFound />} /> */}

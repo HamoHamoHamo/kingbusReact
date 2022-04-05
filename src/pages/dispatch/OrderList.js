@@ -1,12 +1,13 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { DispatchForm } from './Component';
+import { DispatchForm, OrderInfo } from './Component';
 import { Api } from '../../utils/Api';
 import { useNavigate } from 'react-router-dom';
-import { OrderInfo } from './Component';
 import routes from '../../utils/Routes';
+import { useAppContext } from "../../Store";
 
 export default function OrderList() {
     const [datas, setDatas] = useState();
+    const { store: { isAuthenticated, name } } = useAppContext();
 
     useEffect(() => {
         async function getData() {
@@ -32,7 +33,7 @@ export default function OrderList() {
         let cnt = -1;
 
         const onClickCreate = (id) => {
-            window.location.href = routes.orderDetail(id);
+            window.location.href = routes.orderDetailList(id);
         }
         
         const onBlur = (e, idx) => {
@@ -55,7 +56,7 @@ export default function OrderList() {
 
         const dataContent = datas && datas.map((data, idx) => {
             console.log("data", data);
-            const order = data;
+            const { order } = data;
 
             const startDate = new Date(filter.startDate);
             const finishDate = new Date(filter.finishDate);
@@ -98,15 +99,23 @@ export default function OrderList() {
             
             else {
                 cnt = cnt+1;
+                let selected = false;
+                if(data.status === 2){
+                    selected = true
+                }
+
                 return (
-                    <div onBlur={(e) => { onBlur(e, idx) }} onFocus={(e) => { onFocus(e, idx) }} class="bothLinkBox" tabIndex="0" key={data.order}>
+                    <div onBlur={(e) => { onBlur(e, idx) }} onFocus={(e) => { onFocus(e, idx) }} class="bothLinkBox" tabIndex="0" key={order.id}>
                         <div class="orderContainerPlusBtn">
 
                             <OrderInfo data={order} idx={cnt}/>
                         </div>
-                        
-                        <button onMouseDown={() => {onClickCreate(data.id)}} class="createEstimate displayNone">견적 선택하기</button>
-                        
+                        {!selected &&
+                            <button onMouseDown={() => {onClickCreate(order.id)}} class="createEstimate displayNone">견적 선택하기</button>
+                        }
+                        {selected &&
+                            <button onMouseDown={() => {onClickCreate(order.id)}} class="createEstimate displayNone">견적세부</button>
+                        }
                     </div>
                 )
             }

@@ -60,7 +60,7 @@ export default function EstimateList() {
         }
 
         const dataContent = datas.results && datas.results.map((data, idx) => {
-            const { orders: order } = data;
+            const { order } = data;
             const startDate = new Date(filter.startDate);
             const finishDate = new Date(filter.finishDate);
             const departureDate = new Date(order.departure_date);
@@ -109,7 +109,7 @@ export default function EstimateList() {
                             <OrderInfo data={order} idx={cnt}/>
                         </div>
                         
-                        <button onMouseDown={() => {onClickCreate(data.order)}} class="createEstimate displayNone">견적 등록하기</button>
+                        <button onMouseDown={() => {onClickCreate(order.id)}} class="createEstimate displayNone">견적 등록하기</button>
                         
                     </div>
                 )
