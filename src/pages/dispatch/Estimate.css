@@ -395,7 +395,7 @@ body{
   .sidemenuCell div:nth-child(1){
     margin: 0;
   }
-  .filterBox{
+  /* .filterBox{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -403,7 +403,7 @@ body{
     padding: 1.8rem 0;
     border-top: 0.2rem solid #b00020;
     margin-top: 1rem;
-  }
+  } */
   .filterBox:first-child{
     border-top: none;
     margin-top: 0;
@@ -790,13 +790,13 @@ body{
   .filterInput input{  
     width: calc(100% - 1rem);
   }
-  .filterBox span{
+  /* .filterBox span{
     width: 100%;
     margin-top: 0.4rem;
     text-align: right;
     font-size: 1.2rem;
     color: #b00020;
-  }
+  } */
   .bothLinkMain{
     width: 100%;
     color: black;
@@ -1410,4 +1410,809 @@ body{
 .CreateBtnfocusOutOrderEstimate{
   border: 0.1rem solid #a7a7a7;
   
+}
+
+
+/* module.css */
+
+/*filter*/
+.filterBox{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 32rem;
+  height: 50rem;
+  border: 0.1rem solid #A7A7A7;
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0.3rem 0.3rem 0.6rem rgba(0, 0, 0, 0.4);
+}
+.filterCell{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+  width: 28rem;
+  height: 10rem;
+  padding: 1rem 0;
+  border-bottom: 0.1rem solid #b00020;
+}
+.filterCellEnd{
+  border: none;
+}
+.filterCell span{
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+.inputCell{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 2.4rem;
+}
+.filter{
+  width: calc(100% - 1rem);
+  height: 2.4rem;
+  padding-left: 1rem;
+  border: 0.1rem solid #C9C9C9;
+  border-radius: 0.2rem;
+  font-size: 1.5rem;
+  outline: none;
+}
+.filterInside{
+  width: 42%;
+}
+
+/*order*/
+.orderBox{
+  display: flex;
+  width: 80rem;
+  height: 11rem;
+  border: 0.1rem solid #A7A7A7;
+  background-color: white;
+  border-bottom: none;
+  cursor: pointer;
+}
+.orderBox:first-child{
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+.orderBox:last-child{
+  border-bottom: 0.1rem solid #a7a7a7;
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+.stateArea{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3.1rem;
+  height: 100%;
+  border-right: 0.1rem solid #A7A7A7;
+  font-size: 1.6rem;
+  color: white;
+  background-color: #7f7f7f;
+  writing-mode: tb-rl;
+  letter-spacing: 0.2rem;
+}
+.dataArea{
+  display: flex;
+  justify-content: space-between;
+  width: 72.8rem;
+  height: (100% - 4rem);
+  padding: 2rem;
+}
+.mainInforbox{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 60.8rem;
+  height: 100%;
+}
+.dataCell{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.dataCellDate{
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+.dataTitle{
+  font-size: 1.4rem;
+}
+.dataContants{
+  margin-left: 2rem;
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+.dataContantsDate{
+  margin-left: 2rem;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+.subInforBox{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 12rem;
+  height: 100%;
+}
+.wayBox{
+  display: flex;
+  height: 2.5rem;
+  align-items: center;
+}
+
+.wayBox span{
+  margin-left: 0.6rem;
+  font-size: 1.4rem;
+  color: #b00020;
+}
+.subDataBox{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  width: 100%;
+  height: 4rem;
+}
+.subDataCell{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.subDataCell:first-child{
+  margin-bottom: 0.5rem;
+}
+
+
+.subDataCell span:nth-child(1){
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #b00020;
+}
+.subDataCell span:nth-child(2){
+  font-size: 1.4rem;  
+}
+
+/*order detail*/
+.orderDetailBox{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 42rem;
+  height: auto;
+}
+.orderDetailBoxMainData{
+  width: calc(100% - 0.2rem);
+  height: 14rem;
+  margin-bottom: 2rem;
+  border: 0.1rem solid #DBDBDB;
+  border-radius: 0.2rem;
+  background-color: white;
+  box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.45);
+}
+.detailMainInforbox{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: calc(100% - 4rem);
+  height: calc(100% - 4.1rem);
+  padding: 1rem 2rem 0 2rem;
+  border-bottom: 0.1rem solid #707070;
+}
+.detailSubInforbox{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(100% - 4rem);
+  height: 3rem;
+  padding: 0 2rem;
+}
+.detailSubInforCell{
+  display: flex;
+  justify-content: space-between;
+  min-width: 8rem;
+  width: auto;
+}
+.detailSubInforCell span:nth-child(1){
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #b00020;
+}
+.detailSubInforCell span:nth-child(2){
+  font-size: 1.4rem;  
+}
+.withDriver{
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #b00020;
+}
+.orderDetailSbuDataBox{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  border: 0.1rem solid #DBDBDB;
+  border-radius: 0.2rem;
+  box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.45);
+}
+.convenienceBox{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 9rem;
+}
+.convenienceCell{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 9.8rem;
+  height: 1.8rem;
+  margin: 0 1rem;
+  padding-top: 0.4rem;
+  border: 0.1rem solid #b00020;
+  border-radius: 1rem;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #b00020;
+}
+.wayPointBox{
+  display: flex;
+  width: 36rem;
+  height: auto;
+  margin: 2rem 0;
+}
+.waypointArea{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 36rem;
+  height: auto;
+  border-left: 0.4rem solid black;
+}
+.writeInforBox{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 36rem;
+  min-height: 10rem;
+  height: auto;
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 0.1rem solid #DBDBDB;
+  border-radius: 0.1rem;
+}
+.sideCell{
+  display: flex;
+  align-items: center;
+  height: 3.2rem;
+}
+.sideCellStart{
+  transform: translate(0, -50%);
+}
+.sideCellEnd{
+  transform: translate(0, 50%);
+}
+.sideCell img{
+  z-index: 10;
+  transform: translate(-65%, 0);
+}
+.sideCell span{
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.waypoinCell{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 3.2rem;
+}
+.wayPointIcon{
+  width: 1.2rem;
+  height: 1.2rem;
+  border: 0.1rem solid grey;
+  border-radius: 0.8rem;
+  background-color: white;
+  z-index: 10;
+  transform: translate(-65%, 0);
+}
+.waypoinCell span{
+  font-size: 1.2rem;
+}
+.writeInforBox span{
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+.writeInforBox div{
+  font-size: 1.4rem;
+  color: #656565;
+}
+
+/*estimate*/
+.estimateBox{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 70rem;
+  height: 11rem;
+  padding: 1rem;
+  border: 0.1rem solid #DBDBDB;
+  border-radius: 0.5rem;
+  background-color: white;
+}
+.driverProfile{
+  width: 11.2rem;
+  height: 11.2rem;
+}
+.estimateBoxDataArea{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 57rem;
+  height: 100%;
+}
+.estimateBoxMainArea{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  height: 55%;
+}
+.driverDataBox{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: calc( 100% - 14rem);
+  height: 100%;
+}
+.driverName{
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-bottom: 0.6rem;
+}
+.driverDataCell{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  font-size: 1.4rem;
+  color: #959595;
+}
+.driverDataCell img{
+ height: 1.4rem;
+}
+.driverDataCell span:nth-child(2){
+  margin: 0 0.6rem;
+}
+
+.priceDataBox{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  width: 14rem;
+  height: 100%;
+}
+.totalPrice{
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 0.6rem;
+}
+.priceDataCell{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  font-size: 1.6rem;
+}
+.priceDataCell span:nth-child(2){
+  margin:  0 1.4rem 0 0.6rem;
+}
+.estimateBoxSubArea{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  height: 45%;
+}
+.certificationBox{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: calc(100% - 26rem);
+  height: 100%;
+}
+.additionalFeeBox{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 26rem;
+  height: 100%;
+}
+.checkingCell{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  width: 4rem;
+  height: 100%;
+  margin-right: 1rem;
+}
+.certificationCell img{
+  width: 2rem;
+  margin-bottom: 0.4rem;
+}
+.certificationCell span{
+  font-size: 1rem;
+}
+
+/*estimate detail*/
+.estimateDetailBox{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 68rem;
+  height: 177rem;
+  padding: 0 4rem 2rem 4rem;
+  border: 0.1rem solid #DBDBDB;
+  border-radius: 0.5rem;
+  background-color: white;
+}
+
+      /*imgSlide*/
+.profileImgBox{
+  position: relative;
+  width: 76rem;
+  height: 40rem;
+  overflow: hidden;
+}
+.profileImgCell{
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.profileImgSlide{
+  position: absolute;
+  left: -100%;
+  width: 800%;
+  height: 100%;
+  transition: all 0.4s;
+  transform: translate(0, 0);
+}
+.profileImg{
+  width: calc(100%/8);
+  height: 40rem;
+  float: left;
+}
+.profileImg6{
+  left: -100%;
+}
+.profileImg1{
+  left: 0;
+}
+.profileImg2{
+  left: 100%;
+}
+.profileImg3{
+  left: 200%;
+}
+.profileImg4{
+  left: 300%;
+}
+.profileImg5{
+  left: 400%;
+}
+.buttonBlockCover{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  height: 0;
+  width: 100%;
+  height: 100%;
+  background-color: none;
+  display: none;
+}
+.controlBox{
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.controlBtn{
+  position: absolute;
+  top: 50%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 96%;
+  transform: translate(0. -50%);
+}
+.controlBtn img{
+  cursor: pointer;
+}
+.controlBtn img:hover{
+  border-radius: 100%;
+  background-color: #8787876e;
+}
+.controlBtn img:nth-child(2){
+  transform: rotate(180deg);
+}
+.imgRocateCell{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 13.2rem;
+}
+.rocateDot{
+  width: 1rem;
+  height: 1rem;
+  border: 0.1rem solid white;
+  border-radius: 100%;
+  margin-bottom: 0.6rem;
+}
+.rocation{
+  background-color: white;
+}
+.driverdataArea{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 72rem;
+  height: 11rem;
+  padding: 4rem 2rem;
+  border-bottom: 0.1rem solid #DBDBDB;
+  background-color: white;
+}
+.estimateMainInforBox{
+  display: flex;
+  width: 76rem;
+  height: 6rem;
+  background-color: #FCFCFC;
+  border-top: 0.1rem solid #DCDCDC;
+  border-bottom: 0.1rem solid #DCDCDC;
+  margin-bottom: 4rem;
+}
+.estimateMainInforCell{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.estimateMainInforCellBus{
+  width: 48%;
+}
+.estimateMainInforCellBusNumber{
+  width: calc(16% - 0.2rem);
+  border-left: 0.1rem solid #DCDCDC;
+  border-right: 0.1rem solid #DCDCDC;
+}
+.estimateMainInforCellPrice{
+  width: 36%;
+}
+.estimateMainInforCell span:nth-child(1){
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 0.6rem;
+}
+.estimateMainInforCell span:nth-child(2){
+  font-size: 1.6rem;
+}
+.estimateDetailCell{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  width: 100%;
+  margin-bottom: 4rem;
+}
+.estimateDetailTitle{
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-bottom: 1.6rem;
+}
+.informationsToIcon{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: calc(100% - 4rem);
+  height: 6rem;
+  padding: 1rem 2rem;
+  border: 0.1rem solid #E0E0E0;
+  border-radius: 0.3rem;
+}
+.inforToIconCell{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 4rem;
+  height: 5rem;
+  margin-right: 2.4rem;
+}
+.inforToIconCell img{
+  margin-bottom: 0.6rem;
+}
+.companyInformationBox{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(100% - 4rem);
+  height: 12rem;
+  padding: 2rem;
+  border: 0.1rem solid #E0E0E0;
+  border-radius: 0.5rem;
+  background-color: white;
+}
+.companyInformationBox img{
+  width: 20rem;
+  height: 12rem;
+}
+.companyInformationDataBox{
+ width: calc(100% - 26rem);
+}
+.companyInformationDataCell, .companyInformationDataCellLast{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  margin-bottom: 1.2rem;
+}
+.companyInformationDataCellLast{
+  margin: 0;
+}
+.companyInformationDataCell span:nth-child(1){
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+.companyInformationDataCell span:nth-child(2){
+  font-size: 1.6rem;
+  color: #707070;
+}
+.companyInformationDataCellLast span:nth-child(1){
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+.companyInformationDataCellLast span:nth-child(2){
+  font-size: 1.6rem;
+  color: #707070;
+}
+.reservationBtn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 16rem;
+  height: 4rem;
+  background-color: #b00020;
+  border-radius: 0.3rem;
+  font-size: 1.4rem;
+  color: white;
+  cursor: pointer;
+}
+.gradeTitleBox{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: calc(100% - 4rem);
+  height: 4.6rem;
+  padding: 0 2rem;
+  margin-bottom: 1rem;
+  border: 0.1rem solid #E0E0E0;
+  border-radius: 0.5rem;
+}
+.gradeTitleCell{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 6rem;
+  margin-right: 3rem;
+}
+.gradeCountTitleCell{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 11rem;
+  margin-right: 3rem;
+}
+.gradeTitleCell span:nth-child(1){
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+.gradeTitleCell span:nth-child(2){
+  font-size: 1.6rem;
+  color: #b00020;
+}
+.gradeCountTitleCell span:nth-child(1){
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+.gradeCountTitleCell span:nth-child(2){
+  font-size: 1.6rem;
+  color: #b00020;
+}
+.gradeBox{
+  width: 100%;
+  height: 36rem;
+  border: 0.1rem solid #E0E0E0;
+  border-radius: 0.5rem;
+  overflow-y: scroll;
+}
+.gradeBox::-webkit-scrollbar{
+  width: 0.6rem;
+}
+.gradeBox::-webkit-scrollbar-thumb{
+  height: 17%;
+  background-color: #B00020;
+  border-radius: 1rem
+}
+.gradeBox::-webkit-scrollbar-track{
+  background-color: rgba(176,0,32,0.1);
+}
+.gradeCell{
+  width: calc(100% - 2rem);
+  height: 5.2rem;
+  padding: 1rem;
+  border-bottom: 0.1rem solid #E0E0E0;
+}
+.userDataBox{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+.userGradeCell{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-right: 1.8rem;
+}
+.userGradeCell img{
+  height: 1.6rem;
+  margin-right: 0.4rem;
+}
+.userGradeCell span{
+  font-size: 1.5rem;
+}
+.userDataCell{
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+.userDataCell span:nth-child(1){
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-right: 0.8rem;
+}
+.userDataCell span:nth-child(2){
+  font-size: 1.4rem;
+  color: #959595;
+}
+.gradeContents{
+  width: 100%;
+  font-size: 1.4rem;
 }

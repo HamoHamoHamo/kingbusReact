@@ -37,8 +37,8 @@ export default function EstimateList() {
         
         const onClickCreate = (id) => {
             console.log("CLICDKLJLSC", id)
-            // navigate(routes.estimateCreate(id));
-            window.location.href = routes.estimateCreate(id);
+            navigate(routes.estimateCreate(id));
+            // window.location.href = routes.estimateCreate(id);
         }
         
         const onBlur = (e, idx) => {
@@ -103,14 +103,8 @@ export default function EstimateList() {
             else {
                 cnt = cnt+1;
                 return (
-                    <div onBlur={(e) => { onBlur(e, idx) }} onFocus={(e) => { onFocus(e, idx) }} class="bothLinkBox" tabIndex="0" key={data.order}>
-                        <div class="orderContainerPlusBtn">
-
-                            <OrderInfo data={order} idx={cnt}/>
-                        </div>
-                        
-                        <button onMouseDown={() => {onClickCreate(order.id)}} class="createEstimate displayNone">견적 등록하기</button>
-                        
+                    <div onClick={() => {onClickCreate(order.id)}}>
+                        <OrderInfo data={order} idx={cnt}/>
                     </div>
                 )
             }

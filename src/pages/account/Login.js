@@ -101,11 +101,11 @@ export function Login({ role, str }) {
                 </div>
 
                 <div class="loginContents">
-                    <div class="inputCell">
+                    <div class="LoginInputCell">
                         <label class="loginLabel">아이디</label>
                         <input ref={usernameRef} type="text" name='username' class="loginInput" placeholder="아이디를 입력해 주세요." />
                     </div>
-                    <div class="inputCell">
+                    <div class="LoginInputCell">
                         <label class="loginLabel">비밀번호</label>
                         <input ref={passwordRef} type="password" name='password' class="loginInput" placeholder="비밀번호를 입력해 주세요." />
                     </div>

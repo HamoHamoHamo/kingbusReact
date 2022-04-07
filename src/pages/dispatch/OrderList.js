@@ -8,7 +8,7 @@ import { useAppContext } from "../../Store";
 export default function OrderList() {
     const [datas, setDatas] = useState();
     const { store: { isAuthenticated, name } } = useAppContext();
-
+    let navigate = useNavigate();
     useEffect(() => {
         async function getData() {
             try {
@@ -36,22 +36,13 @@ export default function OrderList() {
             window.location.href = routes.orderDetailList(id);
         }
         
-        const onBlur = (e, idx) => {
-            
-            const container = e.target
-            const button = container.querySelector('.createEstimate');
-            container.classList.remove('CreateBtnfocusIn')
-            container.classList.add('CreateBtnfocusOut')
-            button.classList.add('displayNone');            
-        }
-
-        const onFocus = (e, idx) => {
-            console.log("EEEE", e.target);
-            const container = e.target
-            const button = container.querySelector('.createEstimate');
-            container.classList.remove('CreateBtnfocusOut')
-            container.classList.add('CreateBtnfocusIn')
-            button.classList.remove('displayNone');
+        const onClickBox = (estOrOrder, selected) => {
+            console.log("ID", estOrOrder);
+            if(selected){
+                return navigate(routes.orderEstimateDetail(estOrOrder));
+            }
+            console.log("NO", selected);
+            return navigate(routes.orderDetailList(estOrOrder))
         }
 
         const dataContent = datas && datas.map((data, idx) => {
@@ -100,31 +91,23 @@ export default function OrderList() {
             else {
                 cnt = cnt+1;
                 let selected = false;
-                if(data.status === 2){
+                if(data.dispatch_status === '2'){
                     selected = true
                 }
+                const estimateOrOderId = selected ? data.selected_estimate : order.id;
 
                 return (
-                    <div onBlur={(e) => { onBlur(e, idx) }} onFocus={(e) => { onFocus(e, idx) }} class="bothLinkBox" tabIndex="0" key={order.id}>
-                        <div class="orderContainerPlusBtn">
-
-                            <OrderInfo data={order} idx={cnt}/>
-                        </div>
-                        {!selected &&
-                            <button onMouseDown={() => {onClickCreate(order.id)}} class="createEstimate displayNone">견적 선택하기</button>
-                        }
-                        {selected &&
-                            <button onMouseDown={() => {onClickCreate(order.id)}} class="createEstimate displayNone">견적세부</button>
-                        }
+                    <div onClick={() => {onClickBox(estimateOrOderId, selected)}}>
+                        <OrderInfo data={order} idx={cnt}/>
                     </div>
+                        
+                    
                 )
             }
         })
         return (
             <div class="mainContentsArea">
-                <div class="orderStatus">
-                    총 <span>건의 주문</span> 신청이 있습니다.
-                </div>
+                
                 {dataContent}
 
             </div>

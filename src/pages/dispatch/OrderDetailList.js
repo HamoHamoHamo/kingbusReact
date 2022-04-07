@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { DispatchForm } from './Component';
+import { DispatchOrderForm, OrderEstimateInfo } from './Component';
 import { Api } from '../../utils/Api';
 import { useParams, useNavigate } from "react-router";
-import { OrderEstimateInfo } from './Component';
 import routes from '../../utils/Routes';
 
 
-export default function OrderDetail() {
+export default function OrderDetailList() {
     const { id } = useParams();
     const [datas, setDatas] = useState({});
     let navigate = useNavigate();
@@ -21,11 +20,6 @@ export default function OrderDetail() {
                     estimate,
                     order
                 }));
-                // setDatas(() => ({
-                //     count,
-                //     results
-                // }));
-                // content({ count, results });
             }
             catch (err) {
                 console.log("err",);
@@ -70,22 +64,10 @@ export default function OrderDetail() {
             navigate(routes.chat(roomId));
         }
         
-        const onBlur = (e, idx) => {
-            
-            const container = e.target
-            const button = container.querySelector('.createEstimate');
-            container.classList.remove('CreateBtnfocusIn')
-            container.classList.add('CreateBtnfocusOut')
-            button.classList.add('displayNone');            
-        }
 
-        const onFocus = (e, idx) => {
-            console.log("EEEE", e.target);
-            const container = e.target
-            const button = container.querySelector('.createEstimate');
-            container.classList.remove('CreateBtnfocusOut')
-            container.classList.add('CreateBtnfocusIn')
-            button.classList.remove('displayNone');
+        const onClickBox = (id) => {
+            console.log("ID", id);
+            navigate(routes.orderEstimateDetail(id));
         }
 
         const dataContent = datas.estimate && datas.estimate.map((data, idx) => {
@@ -139,7 +121,7 @@ export default function OrderDetail() {
                     order: datas.order
                 }
                 return (
-                    <div onBlur={(e) => { onBlur(e, idx) }} onFocus={(e) => { onFocus(e, idx) }} class="bothLinkBox" tabIndex="0" key={idx}>
+                    <div onClick={(e) => {onClickBox(data.id)}} class="bothLinkBox" key={idx}>
                         <div class="orderContainerPlusBtn">
     
                             <OrderEstimateInfo data={dataObject} idx={cnt}/>
@@ -164,10 +146,7 @@ export default function OrderDetail() {
     }
     return (
         <>
-            <DispatchForm Content={Content} />
-
-
-
+            <DispatchOrderForm Content={Content} />
         </>
     )
 }

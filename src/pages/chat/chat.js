@@ -82,25 +82,15 @@ export default function Chat() {
         }
     }
 
-    // const roomName = 'dfa78ef0-d228-4ac5-be18-b8a7845035f2';
     const userName = name;
 
-    // const chatSocket = new WebSocket('ws://' + 'localhost:8081' + '/ws/' + roomName + '/');
-
-    // const chatSocket = io('ws://' + 'localhost:8081' + '/ws/' + roomName + '/', {
-    //     auth: {
-    //         token: `Bearer ${token}`,
-    //     },
-    // });
     console.log("TEST", roomName);
-    // const chatSocket = new WebSocket('ws://' + 'localhost:8081' + '/ws/' + roomName + '/');
-    // {% comment %} const chatSocket = new WebSocket('ws://' + window.location.host + '/ws/' + roomName + '/'); {% endcomment %} */}
     if(ws){
         ws.onclose = function (e) {
+            console.log("CODE", e.code);
             console.log('The socket close unexpectedly');
         }
     }
-    
 
     function onClickSubmit(e) {
         const message = inputRef.current.value;

@@ -14,7 +14,8 @@ import EstimateList from './dispatch/EstimateList';
 import EstimateCreate from './dispatch/EstimateCreate';
 import EstimateWaiting from './dispatch/EstimateWaiting';
 import OrderList from './dispatch/OrderList';
-import OrderDetail from './dispatch/OrderDetail';
+import OrderDetailList from './dispatch/OrderDetailList';
+import OrderEstimateDetail from './dispatch/OrderEstimateDetail';
 import Community from './community/Community';
 import Chat from './chat/chat';
 
@@ -55,8 +56,8 @@ function Root() {
         <Route path={routes.estimateDone} element={<EstimateWaiting status={4}/> } />
 
         <Route path={routes.orderList} element={<OrderList /> } />
-        <Route path={routes.orderDetailList()} element={<OrderDetail /> } />
-        <Route path={routes.orderEstimateDetail()} element={<OrderDetail /> } />
+        <Route path={routes.orderDetailList()} element={<OrderDetailList /> } />
+        <Route path={routes.orderEstimateDetail()} element={<OrderEstimateDetail /> } />
         <Route path={routes.orderDone} element={<EstimateWaiting status={4}/> } />
 
         <Route path={routes.communityHome} element={<Community /> } />

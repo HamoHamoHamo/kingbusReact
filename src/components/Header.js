@@ -1,15 +1,20 @@
 import React, { useRef } from "react";
 import { useAppContext, deleteToken } from "../Store";
 import routes from '../utils/Routes';
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
     const { store: { isAuthenticated, name, role }, dispatch } = useAppContext();
     const mypageOptionBox = useRef();
+    let navigate = useNavigate();
+
     
     function logout() {
         dispatch(deleteToken());
         console.log("LOGOUT");
-        // window.location.href = "/"
+        window.location.href = "/"
+        // navigate("/");  // 홈에서 js로 구현해놓은게 많아서 navigate쓰면 js가 적용이 안됨
+
     }
 
     function ShowUsername() {
